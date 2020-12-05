@@ -14,23 +14,11 @@ class home extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            query: '',
-            mealType: ''
-        })
-    }
-
-    handleMealSearch = (e) => {
-        this.setState({
-            query: e.target.query.value,
-            mealType: e.target.mealType.value
-        })
-        axios.get(API_URL+this.state.query+API_ID+API_KEY+this.state.mealType)
     }
 
     changeSearchIngredient = (e) => {
         this.setState({
-            query: e.target.value,
+            query: e.target.value.toLowerCase(),
         }, ()=>console.log(this.state.query))
     }
 
@@ -38,6 +26,21 @@ class home extends Component {
         this.setState({
             mealType: e.target.value
         }, ()=>console.log(this.state.mealType))
+    }
+
+    componentDidUpdate() {
+        this.state.query&&this.state.mealType&&
+            console.log(API_URL+this.state.query+API_ID+API_KEY+this.state.mealType)
+
+
+        axios.get(API_URL+this.state.query+API_ID+API_KEY+this.state.mealType)
+        .then(response => {
+            console.log(response)
+            // this.setState({
+            //     query: '',
+            //     mealType: ''
+            // })
+        }) 
     }
 
     render() {
@@ -52,9 +55,9 @@ class home extends Component {
                     <option defaultValue value="default" hidden>
                       Please select a meal:
                     </option>
-                    <option value="Breakfast">Breakfast</option>
-                    <option value="Lunch">Lunch</option>
-                    <option value="Dinner">Dinner</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
                     </select>
                 </form>
             </div>
