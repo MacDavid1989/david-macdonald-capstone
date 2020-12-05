@@ -10,7 +10,8 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 class home extends Component {
     state = {
         query: '',
-        mealType: ''
+        mealType: '',
+        meals: ''
     }
 
     componentDidMount() {
@@ -29,17 +30,14 @@ class home extends Component {
     }
 
     componentDidUpdate() {
-        this.state.query&&this.state.mealType&&
-            console.log(API_URL+this.state.query+API_ID+API_KEY+this.state.mealType)
-
-
+        this.state.query&&this.state.mealType&&!this.state.meals&&
         axios.get(API_URL+this.state.query+API_ID+API_KEY+this.state.mealType)
         .then(response => {
             console.log(response)
-            // this.setState({
-            //     query: '',
-            //     mealType: ''
-            // })
+            this.setState({
+                meals: response.data.hits.map(meal => meal.recipe)
+            })
+            console.log(this.state.meals)
         }) 
     }
 
@@ -60,6 +58,26 @@ class home extends Component {
                     <option value="dinner">Dinner</option>
                     </select>
                 </form>
+                <h1>
+                    Select your meal!
+                </h1>
+                <ul>
+                    {/* {this.state.meals&&this.state.meals.map(meal =>
+                    <li>
+                        <div>
+                            <img src={meal.image}/>
+                            <div>
+                                <span>
+                                    {meal.label}
+                                </span>
+                                <span>
+                                    {`${Math.ceil(meal.calories)} cals`}
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    )} */}
+                </ul>
             </div>
         );
     }
