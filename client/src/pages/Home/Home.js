@@ -8,6 +8,7 @@ import { meals } from '../../utils/tempData'
 
 
 class home extends Component {
+    // state for meal search and select page
     state = {
         query: '',
         mealType: '',
@@ -15,6 +16,7 @@ class home extends Component {
         from: 0
     }
 
+    // request to get meals from api based on search
     getMeals = () => {
         const API_URL = process.env.REACT_APP_API_URL;
         const API_ID = process.env.REACT_APP_API_ID;
@@ -33,18 +35,21 @@ class home extends Component {
         }) 
     }
 
+    // onChange handler for search input
     changeSearchIngredient = (e) => {
         this.setState({
             query: e.target.value.toLowerCase(),
         }, this.getMeals)   
     }
 
+    // onChange handler for select input
     changeMealType = (e) => {
         this.setState({
             mealType: e.target.value
         }, this.getMeals)
     }
 
+    // resets meals forcing new request for the next 10 meals in the search
     handleNext = () => {
         this.setState({
             meals: '',
@@ -52,6 +57,7 @@ class home extends Component {
         }, this.getMeals)
     }
 
+    // resets meals forcing new request for the previous 10 meals in the search
     handlePrevious = () => {
         (this.state.from > 0)&&
         this.setState({
@@ -60,9 +66,22 @@ class home extends Component {
         }, this.getMeals)
     }
 
+    // post to server with the meal wanting to be added
+    handleAdd = (meal) => {
+        console.log(meal)
+        axios.post(`http://localhost:8080/meals`, {
+            calories: Math.ceil(meal.calories / meal.yield),
+            name: meal.label,
+            image: meal.image,
+            url: meal.url,
+            ingredients: meal.ingredients
+        }).then().catch(console.error)
+    }
+
     render() {
         return (
             <div>
+                {/* search for meal component */}
                 <h1>
                     Welcome! Search for your meal!
                 </h1>
@@ -77,13 +96,14 @@ class home extends Component {
                     <option value="dinner">Dinner</option>
                     </select>
                 </form>
+                {/* select meal component */}
                 <h1>
                     Select your meal!
                 </h1>
                 <ul className="mealList">
                     {this.state.meals&&this.state.meals.map(meal =>
                     <li className="mealCard">
-                        <img className="mealCard-select" src={select}/>
+                        <img className="mealCard-select" onClick={()=>this.handleAdd(meal)} src={select}/>
                         <img className="mealCard-image" src={meal.image}/>
                         <div className="mealCard-details">
                             <span>
@@ -98,6 +118,7 @@ class home extends Component {
                 </ul>
                 <button onClick={this.handlePrevious}>PREVIOUS</button>
                 <button onClick={this.handleNext}>NEXT</button>
+                {/* mymeals component */}
             </div>
         );
     }
