@@ -13,6 +13,7 @@ app.use(cors())
 // middleware that parses json
 app.use(express.json())
 
+// meals route for user meals
 app.use('/meals', mealList);
 
 app.listen(PORT, () => {
