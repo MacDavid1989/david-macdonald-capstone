@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import '../../scss/Home.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
+import remove from '../../assets/icons/remove.svg'
 import { meals } from '../../utils/tempData'
-
-// https://api.edamam.com/search?q=${query}+${YOUR_APP_ID}+${YOUR_APP_KEY}
-
+import { v4 as uuidv4 } from 'uuid';
 
 class home extends Component {
     // state for meal search and select page
@@ -13,7 +12,8 @@ class home extends Component {
         query: '',
         mealType: '',
         meals: meals.hits.map(meal => meal.recipe),
-        from: 0
+        from: 0,
+        myMeals: ''
     }
 
     // request to get meals from api based on search
@@ -27,11 +27,9 @@ class home extends Component {
         this.state.query&&this.state.mealType&&!this.state.meals&&
         axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
         .then(response => {
-            console.log(response)
             this.setState({
                 meals: response.data.hits.map(meal => meal.recipe)
             })
-            console.log(this.state.meals)
         }) 
     }
 
@@ -67,10 +65,11 @@ class home extends Component {
     }
 
     // post to server with the meal wanting to be added
-    handleAdd = (meal) => {
-        console.log(meal)
+    handleAdd = (meal, id) => {
         const ingredients = meal.ingredients.map(ingredient => {
            const newIngredient = {
+                id: uuidv4(),
+                mealId: id,
                 quantity: ingredient.quantity,
                 measure: ingredient.measure,
                 food: ingredient.food,
@@ -80,14 +79,41 @@ class home extends Component {
             return newIngredient
         })
         axios.post(`http://localhost:8080/meals`, {
+            id: id,
             calories: Math.ceil(meal.calories / meal.yield),
             name: meal.label,
             image: meal.image,
             url: meal.url,
             ingredients: ingredients
-        }).then(res => {
-            console.log(res.data)
-        }).catch(console.error)
+        }).then()
+        .catch(console.error)
+    }
+
+    // makes delete request to remove meal from my meals
+    handleRemove = (id) => {
+        axios.delete(`http://localhost:8080/meals/${id}`)
+        .then()
+        .catch(console.error)
+    }
+
+    // gets my meals when the component mounts
+    componentDidMount() {
+        axios.get(`http://localhost:8080/meals`)
+        .then(res => {
+            this.setState({
+                myMeals: res.data
+            })
+        })
+    }
+
+    // when new meals are added a get request is made to update state
+    componentDidUpdate() {
+        axios.get(`http://localhost:8080/meals`)
+        .then(res => {
+            this.setState({
+                myMeals: res.data
+            })
+        })
     }
 
     render() {
@@ -113,10 +139,11 @@ class home extends Component {
                     Select your meal!
                 </h1>
                 <ul className="mealList">
-                    {this.state.meals&&this.state.meals.map(meal =>
-                    <li className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleAdd(meal)} src={select}/>
-                        <img className="mealCard-image" src={meal.image}/>
+                    {this.state.meals&&this.state.meals.map(meal => {
+                        const id = uuidv4();
+                    return <li key={id} className="mealCard">
+                        <img className="mealCard-select" onClick={()=>this.handleAdd(meal, id)} src={select} alt="plus symbol"/>
+                        <img className="mealCard-image" src={meal.image} alt={meal.label}/>
                         <div className="mealCard-details">
                             <span>
                                 {meal.label}
@@ -126,11 +153,28 @@ class home extends Component {
                             </span>
                         </div>
                     </li>
-                    )}
+                    })}
                 </ul>
                 <button onClick={this.handlePrevious}>PREVIOUS</button>
                 <button onClick={this.handleNext}>NEXT</button>
                 {/* mymeals component */}
+                <h1>My Meals</h1>
+                <ul className="mealList">
+                    {this.state.myMeals&&this.state.myMeals.map(meal =>
+                    <li key={meal.id} className="mealCard">
+                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img className="mealCard-image" src={meal.image} alt={`${meal.name}`}/>
+                        <div className="mealCard-details">
+                            <span>
+                                {meal.name}
+                            </span>
+                            <span>
+                                {`${meal.calories} cals`}
+                            </span>
+                        </div>
+                    </li>
+                    )}
+                </ul>
             </div>
         );
     }
