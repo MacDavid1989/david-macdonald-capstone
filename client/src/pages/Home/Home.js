@@ -13,7 +13,8 @@ class home extends Component {
         mealType: '',
         meals: meals.hits.map(meal => meal.recipe),
         from: 0,
-        myMeals: ''
+        myMeals: '',
+        groceries: ''
     }
 
     // request to get meals from api based on search
@@ -112,8 +113,20 @@ class home extends Component {
         .then(res => {
             this.setState({
                 myMeals: res.data
+            });
+            
+        }).catch()
+    }
+
+    handleSave = () => {
+        console.log(this.state.groceries)
+        axios.get(`http://localhost:8080/groceries`)
+        .then(res => {
+            this.setState({
+                groceries: res.data
             })
         })
+        .catch()
     }
 
     render() {
@@ -172,6 +185,22 @@ class home extends Component {
                                 {`${meal.calories} cals`}
                             </span>
                         </div>
+                    </li>
+                    )}
+                </ul>
+                <button onClick={this.handleSave}>Save</button>
+                {/* grocery list component */}
+                <h1>Grocery List</h1>
+                <ul>
+                {this.state.groceries&&this.state.groceries.map(grocery =>
+                    <li key={grocery.id} className="groceryList">
+                        <img className="groceryList-select" onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
+                        <span>
+                            {`${grocery.weight} of `}
+                        </span>
+                        <span>
+                            {`${grocery.food}`}
+                        </span>
                     </li>
                     )}
                 </ul>
