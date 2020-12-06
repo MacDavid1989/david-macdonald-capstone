@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../../scss/Home.scss';
 import axios from 'axios';
+import select from '../../assets/icons/add.svg'
+import { meals } from '../../utils/tempData'
 
 // https://api.edamam.com/search?q=${query}+${YOUR_APP_ID}+${YOUR_APP_KEY}
 
@@ -9,7 +11,7 @@ class home extends Component {
     state = {
         query: '',
         mealType: '',
-        meals: '',
+        meals: meals.hits.map(meal => meal.recipe),
         from: 0
     }
 
@@ -78,19 +80,18 @@ class home extends Component {
                 <h1>
                     Select your meal!
                 </h1>
-                <ul>
+                <ul className="mealList">
                     {this.state.meals&&this.state.meals.map(meal =>
-                    <li>
-                        <div>
-                            <img src={meal.image}/>
-                            <div>
-                                <span>
-                                    {meal.label}
-                                </span>
-                                <span>
-                                    {`${Math.ceil(meal.calories / meal.yield)} cals`}
-                                </span>
-                            </div>
+                    <li className="mealCard">
+                        <img className="mealCard-select" src={select}/>
+                        <img className="mealCard-image" src={meal.image}/>
+                        <div className="mealCard-details">
+                            <span>
+                                {meal.label}
+                            </span>
+                            <span>
+                                {`${Math.ceil(meal.calories / meal.yield)} cals`}
+                            </span>
                         </div>
                     </li>
                     )}
