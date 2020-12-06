@@ -25,8 +25,9 @@ groceryList = (ingredients) => {
         return 0;
         
     })
+    console.log(ingredients)
     for(i=0; i < ingredients.length; i++){
-        while(ingredients[i+1] !== undefined && ingredients[i].food === ingredients[i+1].food){
+        while(ingredients[i+1] !== undefined && (ingredients[i].food.toLowerCase() === ingredients[i+1].food.toLowerCase() || (ingredients[i].food.toLowerCase()+'s') === ingredients[i+1].food.toLowerCase() || ingredients[i].food.toLowerCase() === (ingredients[i].food.toLowerCase()+'s'))){
             ingredients[i].weight = ingredients[i].weight + ingredients[i+1].weight
             ingredients.splice(i+1, 1)
         }

@@ -4,6 +4,7 @@ import axios from 'axios';
 import select from '../../assets/icons/add.svg'
 import remove from '../../assets/icons/remove.svg'
 import { meals } from '../../utils/tempData'
+import { weightConversion } from '../../utils/weightConversion'
 import { v4 as uuidv4 } from 'uuid';
 
 class home extends Component {
@@ -195,10 +196,10 @@ class home extends Component {
                     <li key={grocery.id} className="groceryList">
                         <img className="groceryList-select" onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
                         <span>
-                            {`${grocery.weight} of `}
+                            {`${weightConversion(grocery.weight)}`}
                         </span>
                         <span>
-                            {`${grocery.food}`}
+                            {`${grocery.food.toLowerCase()}`}
                         </span>
                     </li>
                     )}
