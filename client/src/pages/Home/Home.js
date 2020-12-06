@@ -119,7 +119,6 @@ class home extends Component {
     }
 
     handleSave = () => {
-        console.log(this.state.groceries)
         axios.get(`http://localhost:8080/groceries`)
         .then(res => {
             this.setState({
