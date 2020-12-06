@@ -85,7 +85,9 @@ class home extends Component {
             image: meal.image,
             url: meal.url,
             ingredients: ingredients
-        }).then().catch(console.error)
+        }).then(res => {
+            console.log(res.data)
+        }).catch(console.error)
     }
 
     render() {
