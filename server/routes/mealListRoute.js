@@ -7,12 +7,28 @@ const ingredientsFile = './data/ingredients.json';
 
 // post route for meals to be added for user
 router.post('/', (req, res) => {
-    console.log('hey')
     const newMeal = req.body;
     writeMeals(newMeal)
     const newIngredients = newMeal.ingredients;
     writeIngredients(newIngredients)
     res.status(201).send(newMeal)
+})
+
+// get route for meals to be rendered on my meals page
+router.get('/', (req, res) => {
+    const mealList = getMeals()
+    res.status(200).json(mealList)
+})
+
+// delete route for removing meals from my meals page
+router.delete('/:id', (req, res) => {
+    console.log(req.params.id)
+    const mealList = getMeals()
+    mealList.map((meal,i)=>{
+        meal.id===req.params.id&&mealList.splice(i,1)&&
+        res.status(202).json(meal)
+    })
+    fs.writeFileSync(mealsFile, JSON.stringify([...mealList]), err=>console.log(err))
 })
 
 getMeals = () => {
