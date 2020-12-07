@@ -25,6 +25,7 @@ groceryList = (ingredients) => {
         return 0;
         
     })
+
     for(i=0; i < ingredients.length; i++){
         while(ingredients[i+1] !== undefined && 
             (ingredients[i].food.toLowerCase().replace(/-/g, ' ') === ingredients[i+1].food.toLowerCase().replace(/-/g, ' ') 
@@ -35,7 +36,19 @@ groceryList = (ingredients) => {
         }
     }
 
-    console.log(ingredients)
+    // ingredients.sort((a, b) => {
+    //     let fa = a.category.toLowerCase()
+    //     let fb = b.category.toLowerCase()
+    //     if (fa < fb) {
+    //         return -1;
+    //     }
+    //     if (fa > fb) {
+    //         return 1;
+    //     }
+    //     return 0;
+        
+    // })
+
 
     return ingredients
 }

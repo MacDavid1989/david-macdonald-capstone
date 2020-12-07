@@ -3,6 +3,7 @@ import '../../scss/Home.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
 import remove from '../../assets/icons/remove.svg'
+import close from '../../assets/icons/close.svg'
 import { meals } from '../../utils/tempData'
 import { weightConversion } from '../../utils/weightConversion'
 import { v4 as uuidv4 } from 'uuid';
@@ -15,7 +16,9 @@ class home extends Component {
         meals: meals.hits.map(meal => meal.recipe),
         from: 0,
         myMeals: '',
-        groceries: ''
+        groceries: '',
+        display: false,
+        src: ''
     }
 
     // request to get meals from api based on search
@@ -75,7 +78,8 @@ class home extends Component {
                 quantity: ingredient.quantity,
                 measure: ingredient.measure,
                 food: ingredient.food,
-                weight: ingredient.weight
+                weight: ingredient.weight,
+                category: ingredient.foodCategory
             }
 
             return newIngredient
@@ -119,6 +123,7 @@ class home extends Component {
         }).catch()
     }
 
+    // get request for grocery list from server and post meal list to server
     handleSave = () => {
         axios.get(`http://localhost:8080/groceries`)
         .then(res => {
@@ -127,6 +132,21 @@ class home extends Component {
             })
         })
         .catch()
+    }
+
+    //closes the modal
+    closeIframe = () => {
+        this.setState({
+        display: false,
+        });
+    };
+
+    //opens the modal
+    showIframe = (src) => {
+        this.setState({
+            display: true,
+            src: src
+        })
     }
 
     render() {
@@ -156,7 +176,7 @@ class home extends Component {
                         const id = uuidv4();
                     return <li key={id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleAdd(meal, id)} src={select} alt="plus symbol"/>
-                        <img className="mealCard-image" src={meal.image} alt={meal.label}/>
+                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={meal.label}/>
                         <div className="mealCard-details">
                             <span>
                                 {meal.label}
@@ -204,6 +224,15 @@ class home extends Component {
                     </li>
                     )}
                 </ul>
+                {/* Modal */}
+                <div style={{ display: this.state.display ? "initial" : "none" }}>
+                    <div>
+                        <div>
+                            <img src={close} alt="x symbol" onClick={this.closeIframe} />
+                        </div>
+                        <iframe title="selected meal recipe website" width="500" height="500" src={this.state.src}></iframe>
+                    </div>
+                </div>
             </div>
         );
     }
