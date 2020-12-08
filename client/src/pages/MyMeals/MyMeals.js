@@ -39,6 +39,25 @@ class MyMeals extends Component {
         .catch(console.error)
     }
 
+    // get request for grocery list from server and post meal list to server
+    handleSave = () => {
+        axios.get(`http://localhost:8080/groceries`)
+        .then(res => {
+            this.setState({
+                groceries: res.data
+            })
+        })
+        .catch()
+    }
+
+     //opens the modal
+     showIframe = (src) => {
+        this.setState({
+            display: true,
+            src: src
+        })
+    }
+
     render() {
         return (
             <div>
