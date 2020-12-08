@@ -79,7 +79,8 @@ class home extends Component {
                 measure: ingredient.measure,
                 food: ingredient.food,
                 weight: ingredient.weight,
-                category: ingredient.foodCategory
+                category: ingredient.foodCategory,
+                image: ingredient.image
             }
 
             return newIngredient
@@ -113,7 +114,8 @@ class home extends Component {
     }
 
     // when new meals are added a get request is made to update state
-    componentDidUpdate() {
+    componentDidUpdate(_prevP, prevS) {
+        
         axios.get(`http://localhost:8080/meals`)
         .then(res => {
             this.setState({
@@ -221,6 +223,7 @@ class home extends Component {
                         <span>
                             {`${grocery.food.toLowerCase()}`}
                         </span>
+                        <img className="groceryList-select" width="100" height="100" src={grocery.image} alt={`${grocery.food}`}/>
                     </li>
                     )}
                 </ul>
