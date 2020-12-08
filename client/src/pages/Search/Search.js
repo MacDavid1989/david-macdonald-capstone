@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import '../../scss/Home.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
-import remove from '../../assets/icons/remove.svg'
-import close from '../../assets/icons/close.svg'
 import { meals } from '../../utils/tempData'
-import { weightConversion } from '../../utils/weightConversion'
 import { v4 as uuidv4 } from 'uuid';
+import RecipeModal from '../../components/RecipeModal'
 
 class Search extends Component {
     // state for meal search and select page
@@ -15,8 +13,6 @@ class Search extends Component {
         mealType: '',
         meals: meals.hits.map(meal => meal.recipe),
         from: 0,
-        myMeals: '',
-        groceries: '',
         display: false,
         src: ''
     }
@@ -40,13 +36,7 @@ class Search extends Component {
 
     // gets my meals when the component mounts
     componentDidMount() {
-        axios.get(`http://localhost:8080/meals`)
-        .then(res => {
-            this.setState({
-                myMeals: res.data
-            })
-        })
-        .catch(console.error)
+        
     }
 
     // onChange handler for search input
@@ -107,12 +97,16 @@ class Search extends Component {
         .catch(console.error)
     }
 
-
     //opens the modal
     showIframe = (src) => {
         this.setState({
-            display: true,
             src: src
+        })
+    }
+
+    resetSrc = () => {
+        this.setState({
+            src: ''
         })
     }
 
@@ -155,7 +149,9 @@ class Search extends Component {
                 </ul>
                 <button onClick={this.handlePrevious}>PREVIOUS</button>
                 <button onClick={this.handleNext}>NEXT</button>
-            </div>
+                  {/* Modal */}
+                  <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
+           </div>
         );
     }
 }

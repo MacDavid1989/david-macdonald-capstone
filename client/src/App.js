@@ -1,11 +1,10 @@
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import './App.scss';
+import Nav from './components/Nav'
 import Home from './pages/Home'
+import Search from './pages/Search'
 import MyMeals from './pages/MyMeals'
 import GroceryList from './pages/GroceryList'
-import Nav from './components/Nav'
-import Search from './pages/Search'
-
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 function App() {
   return (

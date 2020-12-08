@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import '../../scss/Home.scss';
 import axios from 'axios';
-import select from '../../assets/icons/add.svg'
+import RecipeModal from '../../components/RecipeModal'
 import remove from '../../assets/icons/remove.svg'
-import close from '../../assets/icons/close.svg'
-import { meals } from '../../utils/tempData'
-import { weightConversion } from '../../utils/weightConversion'
-import { v4 as uuidv4 } from 'uuid';
+import '../../scss/Home.scss';
 
 class MyMeals extends Component {
      // state for meal search and select page
      state = {
-        myMeals: ''
+        myMeals: '',
+        display: false,
+        src: ''
     }
 
     componentDidMount() {
@@ -39,22 +37,21 @@ class MyMeals extends Component {
         .catch(console.error)
     }
 
-    // get request for grocery list from server and post meal list to server
+    // post meal list to server
     handleSave = () => {
-        axios.get(`http://localhost:8080/groceries`)
-        .then(res => {
-            this.setState({
-                groceries: res.data
-            })
-        })
-        .catch()
+        // post saved list to server goes here
     }
 
-     //opens the modal
-     showIframe = (src) => {
+    //opens the modal
+    showIframe = (src) => {
         this.setState({
-            display: true,
             src: src
+        })
+    }
+
+    resetSrc = () => {
+        this.setState({
+            src: ''
         })
     }
 
@@ -66,7 +63,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" src={meal.image} alt={`${meal.name}`}/>
+                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
                                 {meal.name}
@@ -79,6 +76,8 @@ class MyMeals extends Component {
                     )}
                 </ul>
                 <button onClick={this.handleSave}>Save</button>
+                {/* Modal */}
+                <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
             </div>
         );
     }
