@@ -115,7 +115,6 @@ class home extends Component {
 
     // when new meals are added a get request is made to update state
     componentDidUpdate(_prevP, prevS) {
-        
         axios.get(`http://localhost:8080/meals`)
         .then(res => {
             this.setState({

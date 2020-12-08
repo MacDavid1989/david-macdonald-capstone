@@ -20,7 +20,15 @@ class MyMeals extends Component {
             this.setState({
                 myMeals: res.data
             });
-            
+        }).catch()
+    }
+
+    componentDidUpdate() {
+        axios.get(`http://localhost:8080/meals`)
+        .then(res => {
+            this.setState({
+                myMeals: res.data
+            });
         }).catch()
     }
 
