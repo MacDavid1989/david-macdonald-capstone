@@ -57,8 +57,8 @@ class GroceryList extends Component {
             <div>
                 <h1>Grocery List</h1>
                 <form onSubmit={this.handleAddGrocery}>
-                    <input required type="text" name="itemName" placeholder="Add item name"/>
-                    <input required type="number" pattern="[0-9]" name="itemWeight" placeholder="Add item weight"/>
+                    <input required type="text" pattern="[A-Za-z ]{3,}" name="itemName" placeholder="Add item name"/>
+                    <input required type="number" name="itemWeight" placeholder="Add item weight"/>
                     <button type="submit">Add</button>
                 </form>
                 <ul>
