@@ -5,6 +5,7 @@ import select from '../../assets/icons/add.svg'
 import { meals } from '../../utils/tempData'
 import { v4 as uuidv4 } from 'uuid';
 import RecipeModal from '../../components/RecipeModal'
+import AddToModal from '../../components/AddToModal'
 
 class Search extends Component {
     // state for meal search and select page
@@ -14,7 +15,9 @@ class Search extends Component {
         meals: meals.hits.map(meal => meal.recipe),
         from: 0,
         display: false,
-        src: ''
+        src: '',
+        selectedMeal: '',
+        selectedMealId: ''
     }
 
     // request to get meals from api based on search
@@ -110,14 +113,27 @@ class Search extends Component {
         })
     }
 
+    showAddTo = (meal, id) => {
+        this.setState({
+            display: true,
+            selectedMeal: meal,
+            selectedMealId: id
+        })
+    }
+
+    resetDisplay = () => {
+        this.setState({
+            display: false,
+            selectedMeal: '',
+            selectedMealId: ''
+        })
+    }
+
     render() {
         return (
             <div>
-                <h1>
-                    Search for your meal!
-                </h1>
                 <form>
-                    <input type='search' name='searchIngredient' value={this.state.query} onChange={this.changeSearchIngredient}/>
+                    <input type='search' name='searchIngredient' placeholder="Search Meals" value={this.state.query} onChange={this.changeSearchIngredient}/>
                     <select name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
                     <option defaultValue value="default" hidden>
                       Please select a meal:
@@ -127,14 +143,12 @@ class Search extends Component {
                     <option value="dinner">Dinner</option>
                     </select>
                 </form>
-                <h1>
-                    Select your meal!
-                </h1>
+                {/* render meal cards */}
                 <ul className="mealList">
                     {this.state.meals&&this.state.meals.map(meal => {
                         const id = uuidv4();
                     return <li key={id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleAdd(meal, id)} src={select} alt="plus symbol"/>
+                        <img className="mealCard-select" onClick={()=>this.showAddTo(meal, id)} src={select} alt="plus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={meal.label}/>
                         <div className="mealCard-details">
                             <span>
@@ -149,9 +163,17 @@ class Search extends Component {
                 </ul>
                 <button onClick={this.handlePrevious}>PREVIOUS</button>
                 <button onClick={this.handleNext}>NEXT</button>
-                  {/* Modal */}
-                  <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
-           </div>
+                    {/* Modal */}
+                    <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
+                    {/* Add to modal */}
+                    <AddToModal 
+                    display={this.state.display} 
+                    meal={this.state.selectedMeal}
+                    id={this.state.selectedMealId}
+                    addToDate={this.handleAdd} 
+                    resetDisplay={this.resetDisplay}
+                    />
+            </div>
         );
     }
 }
