@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../scss/RecipeModal.scss';
-import close from '../../assets/icons/close.svg'
+import close from '../../assets/icons/reply.svg'
 
 class RecipeModal extends Component {
     state = {

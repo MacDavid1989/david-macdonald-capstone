@@ -4,12 +4,20 @@ import '../../scss/Nav.scss';
 function Nav() {
 
     return (
-        <div>
-            <NavLink to="/">Hello</NavLink>
-            <NavLink to="/search">Meal Search</NavLink>
-            <NavLink to="/my meals">Meal Plan</NavLink>
-            <NavLink to="/grocery list">Grocery List</NavLink>
-        </div>
+        <>
+            <div className="nav">
+                <div className="nav__logo">
+                    <NavLink to="/">Logo</NavLink>
+                </div>
+                <div className="nav__links">
+                    <NavLink to="/search">Meal Search</NavLink>
+                    <NavLink to="/my meals">Meal Plan</NavLink>
+                    <NavLink to="/grocery list">Grocery List</NavLink>
+                </div>
+            </div>
+            <div className="spacer">
+            </div>
+        </>
     );
 }
 
