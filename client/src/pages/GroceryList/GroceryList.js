@@ -27,6 +27,10 @@ class GroceryList extends Component {
         return (
             <div>
                 <h1>Grocery List</h1>
+                <form>
+                    <input type="text" placeholder="Add additional item"/>
+                    <button type="submit">Add</button>
+                </form>
                 <ul>
                 {this.state.groceries&&this.state.groceries.map(grocery =>
                     <li key={grocery.id} className="groceryList">
