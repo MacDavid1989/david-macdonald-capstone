@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import RecipeModal from '../../components/RecipeModal'
 import remove from '../../assets/icons/remove.svg'
-import '../../scss/Home.scss';
+import '../../scss/MyMeals.scss';
 
 class MyMeals extends Component {
      // state for meal search and select page

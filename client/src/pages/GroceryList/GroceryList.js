@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import remove from '../../assets/icons/remove.svg'
 import { weightConversion } from '../../utils/weightConversion'
-import '../../scss/Home.scss';
+import '../../scss/GroceryList.scss';
 
 class GroceryList extends Component {
     state = {
@@ -30,14 +30,13 @@ class GroceryList extends Component {
                 <ul>
                 {this.state.groceries&&this.state.groceries.map(grocery =>
                     <li key={grocery.id} className="groceryList">
-                        <img className="groceryList-select" onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
                         <span>
                             {`${weightConversion(grocery.weight)}`}
                         </span>
                         <span>
                             {`${grocery.food.toLowerCase()}`}
                         </span>
-                        <img className="groceryList-select" width="100" height="100" src={grocery.image} alt={`${grocery.food}`}/>
+                        <img className="groceryList-select" onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
                     </li>
                     )}
                 </ul>

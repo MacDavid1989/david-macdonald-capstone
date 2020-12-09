@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import './App.scss';
+import './scss/App.scss';
 import Nav from './components/Nav'
 import Home from './pages/Home'
 import Search from './pages/Search'

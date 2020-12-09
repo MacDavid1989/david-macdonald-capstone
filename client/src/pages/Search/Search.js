@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../scss/Home.scss';
+import '../../scss/Search.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
 import { meals } from '../../utils/tempData'

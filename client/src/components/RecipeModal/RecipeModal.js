@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../scss/Home.scss';
+import '../../scss/RecipeModal.scss';
 import close from '../../assets/icons/close.svg'
 
 class RecipeModal extends Component {
@@ -23,12 +23,10 @@ class RecipeModal extends Component {
 
     render() {
         return (
-            <div style={{ display: this.state.display ? "initial" : "none" }}>
-                <div>
-                    <div>
-                        <img src={close} alt="x symbol" onClick={this.closeIframe} />
-                    </div>
-                    <iframe title="selected meal recipe website" width="500" height="500" src={this.props.src}></iframe>
+            <div className="recipe" style={{ display: this.state.display ? "initial" : "none" }}>
+                <div className="recipe__frame">
+                    <img className="recipe__close" src={close} alt="x symbol" onClick={this.closeIframe} />
+                    <iframe className="recipe__source" title="selected meal recipe website" src={this.props.src}></iframe>
                 </div>
             </div>
         );
