@@ -5,19 +5,25 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    background-color: #FFF;
 
     &__frame {
+        display: flex;
+        justify-content: center;
         position: relative;
         width: 100%;
         height: 100%;
+        padding: 4rem;
     }
 
     &__close {
         position: absolute;
+        left: 0;
     }
 
     &__source {
-        width: 100%;
+        width: 75%;
         height: 100%;
+        border-radius: 1rem;
     }
 }
