@@ -19,14 +19,19 @@ class GroceryList extends Component {
         .catch(console.error)
     }
 
+    componentDidUpdate() {
+        axios.get(`http://localhost:8080/groceries`)
+        .then(res => {
+            this.setState({
+                groceries: res.data
+            })
+        })
+        .catch(console.error)
+    }
+
     handleRemoveGrocery = (id) => {
-        console.log(id)
-        axios.delete(`http://localhost:8080/groceries`, { 
-            id: id
-        })
-        .then(response => {
-            console.log(response)
-        })
+        axios.delete(`http://localhost:8080/groceries/${id}`)
+        .then()
         .catch()
     }
 

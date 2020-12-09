@@ -30,8 +30,14 @@ router.post('/', (req, res) => {
     }
 })
 
-router.delete('/', (req, res) => {
-    console.log(req.body.id)
+router.delete('/:id', (req, res) => {
+    const groceries = getGroceries()
+    groceries.find((item, i) => {
+        item.id===req.params.id&&
+        groceries.splice(i,1)
+        writeGroceries(groceries)
+        return res.status(202).json(item)
+    })
 })
 
 groceryList = (ingredients) => {
