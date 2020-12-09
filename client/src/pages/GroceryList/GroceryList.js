@@ -19,19 +19,17 @@ class GroceryList extends Component {
         .catch(console.error)
     }
 
-    componentDidUpdate() {
-        axios.get(`http://localhost:8080/groceries`)
-        .then(res => {
-            this.setState({
-                groceries: res.data
-            })
-        })
-        .catch(console.error)
-    }
-
     handleRemoveGrocery = (id) => {
         axios.delete(`http://localhost:8080/groceries/${id}`)
-        .then()
+        .then(()=>{
+            axios.get(`http://localhost:8080/groceries`)
+            .then(res => {
+                this.setState({
+                    groceries: res.data
+                })
+            })
+            .catch(console.error)
+        })
         .catch()
     }
 
@@ -41,8 +39,14 @@ class GroceryList extends Component {
             food: e.target.itemName.value,
             weight: e.target.itemWeight.value 
         })
-        .then(response => {
-            console.log(response)
+        .then(() => {
+            axios.get(`http://localhost:8080/groceries`)
+            .then(res => {
+                this.setState({
+                    groceries: res.data
+                })
+            })
+            .catch(console.error)
         })
         .catch()
         e.target.reset()
