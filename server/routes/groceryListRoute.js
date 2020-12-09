@@ -4,12 +4,34 @@ const { v4: uuidv4 } = require("uuid");
 const router = express.Router();
 const mealsFile = './data/meals.json';
 const ingredientsFile = './data/ingredients.json';
+const groceriesFile = './data/groceries.json';
 
 // get route for meals to be rendered on my meals page
 router.get('/', (_req, res) => {
-    const ingredients = getIngredients()
-    const groceries = groceryList(ingredients)
+    const groceries = getGroceries()
     res.status(200).json(groceries)
+})
+
+router.post('/', (req, res) => {
+    if(req.body.meals){
+        const ingredients = getIngredients();
+        const groceries = groceryList(ingredients)
+        writeGroceries(groceries)
+    } else {
+        const newGrocery = {
+            id: uuidv4(),
+            food: req.body.food.toLowerCase(),
+            weight: req.body.weight
+        }
+        const groceries = getGroceries()
+        groceries.unshift(newGrocery)
+        writeGroceries(groceries)
+        res.status(201).json(newGrocery)
+    }
+})
+
+router.delete('/', (req, res) => {
+    console.log(req.body.id)
 })
 
 groceryList = (ingredients) => {
@@ -61,12 +83,20 @@ getIngredients = () => {
     return JSON.parse(fs.readFileSync(ingredientsFile))
 }
 
+getGroceries = () => {
+    return JSON.parse(fs.readFileSync(groceriesFile))
+}
+
 writeMeals = (meals) => {
     fs.writeFileSync(mealsFile, JSON.stringify([...meals]), err=>console.log(err))
 }
 
 writeIngredients = (ingredients) => {
     fs.writeFileSync(ingredientsFile, JSON.stringify([...ingredients]), err=>console.log(err))
+}
+
+writeGroceries = (groceries) => {
+    fs.writeFileSync(groceriesFile, JSON.stringify([...groceries]), err=>console.log(err))
 }
 
 addNewMeal = (newMeal) => {

@@ -40,7 +40,9 @@ class MyMeals extends Component {
 
     // post meal list to server
     handleSave = () => {
-        // post saved list to server goes here
+        axios.post(`http://localhost:8080/groceries`, { meals: this.state.myMeals })
+        .then()
+        .catch()
     }
 
     //opens the modal

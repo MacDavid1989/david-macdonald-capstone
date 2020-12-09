@@ -19,16 +19,37 @@ class GroceryList extends Component {
         .catch(console.error)
     }
 
-    handleRemoveGrocery = () => {
-        // delete request to remove item from grocery goes here
+    handleRemoveGrocery = (id) => {
+        console.log(id)
+        axios.delete(`http://localhost:8080/groceries`, { 
+            id: id
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch()
+    }
+
+    handleAddGrocery = (e) => {
+        e.preventDefault()
+        axios.post(`http://localhost:8080/groceries`, { 
+            food: e.target.itemName.value,
+            weight: e.target.itemWeight.value 
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch()
+        e.target.reset()
     }
 
     render() {
         return (
             <div>
                 <h1>Grocery List</h1>
-                <form>
-                    <input type="text" placeholder="Add additional item"/>
+                <form onSubmit={this.handleAddGrocery}>
+                    <input required type="text" name="itemName" placeholder="Add item name"/>
+                    <input required type="number" pattern="[0-9]" name="itemWeight" placeholder="Add item weight"/>
                     <button type="submit">Add</button>
                 </form>
                 <ul>
