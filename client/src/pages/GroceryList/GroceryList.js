@@ -21,7 +21,8 @@ class GroceryList extends Component {
 
     handleRemoveGrocery = (id) => {
         axios.delete(`http://localhost:8080/groceries/${id}`)
-        .then(()=>{
+        .then((res)=>{
+            console.log(res.data)
             axios.get(`http://localhost:8080/groceries`)
             .then(res => {
                 this.setState({

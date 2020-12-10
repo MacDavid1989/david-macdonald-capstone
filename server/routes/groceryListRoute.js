@@ -37,20 +37,17 @@ router.post('/', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    const groceries = getGroceries()
     const userItems = getUserItems()
-    userItems.length!==0&&
-    userItems.find((item, i) => {
-        item.id===req.params.id&&
-        userItems.splice(i,1)
-        writeUserItems(userItems)
-    })
-    groceries.find((item, i) => {
-        item.id===req.params.id&&
-        groceries.splice(i,1)
-        writeGroceries(groceries)
-        return res.status(202).json(item)
-    })
+    const recipeItems = getRecipeItems()
+    const groceries = getGroceries()
+
+    writeUserItems(userItems.filter(item=>item.id!==req.params.id))
+
+    writeRecipeItems(recipeItems.filter(item=>item.id!==req.params.id))
+    
+    writeGroceries(groceries.filter(item=>item.id!==req.params.id))
+
+    res.status(200).json({ success: true})
 })
 
 groceryList = (ingredients) => {

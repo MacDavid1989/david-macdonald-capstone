@@ -5,63 +5,63 @@ import '../../scss/Home.scss';
 function Home() {
 
     return (
-        <>
-            <div>
-                <h1>
+        <div className="home">
+            <div className="hero">
+                <h1 className="hero__title">
                     Meet Your Favorite Timesaver
                 </h1>
-                <img/>
+                <img className="hero__image" alt="mobile snapshot of search page"/>
             </div>
-            <div>
-                <h2>Weekly Meal Planning Made Easy</h2>
-                <div>
-                    <div>
+            <div className="summary">
+                <h2 className="summary__title">Weekly Meal Planning Made Easy</h2>
+                <div className="summary__container">
+                    <div className="summary">
                         <div>
-                            <img/>
+                            <img alt="browsing through meals"/>
                             <h3>Browse</h3>
                         </div>
                         <div>
-                            <img/>
+                            <img alt="planning weekly meals"/>
                             <h3>Plan</h3>
                         </div>
                     </div>
-                    <div>
+                    <div className="summary">
                         <div>
-                            <img/>
+                            <img alt="grocery shopping"/>
                             <h3>Shop</h3>
                         </div>
                         <div>
-                            <img/>
+                            <img alt="cooking meals"/>
                             <h3>Cook</h3>
                         </div>
                     </div>
                 </div>
                 <Link to="/search">
-                    <button>Browse Meals</button>
+                    <button className="home__button">Browse Meals</button>
                 </Link>
             </div>
-            <div>
-                <h1>Plan Your Meals in Minutes</h1>
-                <img/>
+            <div className="home__card">
+                <h1 className="home__card-title">Plan Your Meals in Minutes</h1>
+                <img className="home__card-image" alt="meal plan snapshot"/>
                 <Link to="/search">
-                    <button>Begin Planning</button>
+                    <button className="home__button">Begin Planning</button>
                 </Link>
             </div>
-            <div>
-                <h1>Grocery List Simplified</h1>
-                <img/>
+            <div className="home__card">
+                <h1 className="home__card-title">Grocery List Simplified</h1>
+                <img className="home__card-image" alt="grocery list snapshot"/>
                 <Link to="/search">
-                    <button>Save Time</button>
+                    <button className="home__button">Save Time</button>
                 </Link>
             </div>
-            <div>
-                <h1>What Are You Waiting For?</h1>
-                <img/>
+            <div className="home__card">
+                <h1 className="home__card-title">What Are You Waiting For?</h1>
+                <img className="home__card-image" alt="recipe snapshot"/>
                 <Link to="/search">
-                    <button>Start Cooking</button>
+                    <button className="home__button">Start Cooking</button>
                 </Link>
             </div>
-        </>
+        </div>
     );
     
 }
