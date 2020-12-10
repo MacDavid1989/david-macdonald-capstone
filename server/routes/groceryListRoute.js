@@ -54,8 +54,8 @@ router.delete('/:id', (req, res) => {
 
 groceryList = (ingredients) => {
     ingredients.sort((a, b) => {
-        let fa = a.food.toLowerCase()
-        let fb = b.food.toLowerCase()
+        let fa = a.foodId
+        let fb = b.foodId
         if (fa < fb) {
             return -1;
         }
@@ -76,19 +76,18 @@ groceryList = (ingredients) => {
         }
     }
 
-    // ingredients.sort((a, b) => {
-    //     let fa = a.category.toLowerCase()
-    //     let fb = b.category.toLowerCase()
-    //     if (fa < fb) {
-    //         return -1;
-    //     }
-    //     if (fa > fb) {
-    //         return 1;
-    //     }
-    //     return 0;
+    ingredients.sort((a, b) => {
+        let fa = a.category.toLowerCase()
+        let fb = b.category.toLowerCase()
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
         
-    // })
-
+    })
 
     return ingredients
 }

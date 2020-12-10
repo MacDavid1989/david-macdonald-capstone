@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../scss/Search.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
-// import { meals } from '../../utils/tempData'
+import { meals } from '../../utils/tempData'
 import { v4 as uuidv4 } from 'uuid';
 import RecipeModal from '../../components/RecipeModal'
 import AddToModal from '../../components/AddToModal'
@@ -12,7 +12,7 @@ class Search extends Component {
     state = {
         query: '',
         mealType: '',
-        meals: '', //meals.hits.map(meal => meal.recipe)
+        meals: meals.hits.map(meal => meal.recipe),
         from: 0,
         to: 9,
         display: false,
@@ -25,7 +25,9 @@ class Search extends Component {
         if(sessionStorage.getItem('query')&&sessionStorage.getItem('mealType')){
             this.setState({
                 query: sessionStorage.getItem('query'),
-                mealType: sessionStorage.getItem('mealType')
+                mealType: sessionStorage.getItem('mealType'),
+                from: sessionStorage.getItem('from'),
+                to: sessionStorage.getItem('to')
             }, this.getMeals)
         }
     }
@@ -33,23 +35,25 @@ class Search extends Component {
     componentWillUnmount() {
         sessionStorage.setItem('query', this.state.query);
         sessionStorage.setItem('mealType', this.state.mealType);
+        sessionStorage.setItem('from', this.state.from);
+        sessionStorage.setItem('to', this.state.to);
     }
 
     // request to get meals from api based on search
     getMeals = () => {
-        const API_URL = process.env.REACT_APP_API_URL;
-        const API_ID = process.env.REACT_APP_API_ID;
-        const API_KEY = process.env.REACT_APP_API_KEY;
-        const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
-        const QUERY = this.state.query;
+        // const API_URL = process.env.REACT_APP_API_URL;
+        // const API_ID = process.env.REACT_APP_API_ID;
+        // const API_KEY = process.env.REACT_APP_API_KEY;
+        // const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
+        // const QUERY = this.state.query;
 
-        this.state.query&&this.state.mealType&&!this.state.meals&&
-        axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
-        .then(response => {
-            this.setState({
-                meals: response.data.hits.map(meal => meal.recipe)
-            })
-        }) 
+        // this.state.query&&this.state.mealType&&!this.state.meals&&
+        // axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
+        // .then(response => {
+        //     this.setState({
+        //         meals: response.data.hits.map(meal => meal.recipe)
+        //     })
+        // }) 
     }
 
     // onChange handler for search input
@@ -96,6 +100,7 @@ class Search extends Component {
                 quantity: ingredient.quantity,
                 measure: ingredient.measure,
                 food: ingredient.food,
+                foodId: ingredient.foodId,
                 weight: ingredient.weight,
                 category: ingredient.foodCategory,
                 image: ingredient.image
