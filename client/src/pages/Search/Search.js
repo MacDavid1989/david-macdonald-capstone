@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../scss/Search.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
-import { meals } from '../../utils/tempData'
+// import { meals } from '../../utils/tempData'
 import { v4 as uuidv4 } from 'uuid';
 import RecipeModal from '../../components/RecipeModal'
 import AddToModal from '../../components/AddToModal'
@@ -12,12 +12,27 @@ class Search extends Component {
     state = {
         query: '',
         mealType: '',
-        meals: meals.hits.map(meal => meal.recipe),
+        meals: '', //meals.hits.map(meal => meal.recipe)
         from: 0,
+        to: 9,
         display: false,
         src: '',
         selectedMeal: '',
         selectedMealId: ''
+    }
+
+    componentDidMount() {
+        if(sessionStorage.getItem('query')&&sessionStorage.getItem('mealType')){
+            this.setState({
+                query: sessionStorage.getItem('query'),
+                mealType: sessionStorage.getItem('mealType')
+            }, this.getMeals)
+        }
+    }
+
+    componentWillUnmount() {
+        sessionStorage.setItem('query', this.state.query);
+        sessionStorage.setItem('mealType', this.state.mealType);
     }
 
     // request to get meals from api based on search
@@ -25,7 +40,7 @@ class Search extends Component {
         const API_URL = process.env.REACT_APP_API_URL;
         const API_ID = process.env.REACT_APP_API_ID;
         const API_KEY = process.env.REACT_APP_API_KEY;
-        const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}`;
+        const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
         const QUERY = this.state.query;
 
         this.state.query&&this.state.mealType&&!this.state.meals&&
@@ -40,13 +55,15 @@ class Search extends Component {
     // onChange handler for search input
     changeSearchIngredient = (e) => {
         this.setState({
-            query: e.target.value.toLowerCase(),
+            meals: '',
+            query: e.target.value.toLowerCase()
         }, this.getMeals)   
     }
 
     // onChange handler for select input
     changeMealType = (e) => {
         this.setState({
+            meals: '',
             mealType: e.target.value
         }, this.getMeals)
     }
@@ -55,7 +72,8 @@ class Search extends Component {
     handleNext = () => {
         this.setState({
             meals: '',
-            from: this.state.from + 10
+            from: this.state.from + 9,
+            to: this.state.to + 9
         }, this.getMeals)
     }
 
@@ -64,7 +82,8 @@ class Search extends Component {
         (this.state.from > 0)&&
         this.setState({
             meals: '',
-            from: this.state.from - 10
+            from: this.state.from - 9,
+            to: this.state.to - 9
         }, this.getMeals)
     }
 
