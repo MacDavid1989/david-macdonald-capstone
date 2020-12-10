@@ -22,10 +22,10 @@ router.get('/', (_req, res) => {
 
 // delete route for removing meals from my meals page
 router.delete('/:id', (req, res) => {
-    const ingredients = getIngredients().filter(ingredient => ingredient.mealId!==req.params.id)
+    const ingredients = getIngredients().map(ingredient => ingredient.mealId!==req.params.id)
     writeIngredients(ingredients)
     const meals = getMeals()
-    meals.forEach((meal,i) => {
+    meals.map((meal,i) => {
         meal.id===req.params.id&&meals.splice(i,1)&&
         res.status(202).json(meal)
     })

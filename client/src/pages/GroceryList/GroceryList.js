@@ -37,7 +37,7 @@ class GroceryList extends Component {
         e.preventDefault()
         axios.post(`http://localhost:8080/groceries`, { 
             food: e.target.itemName.value,
-            weight: e.target.itemWeight.value 
+            weight: parseInt(e.target.itemWeight.value) 
         })
         .then(() => {
             axios.get(`http://localhost:8080/groceries`)
@@ -57,7 +57,7 @@ class GroceryList extends Component {
             <div>
                 <h1>Grocery List</h1>
                 <form onSubmit={this.handleAddGrocery}>
-                    <input required type="text" pattern="[A-Za-z ]{3,}" name="itemName" placeholder="Add item name"/>
+                    <input required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item name"/>
                     <input required type="number" name="itemWeight" placeholder="Add item weight"/>
                     <button type="submit">Add</button>
                 </form>

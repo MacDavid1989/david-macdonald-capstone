@@ -22,19 +22,17 @@ class MyMeals extends Component {
         }).catch()
     }
 
-    componentDidUpdate() {
-        axios.get(`http://localhost:8080/meals`)
-        .then(res => {
-            this.setState({
-                myMeals: res.data
-            });
-        }).catch()
-    }
-
     // makes delete request to remove meal from my meals
     handleRemove = (id) => {
         axios.delete(`http://localhost:8080/meals/${id}`)
-        .then()
+        .then(()=>{
+            axios.get(`http://localhost:8080/meals`)
+            .then(res => {
+                this.setState({
+                    myMeals: res.data
+                });
+            }).catch()
+        })
         .catch(console.error)
     }
 

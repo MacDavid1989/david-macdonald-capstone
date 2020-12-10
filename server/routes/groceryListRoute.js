@@ -5,6 +5,8 @@ const router = express.Router();
 const mealsFile = './data/meals.json';
 const ingredientsFile = './data/ingredients.json';
 const groceriesFile = './data/groceries.json';
+const userItemsFile = './data/userItems.json';
+const recipeItemsFile = './data/recipeItems.json';
 
 // get route for meals to be rendered on my meals page
 router.get('/', (_req, res) => {
@@ -15,7 +17,9 @@ router.get('/', (_req, res) => {
 router.post('/', (req, res) => {
     if(req.body.meals){
         const ingredients = getIngredients();
-        const groceries = groceryList(ingredients)
+        const recipeItems = groceryList(ingredients)
+        writeRecipeItems(recipeItems)
+        const groceries = [...getUserItems(), ...getRecipeItems()]
         writeGroceries(groceries)
     } else {
         const newGrocery = {
@@ -23,8 +27,10 @@ router.post('/', (req, res) => {
             food: req.body.food.toLowerCase(),
             weight: req.body.weight
         }
-        const groceries = getGroceries()
-        groceries.unshift(newGrocery)
+        const userItems = getUserItems()
+        userItems.unshift(newGrocery)
+        writeUserItems(userItems)
+        const groceries = [...getUserItems(), ...getRecipeItems()]
         writeGroceries(groceries)
         res.status(201).json(newGrocery)
     }
@@ -32,6 +38,13 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     const groceries = getGroceries()
+    const userItems = getUserItems()
+    userItems.length!==0&&
+    userItems.find((item, i) => {
+        item.id===req.params.id&&
+        userItems.splice(i,1)
+        writeUserItems(userItems)
+    })
     groceries.find((item, i) => {
         item.id===req.params.id&&
         groceries.splice(i,1)
@@ -93,6 +106,14 @@ getGroceries = () => {
     return JSON.parse(fs.readFileSync(groceriesFile))
 }
 
+getUserItems = () => {
+    return JSON.parse(fs.readFileSync(userItemsFile))
+}
+
+getRecipeItems = () => {
+    return JSON.parse(fs.readFileSync(recipeItemsFile))
+}
+
 writeMeals = (meals) => {
     fs.writeFileSync(mealsFile, JSON.stringify([...meals]), err=>console.log(err))
 }
@@ -103,6 +124,14 @@ writeIngredients = (ingredients) => {
 
 writeGroceries = (groceries) => {
     fs.writeFileSync(groceriesFile, JSON.stringify([...groceries]), err=>console.log(err))
+}
+
+writeUserItems = (userItems) => {
+    fs.writeFileSync(userItemsFile, JSON.stringify([...userItems]), err=>console.log(err))
+}
+
+writeRecipeItems = (recipeItems) => {
+    fs.writeFileSync(recipeItemsFile, JSON.stringify([...recipeItems]), err=>console.log(err))
 }
 
 addNewMeal = (newMeal) => {

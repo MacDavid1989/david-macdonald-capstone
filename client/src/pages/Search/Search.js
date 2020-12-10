@@ -37,11 +37,6 @@ class Search extends Component {
         }) 
     }
 
-    // gets my meals when the component mounts
-    componentDidMount() {
-        
-    }
-
     // onChange handler for search input
     changeSearchIngredient = (e) => {
         this.setState({
