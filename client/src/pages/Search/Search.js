@@ -92,7 +92,7 @@ class Search extends Component {
     }
 
     // post to server with the meal wanting to be added
-    handleAdd = (meal, id, date) => {
+    handleAdd = (meal, id, date, week) => {
         const ingredients = meal.ingredients.map(ingredient => {
            const newIngredient = {
                 id: uuidv4(),
@@ -111,6 +111,7 @@ class Search extends Component {
         axios.post(`http://localhost:8080/meals`, {
             id: id,
             date: date,
+            week: week,
             calories: Math.ceil(meal.calories / meal.yield),
             name: meal.label,
             image: meal.image,

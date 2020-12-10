@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { getWeek } from 'date-fns'
 import axios from 'axios';
 import RecipeModal from '../../components/RecipeModal'
 import remove from '../../assets/icons/remove.svg'
@@ -10,7 +11,8 @@ class MyMeals extends Component {
      state = {
         myMeals: '',
         display: false,
-        src: ''
+        src: '',
+        week: getWeek(new Date())
     }
 
     componentDidMount() {
@@ -52,14 +54,45 @@ class MyMeals extends Component {
         })
     }
 
+    handlePrevious = () => {
+        if(this.state.week===1){
+            this.setState({
+                week: 52,
+                display: true
+            })
+        } else {
+            this.setState({
+                week: this.state.week - 1,
+                display: true
+            })
+        }
+    }
+
+    handleNext = () => {
+        if(this.state.week===52){
+            this.setState({
+                week: 1,
+                display: true
+            })
+        } else {
+            this.setState({
+                week: this.state.week + 1,
+                display: true
+            })
+        }
+    }
+
     render() {
         return (
             <div>
                 <h1>My Meals</h1>
+                <button onClick={this.handlePrevious}>previous</button>
+                <h1>{this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}</h1>
+                <button onClick={this.handleNext}>next</button>
                 <h2>Sunday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Sunday'&&
+                    meal.date==='Sunday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
@@ -78,7 +111,7 @@ class MyMeals extends Component {
                 <h2>Monday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Monday'&&
+                    meal.date==='Monday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
@@ -97,7 +130,7 @@ class MyMeals extends Component {
                 <h2>Tuesday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Tuesday'&&
+                    meal.date==='Tuesday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
@@ -116,7 +149,7 @@ class MyMeals extends Component {
                 <h2>Wednesday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Wednesday'&&
+                    meal.date==='Wednesday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
@@ -135,7 +168,7 @@ class MyMeals extends Component {
                 <h2>Thursday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Thursday'&&
+                    meal.date==='Thursday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
@@ -154,7 +187,7 @@ class MyMeals extends Component {
                 <h2>Friday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Friday'&&
+                    meal.date==='Friday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
@@ -173,7 +206,7 @@ class MyMeals extends Component {
                 <h2>Saturday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Saturday'&&
+                    meal.date==='Saturday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
                         <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
