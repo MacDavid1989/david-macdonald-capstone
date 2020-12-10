@@ -15,24 +15,26 @@ router.get('/', (_req, res) => {
 })
 
 router.post('/', (req, res) => {
-    if(req.body.meals){
+    if(req.body.plan){
         const ingredients = getIngredients();
         const recipeItems = groceryList(ingredients)
         writeRecipeItems(recipeItems)
         const groceries = [...getUserItems(), ...getRecipeItems()]
         writeGroceries(groceries)
+        return res.status(201).json({ success: true})
     } else {
         const newGrocery = {
             id: uuidv4(),
             food: req.body.food.toLowerCase(),
-            weight: req.body.weight
+            weight: req.body.weight,
+            category: "user item"
         }
         const userItems = getUserItems()
         userItems.unshift(newGrocery)
         writeUserItems(userItems)
         const groceries = [...getUserItems(), ...getRecipeItems()]
         writeGroceries(groceries)
-        res.status(201).json(newGrocery)
+        return res.status(201).json(newGrocery)
     }
 })
 

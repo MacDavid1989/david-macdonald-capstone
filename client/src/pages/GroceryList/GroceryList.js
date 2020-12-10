@@ -62,8 +62,12 @@ class GroceryList extends Component {
                     <input required type="number" name="itemWeight" placeholder="Add item weight"/>
                     <button type="submit">Add</button>
                 </form>
+                <h2>
+                    Your Items
+                </h2>
                 <ul>
                 {this.state.groceries&&this.state.groceries.map(grocery =>
+                grocery.category==="user item"&&
                     <li key={grocery.id} className="groceryList">
                         <span>
                             {`${weightConversion(grocery.weight)}`}
@@ -72,6 +76,22 @@ class GroceryList extends Component {
                             {`${grocery.food.toLowerCase()}`}
                         </span>
                         <img className="groceryList-select" onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
+                    </li>
+                    )}
+                </ul>
+                <h2>
+                    Recipe Items
+                </h2>
+                <ul>
+                {this.state.groceries&&this.state.groceries.map(grocery =>
+                grocery.category!=="user item"&&
+                    <li key={grocery.id} className="groceryList">
+                        <span>
+                            {`${weightConversion(grocery.weight)}`}
+                        </span>
+                        <span>
+                            {`${grocery.food.toLowerCase()}`}
+                        </span>
                     </li>
                     )}
                 </ul>

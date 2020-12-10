@@ -92,7 +92,11 @@ class Search extends Component {
             image: meal.image,
             url: meal.url,
             ingredients: ingredients
-        }).then()
+        }).then(()=>{
+            axios.post(`http://localhost:8080/groceries`, { plan: true })
+            .then()
+            .catch()
+        })
         .catch(console.error)
     }
 

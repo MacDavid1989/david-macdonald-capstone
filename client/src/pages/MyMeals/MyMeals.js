@@ -31,16 +31,12 @@ class MyMeals extends Component {
                 this.setState({
                     myMeals: res.data
                 });
+                axios.post(`http://localhost:8080/groceries`, { plan: true })
+                .then()
+                .catch()
             }).catch()
         })
         .catch(console.error)
-    }
-
-    // post meal list to server
-    handleSave = () => {
-        axios.post(`http://localhost:8080/groceries`, { meals: this.state.myMeals })
-        .then()
-        .catch()
     }
 
     //opens the modal
@@ -192,7 +188,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <button onClick={this.handleSave}>Save</button>
+                <Link to="/search">Add another meal</Link>
                 {/* Modal */}
                 <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
             </div>
