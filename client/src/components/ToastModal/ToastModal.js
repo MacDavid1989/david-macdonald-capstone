@@ -3,9 +3,7 @@ import '../../scss/ToastModal.scss';
 
 class RecipeModal extends Component {
     state = {
-        display: false,
-        meal: '',
-        day: ''
+        display: false
     }
 
     componentDidUpdate(_prevP, prevS) {
@@ -24,7 +22,7 @@ class RecipeModal extends Component {
         return (
             <div className="toast" style={{ display: this.state.display ? "initial" : "none" }}>
                 <div className="toast__frame">
-                    <h1>Successfully added meal!</h1>
+                <h1>{`Successfully added ${this.props.meal} to ${this.props.day} of Week ${this.props.week}`}</h1>
                 </div>
             </div>
         );
