@@ -27,7 +27,6 @@ class GroceryList extends Component {
     }
 
     componentDidUpdate(_prevP, prevS) {
-        console.log(this.state.groceries)
         prevS.week!==this.state.week&&
         axios.get(`http://localhost:8080/groceries/${this.state.week}`)
         .then(res => {
@@ -60,8 +59,7 @@ class GroceryList extends Component {
 
     handleRemoveGrocery = (id) => {
         axios.delete(`http://localhost:8080/groceries/${id}`)
-        .then((res)=>{
-            console.log(res.data)
+        .then(()=>{
             axios.get(`http://localhost:8080/groceries/${this.state.week}`)
             .then(res => {
                 this.setState({
