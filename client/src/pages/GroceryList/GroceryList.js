@@ -13,7 +13,18 @@ class GroceryList extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8080/groceries`)
+        axios.get(`http://localhost:8080/groceries/${this.state.week}`)
+        .then(res => {
+            this.setState({
+                groceries: res.data
+            })
+        })
+        .catch(console.error)
+    }
+
+    componentDidUpdate(_prevP, prevS) {
+        prevS.week!==this.state.week&&
+        axios.get(`http://localhost:8080/groceries/${this.state.week}`)
         .then(res => {
             this.setState({
                 groceries: res.data
@@ -26,7 +37,7 @@ class GroceryList extends Component {
         axios.delete(`http://localhost:8080/groceries/${id}`)
         .then((res)=>{
             console.log(res.data)
-            axios.get(`http://localhost:8080/groceries`)
+            axios.get(`http://localhost:8080/groceries/${this.state.week}`)
             .then(res => {
                 this.setState({
                     groceries: res.data
@@ -45,7 +56,7 @@ class GroceryList extends Component {
             week: this.state.week 
         })
         .then(() => {
-            axios.get(`http://localhost:8080/groceries`)
+            axios.get(`http://localhost:8080/groceries/${this.state.week}`)
             .then(res => {
                 this.setState({
                     groceries: res.data

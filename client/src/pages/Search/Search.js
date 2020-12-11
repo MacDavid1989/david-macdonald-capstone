@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../../scss/Search.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
-import { meals } from '../../utils/tempData'
 import { v4 as uuidv4 } from 'uuid';
 import RecipeModal from '../../components/RecipeModal'
 import AddToModal from '../../components/AddToModal'
