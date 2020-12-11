@@ -173,10 +173,10 @@ class GroceryList extends Component {
                 grocery.category!=="user item"&&grocery.week===this.state.week&&
                     <li key={grocery.id} className="groceryList">
                         <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
-                        <span>
+                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
                             {`${weightConversion(grocery.weight)}`}
                         </span>
-                        <span>
+                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
                             {`${grocery.food.toLowerCase()}`}
                         </span>
                     </li>
