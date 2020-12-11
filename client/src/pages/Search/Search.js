@@ -12,7 +12,7 @@ class Search extends Component {
     state = {
         query: '',
         mealType: '',
-        meals:'',
+        meals: meals.hits.map(meal=>meal.recipe),
         from: 0,
         to: 12,
         display: false,
@@ -41,19 +41,19 @@ class Search extends Component {
 
     // request to get meals from api based on search
     getMeals = () => {
-        const API_URL = process.env.REACT_APP_API_URL;
-        const API_ID = process.env.REACT_APP_API_ID;
-        const API_KEY = process.env.REACT_APP_API_KEY;
-        const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
-        const QUERY = this.state.query;
+        // const API_URL = process.env.REACT_APP_API_URL;
+        // const API_ID = process.env.REACT_APP_API_ID;
+        // const API_KEY = process.env.REACT_APP_API_KEY;
+        // const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
+        // const QUERY = this.state.query;
 
-        this.state.query&&this.state.mealType&&!this.state.meals&&
-        axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
-        .then(response => {
-            this.setState({
-                meals: response.data.hits.map(meal => meal.recipe)
-            })
-        }) 
+        // this.state.query&&this.state.mealType&&!this.state.meals&&
+        // axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
+        // .then(response => {
+        //     this.setState({
+        //         meals: response.data.hits.map(meal => meal.recipe)
+        //     })
+        // }) 
     }
 
     // onChange handler for search input
@@ -96,6 +96,7 @@ class Search extends Component {
         const ingredients = meal.ingredients.map(ingredient => {
            const newIngredient = {
                 id: uuidv4(),
+                week: week,
                 mealId: id,
                 quantity: ingredient.quantity,
                 measure: ingredient.measure,

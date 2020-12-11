@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
             id: uuidv4(),
             food: req.body.food.toLowerCase(),
             weight: req.body.weight,
+            week: req.body.week,
             category: "user item"
         }
         const userItems = getUserItems()
