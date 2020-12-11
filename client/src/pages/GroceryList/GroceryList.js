@@ -163,7 +163,7 @@ class GroceryList extends Component {
                 <ul>
                 {this.state.groceries&&this.state.groceries.map(grocery =>
                 grocery.category==="user item"&&grocery.week===this.state.week&&
-                    <li key={grocery.id} className="groceryList">
+                    <li key={grocery.id} className="groceryList" style={{ display: "flex"}}>
                         <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
                         <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
                             {`${weightConversion(grocery.weight)}`}
@@ -181,7 +181,7 @@ class GroceryList extends Component {
                 <ul>
                 {this.state.groceries&&this.state.groceries.map(grocery =>
                 grocery.category!=="user item"&&grocery.week===this.state.week&&
-                    <li key={grocery.id} className="groceryList">
+                    <li key={grocery.id} className="groceryList" style={{ display: "flex"}}>
                         <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
                         <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
                             {`${weightConversion(grocery.weight)}`}
