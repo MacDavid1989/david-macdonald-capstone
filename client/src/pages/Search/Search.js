@@ -27,7 +27,8 @@ class Search extends Component {
                 query: sessionStorage.getItem('query'),
                 mealType: sessionStorage.getItem('mealType'),
                 from: parseInt(sessionStorage.getItem('from')),
-                to: parseInt(sessionStorage.getItem('to'))
+                to: parseInt(sessionStorage.getItem('to')),
+                // previous: sessionStorage.getItem('previous', this.state.previous)
             }, this.getMeals)
         }
     }
@@ -41,6 +42,11 @@ class Search extends Component {
         this.setState({
             previous: true
         })
+
+        !this.state.previous&&this.state.from!==0&&
+        this.setState({
+            previous: true
+        })
     }
 
     componentWillUnmount() {
@@ -48,6 +54,7 @@ class Search extends Component {
         sessionStorage.setItem('mealType', this.state.mealType);
         sessionStorage.setItem('from', this.state.from);
         sessionStorage.setItem('to', this.state.to);
+        // sessionStorage.setItem('previous', this.state.previous);
     }
 
     // request to get meals from api based on search
