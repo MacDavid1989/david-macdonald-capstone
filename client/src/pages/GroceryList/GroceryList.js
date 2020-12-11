@@ -9,7 +9,8 @@ class GroceryList extends Component {
     state = {
         groceries: '',
         week: getWeek(new Date()),
-        display: false
+        display: false,
+        remove: true
     }
 
     componentDidMount() {
@@ -31,6 +32,26 @@ class GroceryList extends Component {
             })
         })
         .catch(console.error)
+
+        prevS.week===getWeek(new Date())&&this.state.week===(getWeek(new Date())-1)&&
+        this.setState({
+            remove: false
+        })
+
+        prevS.week===(getWeek(new Date())-1)&&this.state.week===(getWeek(new Date()))&&
+        this.setState({
+            remove: true
+        })
+        
+        prevS.week===getWeek(new Date())&&this.state.week===52&&
+        this.setState({
+            remove: false
+        })
+
+        prevS.week===52&&this.state.week===getWeek(new Date())&&
+        this.setState({
+            remove: true
+        })
     }
 
     handleRemoveGrocery = (id) => {
@@ -104,7 +125,7 @@ class GroceryList extends Component {
                 <button onClick={this.handlePrevious}>previous</button>
                 <h1>{this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}</h1>
                 <button onClick={this.handleNext}>next</button>
-                <form onSubmit={this.handleAddGrocery}>
+                <form style={{ display: this.state.remove ? "flex" : "none" }} onSubmit={this.handleAddGrocery}>
                     <input required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item name"/>
                     <input required type="number" name="itemWeight" placeholder="Add item weight"/>
                     <button type="submit">Add</button>
@@ -122,7 +143,7 @@ class GroceryList extends Component {
                         <span>
                             {`${grocery.food.toLowerCase()}`}
                         </span>
-                        <img className="groceryList-select" onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
+                        <img className="groceryList-select" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
                     </li>
                     )}
                 </ul>
