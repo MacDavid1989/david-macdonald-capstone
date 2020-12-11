@@ -15,9 +15,9 @@ class RecipeModal extends Component {
         });
 
         prevS.display===true&&this.state.display===true&&
-        setTimeout(()=>this.setState({
+        setTimeout(()=>{this.setState({
             display: false,
-        }), 3000)
+        }); this.props.resetToast()}, 3000)
     }
 
     render() {

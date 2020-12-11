@@ -83,6 +83,12 @@ class RecipeModal extends Component {
         }
     }
 
+    resetToast = () => {
+        this.setState({
+            toast: false
+        })
+    }
+
     render() {
         return (
             <>
@@ -100,7 +106,7 @@ class RecipeModal extends Component {
                     <h3 className="addTo__date" onClick={(e)=> {this.props.addToDate(this.state.meal, this.state.id, e.target.innerText, this.state.week); this.props.resetDisplay(); this.setState({toast: true})}}>Saturday</h3>
                 </div>
             </div>
-            <ToastModal toast={this.state.toast} />
+            <ToastModal toast={this.state.toast} resetToast={this.resetToast}/>
             </>
         );
     }
