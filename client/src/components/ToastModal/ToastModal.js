@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../scss/ToastModal.scss';
+import { getWeek } from 'date-fns';
 
 class RecipeModal extends Component {
     state = {
@@ -22,7 +23,7 @@ class RecipeModal extends Component {
         return (
             <div className="toast" style={{ display: this.state.display ? "initial" : "none" }}>
                 <div className="toast__frame">
-                <h1>{`Successfully added ${this.props.meal} to ${this.props.day} of Week ${this.props.week}`}</h1>
+                <h1>{`Successfully added ${this.props.meal} to ${this.props.day} of ${this.props.week===getWeek(new Date())?'Current Week': 'Week '+this.props.week}`}</h1>
                 </div>
             </div>
         );

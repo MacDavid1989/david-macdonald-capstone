@@ -166,10 +166,7 @@ class GroceryList extends Component {
                     <li key={grocery.id} className="groceryList" style={{ display: "flex"}}>
                         <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
                         <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                            {`${weightConversion(grocery.weight)}`}
-                        </span>
-                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                            {`${grocery.food.toLowerCase()}`}
+                            {`${weightConversion(grocery.weight)} of ${grocery.food.toLowerCase()}`}
                         </span>
                         <img className="groceryList-select" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
                     </li>
@@ -184,10 +181,7 @@ class GroceryList extends Component {
                     <li key={grocery.id} className="groceryList" style={{ display: "flex"}}>
                         <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
                         <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                            {`${weightConversion(grocery.weight)}`}
-                        </span>
-                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                            {`${grocery.food.toLowerCase()}`}
+                            {`${weightConversion(grocery.weight)} of ${grocery.food.toLowerCase()}`}
                         </span>
                     </li>
                     )}

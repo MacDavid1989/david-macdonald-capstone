@@ -1,1 +1,1 @@
-export const mealType = ['breakfast','lunch','dinner']
+export const mealType = ['breakfast','lunch','dinner','snack']
