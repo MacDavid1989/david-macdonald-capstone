@@ -7,7 +7,8 @@ class RecipeModal extends Component {
         display: false,
         week: getWeek(new Date()),
         meal: '',
-        id: ''
+        id: '',
+        previous: false
     }
 
     closeAddTo = () => {
@@ -29,7 +30,27 @@ class RecipeModal extends Component {
         this.setState({
             display: true,
         });
+
+        prevS.week===(getWeek(new Date())+1)&&this.state.week===(getWeek(new Date()))&&
+        this.setState({
+            previous: false
+        })
+
+        prevS.week===getWeek(new Date())&&this.state.week===(getWeek(new Date())+1)&&
+        this.setState({
+            previous: true
+        })
         
+        prevS.week===1&&this.state.week===getWeek(new Date())&&
+        this.setState({
+            previous: false
+        })
+
+        prevS.week===getWeek(new Date())&&this.state.week===1&&
+        this.setState({
+            previous: true
+        })
+
     }
 
     handlePrevious = () => {
@@ -64,7 +85,7 @@ class RecipeModal extends Component {
         return (
             <div onClick={this.closeAddTo} className="addTo" style={{ display: this.state.display ? "flex" : "none" }}>
                 <div className="addTo__frame">
-                    <button onClick={this.handlePrevious}>previous</button>
+                    <button style={{ display: this.state.previous ? "flex" : "none" }} onClick={this.handlePrevious}>previous</button>
                     <h2 className="addTo__title">{this.state.week===getWeek(new Date())?`Add to Current Week`:`Add to Week ${this.state.week}`}</h2>
                     <button onClick={this.handleNext}>next</button>
                     <h3 className="addTo__date" onClick={(e)=> {this.props.addToDate(this.state.meal, this.state.id, e.target.innerText, this.state.week); this.props.resetDisplay()}}>Sunday</h3>
