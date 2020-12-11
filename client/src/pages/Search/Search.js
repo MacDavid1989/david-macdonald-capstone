@@ -12,10 +12,11 @@ class Search extends Component {
     state = {
         query: '',
         mealType: '',
-        meals: meals.hits.map(meal=>meal.recipe),
+        meals: '',
         from: 0,
         to: 12,
         display: false,
+        previous: false,
         src: '',
         selectedMeal: '',
         selectedMealId: ''
@@ -26,10 +27,21 @@ class Search extends Component {
             this.setState({
                 query: sessionStorage.getItem('query'),
                 mealType: sessionStorage.getItem('mealType'),
-                from: sessionStorage.getItem('from'),
-                to: sessionStorage.getItem('to')
+                from: parseInt(sessionStorage.getItem('from')),
+                to: parseInt(sessionStorage.getItem('to'))
             }, this.getMeals)
         }
+    }
+
+    componentDidUpdate(_prevP, prevS) {
+        prevS.from===12&&this.state.from===0&&
+        this.setState({
+            previous: false
+        })
+        prevS.from===0&&this.state.from===12&&
+        this.setState({
+            previous: true
+        })
     }
 
     componentWillUnmount() {
@@ -41,19 +53,19 @@ class Search extends Component {
 
     // request to get meals from api based on search
     getMeals = () => {
-        // const API_URL = process.env.REACT_APP_API_URL;
-        // const API_ID = process.env.REACT_APP_API_ID;
-        // const API_KEY = process.env.REACT_APP_API_KEY;
-        // const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
-        // const QUERY = this.state.query;
+        const API_URL = process.env.REACT_APP_API_URL;
+        const API_ID = process.env.REACT_APP_API_ID;
+        const API_KEY = process.env.REACT_APP_API_KEY;
+        const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
+        const QUERY = this.state.query;
 
-        // this.state.query&&this.state.mealType&&!this.state.meals&&
-        // axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
-        // .then(response => {
-        //     this.setState({
-        //         meals: response.data.hits.map(meal => meal.recipe)
-        //     })
-        // }) 
+        this.state.query&&this.state.mealType&&!this.state.meals&&
+        axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
+        .then(response => {
+            this.setState({
+                meals: response.data.hits.map(meal => meal.recipe)
+            })
+        }) 
     }
 
     // onChange handler for search input
@@ -187,7 +199,7 @@ class Search extends Component {
                     </li>
                     })}
                 </ul>
-                <button onClick={this.handlePrevious}>PREVIOUS</button>
+                <button style={{ display: this.state.previous ? "flex" : "none" }} onClick={this.handlePrevious}>PREVIOUS</button>
                 <button onClick={this.handleNext}>NEXT</button>
                     {/* Modal */}
                     <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
