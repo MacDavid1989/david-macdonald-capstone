@@ -14,6 +14,21 @@ router.get('/:id', (req, res) => {
     res.status(200).json(grocery)
 })
 
+router.put('/:id', (req, res) => {
+    const groceries = getGroceries();
+    groceries.forEach(item => {
+        if(item.id===req.params.id){
+            if(item.isCompleted===false){
+                return item.isCompleted = true;
+            } else {
+                return item.isCompleted = false;
+            }
+        }
+    })
+    writeGroceries(groceries)
+    return res.status(204).json({ success: true})
+})
+
 router.post('/', (req, res) => {
     if(req.body.plan){
         const groceries = [...getUserItems(), ...getIngredients()]

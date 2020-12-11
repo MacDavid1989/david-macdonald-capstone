@@ -130,7 +130,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <Link to="/search">Add another meal</Link>
+                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 <h2>Monday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
@@ -149,7 +149,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <Link to="/search">Add another meal</Link>
+                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 <h2>Tuesday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
@@ -168,7 +168,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <Link to="/search">Add another meal</Link>
+                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 <h2>Wednesday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
@@ -187,7 +187,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <Link to="/search">Add another meal</Link>
+                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 <h2>Thursday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
@@ -206,7 +206,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <Link to="/search">Add another meal</Link>
+                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 <h2>Friday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
@@ -225,7 +225,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <Link to="/search">Add another meal</Link>
+                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 <h2>Saturday</h2>
                 <ul className="mealList">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
@@ -244,7 +244,7 @@ class MyMeals extends Component {
                     </li>
                     )}
                 </ul>
-                <Link to="/search">Add another meal</Link>
+                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 {/* Modal */}
                 <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
             </div>

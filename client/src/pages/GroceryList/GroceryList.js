@@ -4,13 +4,16 @@ import remove from '../../assets/icons/remove.svg'
 import { getWeek } from 'date-fns'
 import { weightConversion } from '../../utils/weightConversion'
 import '../../scss/GroceryList.scss';
+import unchecked from '../../assets/icons/checkbox-unchecked.svg';
+import checked from '../../assets/icons/checkbox-checked.svg'
 
 class GroceryList extends Component {
     state = {
         groceries: '',
         week: getWeek(new Date()),
         display: false,
-        remove: true
+        remove: true,
+
     }
 
     componentDidMount() {
@@ -24,6 +27,7 @@ class GroceryList extends Component {
     }
 
     componentDidUpdate(_prevP, prevS) {
+        console.log(this.state.groceries)
         prevS.week!==this.state.week&&
         axios.get(`http://localhost:8080/groceries/${this.state.week}`)
         .then(res => {
@@ -118,6 +122,20 @@ class GroceryList extends Component {
         }
     }
 
+    crossOffItem = (id) => {
+        axios.put(`http://localhost:8080/groceries/${id}`)
+        .then(() => {
+            axios.get(`http://localhost:8080/groceries/${this.state.week}`)
+            .then(res => {
+                this.setState({
+                    groceries: res.data
+                })
+            })
+            .catch(console.error)
+        })
+        .catch()
+    }
+
     render() {
         return (
             <div>
@@ -154,6 +172,7 @@ class GroceryList extends Component {
                 {this.state.groceries&&this.state.groceries.map(grocery =>
                 grocery.category!=="user item"&&grocery.week===this.state.week&&
                     <li key={grocery.id} className="groceryList">
+                        <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
                         <span>
                             {`${weightConversion(grocery.weight)}`}
                         </span>
