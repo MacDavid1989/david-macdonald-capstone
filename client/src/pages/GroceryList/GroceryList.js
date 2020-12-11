@@ -76,7 +76,8 @@ class GroceryList extends Component {
         axios.post(`http://localhost:8080/groceries`, { 
             food: e.target.itemName.value,
             weight: parseInt(e.target.itemWeight.value),
-            week: this.state.week 
+            week: this.state.week,
+            isCompleted: false 
         })
         .then(() => {
             axios.get(`http://localhost:8080/groceries/${this.state.week}`)
@@ -153,10 +154,11 @@ class GroceryList extends Component {
                 {this.state.groceries&&this.state.groceries.map(grocery =>
                 grocery.category==="user item"&&grocery.week===this.state.week&&
                     <li key={grocery.id} className="groceryList">
-                        <span>
+                        <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
+                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
                             {`${weightConversion(grocery.weight)}`}
                         </span>
-                        <span>
+                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
                             {`${grocery.food.toLowerCase()}`}
                         </span>
                         <img className="groceryList-select" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>

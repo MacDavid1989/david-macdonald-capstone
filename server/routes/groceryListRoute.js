@@ -40,7 +40,8 @@ router.post('/', (req, res) => {
             food: req.body.food.toLowerCase(),
             weight: req.body.weight,
             week: req.body.week,
-            category: "user item"
+            category: "user item",
+            isCompleted: req.body.isCompleted
         }
         const userItems = getUserItems()
         userItems.unshift(newGrocery)

@@ -126,7 +126,8 @@ class Search extends Component {
                 foodId: ingredient.foodId,
                 weight: ingredient.weight,
                 category: ingredient.foodCategory,
-                image: ingredient.image
+                image: ingredient.image,
+                isCompleted: false
             }
 
             return newIngredient
