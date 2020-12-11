@@ -12,7 +12,8 @@ class MyMeals extends Component {
         myMeals: '',
         display: false,
         src: '',
-        week: getWeek(new Date())
+        week: getWeek(new Date()),
+        remove: true
     }
 
     componentDidMount() {
@@ -22,6 +23,28 @@ class MyMeals extends Component {
                 myMeals: res.data
             });
         }).catch()
+    }
+
+    componentDidUpdate(_prevP, prevS) {
+        prevS.week===getWeek(new Date())&&this.state.week===(getWeek(new Date())-1)&&
+        this.setState({
+            remove: false
+        })
+
+        prevS.week===(getWeek(new Date())-1)&&this.state.week===(getWeek(new Date()))&&
+        this.setState({
+            remove: true
+        })
+        
+        prevS.week===getWeek(new Date())&&this.state.week===52&&
+        this.setState({
+            remove: false
+        })
+
+        prevS.week===52&&this.state.week===getWeek(new Date())&&
+        this.setState({
+            remove: true
+        })
     }
 
     // makes delete request to remove meal from my meals
@@ -94,7 +117,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Sunday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
@@ -113,7 +136,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Monday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
@@ -132,7 +155,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Tuesday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
@@ -151,7 +174,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Wednesday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
@@ -170,7 +193,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Thursday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
@@ -189,7 +212,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Friday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
@@ -208,7 +231,7 @@ class MyMeals extends Component {
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Saturday'&&meal.week===this.state.week&&
                     <li key={meal.id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
+                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
                         <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
                         <div className="mealCard-details">
                             <span>
