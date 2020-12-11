@@ -20,7 +20,9 @@ class GroceryList extends Component {
         axios.get(`http://localhost:8080/groceries/${this.state.week}`)
         .then(res => {
             this.setState({
-                groceries: res.data
+                groceries: res.data.sort((x, y) => {
+                    return (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1;
+                })
             })
         })
         .catch(console.error)
@@ -31,7 +33,9 @@ class GroceryList extends Component {
         axios.get(`http://localhost:8080/groceries/${this.state.week}`)
         .then(res => {
             this.setState({
-                groceries: res.data
+                groceries: res.data.sort((x, y) => {
+                    return (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1;
+                })
             })
         })
         .catch(console.error)
@@ -63,7 +67,9 @@ class GroceryList extends Component {
             axios.get(`http://localhost:8080/groceries/${this.state.week}`)
             .then(res => {
                 this.setState({
-                    groceries: res.data
+                    groceries: res.data.sort((x, y) => {
+                        return (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1;
+                    })
                 })
             })
             .catch(console.error)
@@ -83,7 +89,9 @@ class GroceryList extends Component {
             axios.get(`http://localhost:8080/groceries/${this.state.week}`)
             .then(res => {
                 this.setState({
-                    groceries: res.data
+                    groceries: res.data.sort((x, y) => {
+                        return (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1;
+                    })
                 })
             })
             .catch(console.error)
@@ -127,7 +135,9 @@ class GroceryList extends Component {
             axios.get(`http://localhost:8080/groceries/${this.state.week}`)
             .then(res => {
                 this.setState({
-                    groceries: res.data
+                    groceries: res.data.sort((x, y) => {
+                        return (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1;
+                    })
                 })
             })
             .catch(console.error)
