@@ -5,12 +5,16 @@ import select from '../../assets/icons/add.svg'
 import { v4 as uuidv4 } from 'uuid';
 import RecipeModal from '../../components/RecipeModal'
 import AddToModal from '../../components/AddToModal'
+import { mealType as randomMealType } from '../../utils/randomMealType';
+import { letters as randomQuery } from '../../utils/randomLetter';
+
+// randomQuery[Math.floor(Math.random() * randomQuery.length)]
 
 class Search extends Component {
     // state for meal search and select page
     state = {
-        query: '',
-        mealType: '',
+        query: randomQuery[Math.floor(Math.random() * randomQuery.length)],
+        mealType: randomMealType[Math.floor(Math.random() * randomMealType.length)],
         meals: '',
         from: 0,
         to: 12,
@@ -28,9 +32,10 @@ class Search extends Component {
                 mealType: sessionStorage.getItem('mealType'),
                 from: parseInt(sessionStorage.getItem('from')),
                 to: parseInt(sessionStorage.getItem('to')),
-                // previous: sessionStorage.getItem('previous', this.state.previous)
             }, this.getMeals)
-        }
+        } else {
+            this.getMeals()
+        }    
     }
 
     componentDidUpdate(_prevP, prevS) {
@@ -54,7 +59,6 @@ class Search extends Component {
         sessionStorage.setItem('mealType', this.state.mealType);
         sessionStorage.setItem('from', this.state.from);
         sessionStorage.setItem('to', this.state.to);
-        // sessionStorage.setItem('previous', this.state.previous);
     }
 
     // request to get meals from api based on search
