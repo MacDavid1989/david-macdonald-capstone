@@ -176,15 +176,19 @@ class Search extends Component {
     render() {
         return (
             <div className="search">
-                <form className="search__form">
-                    <input className="search__form-input" type='search' name='searchIngredient' placeholder="Search Meals" value={this.state.query} onChange={this.changeSearchIngredient}/>
-                    <select className="search__form-select" name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
-                        <option className="search__form-option" value="breakfast">Breakfast</option>
-                        <option className="search__form-option" value="lunch">Lunch</option>
-                        <option className="search__form-option" value="dinner">Dinner</option>
-                        <option className="search__form-option" value="snack">Snack</option>
-                    </select>
-                </form>
+                <div className="search__banner">
+                    <h1 className="search__banner-title">Browse Grub</h1>
+                    <h2 className="search__banner-subtitle">1.2 million delicious recipes at your fingertips</h2>
+                    <form className="search__form">
+                        <input className="search__form-input" type='search' name='searchIngredient' placeholder="Search Meals" value={this.state.query} onChange={this.changeSearchIngredient}/>
+                        <select className="search__form-select" name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
+                            <option className="search__form-option" value="breakfast">Breakfast</option>
+                            <option className="search__form-option" value="lunch">Lunch</option>
+                            <option className="search__form-option" value="dinner">Dinner</option>
+                            <option className="search__form-option" value="snack">Snack</option>
+                        </select>
+                    </form>
+                </div>
                 <ul className="search__list">
                     {this.state.meals&&this.state.meals.map(meal => {const id = uuidv4(); 
             return  <li key={id} className="meal">

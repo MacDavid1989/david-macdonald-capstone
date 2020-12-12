@@ -1,33 +1,130 @@
-.mealList {
+@use '../partials/variables' as *;
+@use '../partials/mixins' as *;
+
+.search {
     display: flex;
-    flex-wrap: wrap;
-    list-style-type: none;
-}
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 
-.mealCard {
-    position: relative;
-    height: 20rem;
-    width: 20rem;
-
-    &-select {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-
-    &-image {
-        width: 100%;
-        height: 100%;
-    }
-
-    &-details {
-        position: absolute;
-        z-index: 2;
-        bottom: 0;
-        background-color: #FFF;
-        width: 100%;
-        font-size: 2rem;
+    &__banner {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        height: 20.4rem;
+        background-color: #27ded9b3;
+        padding: 4rem 0 6rem;
+      
+        &-title {
+            width: 49.3rem;
+            color: #FFFFFF;
+            font-size: 4.8rem;
+            font-weight: bold;
+            line-height: 56px;
+            text-align: center;
+            margin: 0 0 3rem;
+        }
+
+        &-subtitle {
+            width: 54.2rem;
+            color: #FFFFFF;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 2.2rem;
+            text-align: center;
+        }
+    }
+
+    &__form {
+        position: absolute;
+        bottom: -2.4rem;
+
+        &-input {
+            height: 48px;
+            width: 460px;
+            border-radius: 41px;
+            background-color: #FFFFFF;
+            box-shadow: 0 6px 6px 0 rgba(144,144,144,0.25);
+            outline: none;
+            border: none;
+            color: #44444454;
+            font-size: 16px;
+            line-height: 22px;
+            padding: 1.3rem 4.8rem;   
+            margin: 0 2.4rem 0 0;       
+        }
+
+        &-select {
+            height: 48px;
+            width: 200px;
+            border-radius: 41px;
+            background-color: #FFFFFF;
+            box-shadow: 0 6px 6px 0 rgba(144,144,144,0.25);
+            outline: none;
+            border: none;          
+            color: #44444454;
+            font-size: 16px;
+            line-height: 22px;
+            padding: 1.3rem 2.4rem;      
+        }
+
+        &-option {
+            height: 48px;
+            width: 200px;
+            border-radius: 41px;
+            background-color: #FFFFFF;
+            box-shadow: 0 6px 6px 0 rgba(144,144,144,0.25);
+            outline: none;
+            border: none;          
+            color: #44444454;
+            font-size: 16px;
+            line-height: 22px;
+            padding: 1.3rem 2.4rem;
+        }
+    }
+
+    &__list {
+
+    }
+
+    .meal {
+
+        &__select {
+
+        }
+
+        &__image {
+
+        }
+
+        &__details {
+
+        }
+
+        &__name {
+
+        }
+
+        &__calories {
+
+        }
+    }
+
+    &__button {
+
+        &-previous {
+
+        }
+
+        &-page {
+
+        }
+
+        &-next {
+
+        }
     }
 }
