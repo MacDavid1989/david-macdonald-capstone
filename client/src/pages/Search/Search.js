@@ -206,9 +206,9 @@ class Search extends Component {
                     })}
                 </ul>
                 <div className="search__button">
-                    <button className="search__button-previous" style={{ display: this.state.previous ? "flex" : "none" }} onClick={this.handlePrevious}>PREVIOUS</button>
-                    <button className="search__button-page">{this.state.page}</button>
-                    <button className="search__button-next" onClick={this.handleNext}>NEXT</button>
+                    <span className="search__button-arrow" style={{ display: this.state.previous ? "flex" : "none" }} onClick={this.handlePrevious}>&#8592;</span>
+                    <span className="search__button-page">{this.state.page}</span>
+                    <span className="search__button-arrow" onClick={this.handleNext}>&#8594;</span>
                 </div>
                     <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
                     <AddToModal 
