@@ -6,13 +6,11 @@ function Nav() {
     return (
         <>
             <div className="nav">
-                <div className="nav__logo">
-                    <NavLink to="/">Logo</NavLink>
-                </div>
+                    <NavLink className="nav__logo" to="/">Logo</NavLink>
                 <div className="nav__links">
-                    <NavLink to="/search">Meal Search</NavLink>
-                    <NavLink to="/my meals">Meal Plan</NavLink>
-                    <NavLink to="/grocery list">Grocery List</NavLink>
+                    <NavLink className="nav__links-text" to="/search">Browse Recipes</NavLink>
+                    <NavLink className="nav__links-text--alt" to="/my meals">Menu</NavLink>
+                    <NavLink className="nav__links-text" to="/grocery list">Grocery List</NavLink>
                 </div>
             </div>
             <div className="spacer">
