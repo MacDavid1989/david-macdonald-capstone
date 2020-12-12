@@ -29,23 +29,23 @@ function Home() {
                         </div>
                 </div>
                 <Link className="home__link" to="/search">
-                    <span className="home__link-text">Browse Meals</span>
+                    <span className="home__link-text">Start Planning</span>
                     <img className="home__link-icon" alt="arrow right"/>
                 </Link>
             </div>
             <div className="home__card">
-                <h1 className="home__card-title">Plan Your Meals in Minutes</h1>
-                <img className="home__card-image" alt="meal plan snapshot"/>
+                <h1 className="home__card-title">Plan your meals for the week in just minutes</h1>
+                <img className="home__card-image--alt" alt="meal plan snapshot"/>
                 <Link className="home__link" to="/search">
-                    <span className="home__link-text">Browse Meals</span>
+                    <span className="home__link-text">Browse Recipes</span>
                     <img className="home__link-icon" alt="arrow right"/>
                 </Link>
             </div>
             <div className="home__card">
-                <h1 className="home__card-title">Grocery List Simplified</h1>
-                <img className="home__card-image--alt" alt="grocery list snapshot"/>
+                <h1 className="home__card-title">What are you waiting for? Save time & eat well!</h1>
+                <img className="home__card-image" alt="grocery list snapshot"/>
                 <Link className="home__link" to="/search">
-                    <span className="home__link-text">Browse Meals</span>
+                    <span className="home__link-text">Start Cooking</span>
                     <img className="home__link-icon" alt="arrow right"/>
                 </Link>
             </div>
