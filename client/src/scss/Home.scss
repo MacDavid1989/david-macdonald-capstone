@@ -13,7 +13,7 @@
         width: 100%;
         height: 53.8rem;
 
-        &__title{
+        &__title {
             width: 49.3rem;
             color: #FFFFFF;
             font-size: 4.8rem;
@@ -21,6 +21,7 @@
             line-height: 5.6rem;
             margin: 0 53rem 0 0;
         }
+
         &__image {
             position: absolute;
             left: 68.5%;
@@ -34,48 +35,145 @@
         }
     }
 
-    .summary{
-        &__title{
+    .summary {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 10.1rem 0 7.2rem;
 
+        &__title {
+            width: 542px;
+            color: #444444;
+            font-size: 35px;
+            line-height: 41px;
+            text-align: center;
+            margin: 0 0 7.5rem 0;
         }
-        &__contatiner{
 
+        &__container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        &__browse{
-            &-image{
 
-            }
-            &-title{
+        &__browse {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
+            &-image {
+                height: 497px;
+                width: 231px;
+                border: 1px solid #979797;
+                transform: rotate(360deg);
+                border-radius: 25px;
+                background-color: #D8D8D8;
+                margin: 0 0 2.4rem 0;
+            } 
+
+            &-title {
+                height: 24px;
+                width: 277px;
+                color: #444444;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 24px;
+                text-align: center;
             }
         }
-        &__plan{
-            &-image{
 
+        &__plan {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin:  0 15.5rem 0;
+
+            &-image {
+                height: 497px;
+                width: 231px;
+                border: 1px solid #979797;
+                transform: rotate(360deg);
+                border-radius: 25px;
+                background-color: #D8D8D8;
+                margin: 0 0 2.4rem 0;
             }
-            &-title{
 
+            &-title {
+                height: 24px;
+                width: 277px;
+                color: #444444;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 24px;
+                text-align: center;
             }
         }
-        &__shop{
-            &-image{
 
+        &__shop {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &-image {
+                height: 497px;
+                width: 231px;
+                border: 1px solid #979797;
+                transform: rotate(360deg);
+                border-radius: 25px;
+                background-color: #D8D8D8;
+                margin: 0 0 2.4rem 0;
             }
-            &-title{
 
+            &-title {
+                height: 24px;
+                width: 277px;
+                color: #444444;
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 24px;
+                text-align: center;
             }
         }
     }
 
     &__link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 343px;
+        border-radius: 25px;
+        background-color: #67E7E4;
+        box-shadow: 0 5px 15px 0 #67E7E4;
+        margin: 5.3rem 0 0;
+        text-decoration: none;
+        
+        &-text {
+            width: 102px;
+            transform: rotate(360deg);
+            color: #FFFFFF;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 18px;
+            margin: 0 0.68rem 0 0;
+        }
 
+        &-icon {
+            height: 15px;
+            width: 14px;
+            transform: rotate(360deg);
+            color: #FFFFFF;
+        }
     }
 
     &__card {
-        &-title{
+
+        &-title {
 
         }
-        &-image{
+
+        &-image {
 
             &--alt {
 

@@ -11,6 +11,7 @@
 @mixin font-stack {
     font-family: $font-family-global;
     font-size: $font-size-global;
+    font-weight: normal;
 };
 
 // Global Flexbox 
