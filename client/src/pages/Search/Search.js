@@ -8,16 +8,14 @@ import AddToModal from '../../components/AddToModal'
 import { mealType as randomMealType } from '../../utils/randomMealType';
 import { letters as randomQuery } from '../../utils/randomLetter';
 
-// randomQuery[Math.floor(Math.random() * randomQuery.length)]
-
 class Search extends Component {
-    // state for meal search and select page
     state = {
         query: randomQuery[Math.floor(Math.random() * randomQuery.length)],
         mealType: randomMealType[Math.floor(Math.random() * randomMealType.length)],
         meals: '',
         from: 0,
         to: 12,
+        page: 1,
         display: false,
         previous: false,
         src: '',
@@ -32,6 +30,7 @@ class Search extends Component {
                 mealType: sessionStorage.getItem('mealType'),
                 from: parseInt(sessionStorage.getItem('from')),
                 to: parseInt(sessionStorage.getItem('to')),
+                page: parseInt(sessionStorage.getItem('page')),
             }, this.getMeals)
         } else {
             this.getMeals()
@@ -59,9 +58,9 @@ class Search extends Component {
         sessionStorage.setItem('mealType', this.state.mealType);
         sessionStorage.setItem('from', this.state.from);
         sessionStorage.setItem('to', this.state.to);
+        sessionStorage.setItem('page', this.state.page);
     }
 
-    // request to get meals from api based on search
     getMeals = () => {
         const API_URL = process.env.REACT_APP_API_URL;
         const API_ID = process.env.REACT_APP_API_ID;
@@ -78,7 +77,6 @@ class Search extends Component {
         }) 
     }
 
-    // onChange handler for search input
     changeSearchIngredient = (e) => {
         this.setState({
             meals: '',
@@ -86,7 +84,6 @@ class Search extends Component {
         }, this.getMeals)   
     }
 
-    // onChange handler for select input
     changeMealType = (e) => {
         this.setState({
             meals: '',
@@ -94,26 +91,25 @@ class Search extends Component {
         }, this.getMeals)
     }
 
-    // resets meals forcing new request for the next 10 meals in the search
     handleNext = () => {
         this.setState({
             meals: '',
             from: this.state.from + 12,
-            to: this.state.to + 12
+            to: this.state.to + 12,
+            page: this.state.page + 1
         }, this.getMeals)
     }
 
-    // resets meals forcing new request for the previous 10 meals in the search
     handlePrevious = () => {
         (this.state.from > 0)&&
         this.setState({
             meals: '',
             from: this.state.from - 12,
-            to: this.state.to - 12
+            to: this.state.to - 12,
+            page: this.state.page - 1
         }, this.getMeals)
     }
 
-    // post to server with the meal wanting to be added
     handleAdd = (meal, id, date, week) => {
         const ingredients = meal.ingredients.map(ingredient => {
            const newIngredient = {
@@ -149,7 +145,6 @@ class Search extends Component {
         .catch(console.error)
     }
 
-    //opens the modal
     showIframe = (src) => {
         this.setState({
             src: src
@@ -180,48 +175,44 @@ class Search extends Component {
 
     render() {
         return (
-            <div>
-                <form>
-                    <input type='search' name='searchIngredient' placeholder="Search Meals" value={this.state.query} onChange={this.changeSearchIngredient}/>
-                    <select name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
-                    <option defaultValue value="default" hidden>
-                      Please select a meal:
-                    </option>
-                    <option value="breakfast">Breakfast</option>
-                    <option value="lunch">Lunch</option>
-                    <option value="dinner">Dinner</option>
-                    <option value="snack">Snack</option>
+            <div className="search">
+                <form className="search__form">
+                    <input className="search__form-input" type='search' name='searchIngredient' placeholder="Search Meals" value={this.state.query} onChange={this.changeSearchIngredient}/>
+                    <select className="search__form-select" name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
+                        <option className="search__form-option" value="breakfast">Breakfast</option>
+                        <option className="search__form-option" value="lunch">Lunch</option>
+                        <option className="search__form-option" value="dinner">Dinner</option>
+                        <option className="search__form-option" value="snack">Snack</option>
                     </select>
                 </form>
-                {/* render meal cards */}
-                <ul className="mealList">
-                    {this.state.meals&&this.state.meals.map(meal => {
-                        const id = uuidv4();
-                    return <li key={id} className="mealCard">
-                        <img className="mealCard-select" onClick={()=>this.showAddTo(meal, id)} src={select} alt="plus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={meal.label}/>
-                        <div className="mealCard-details">
-                            <span>
+                <ul className="search__list">
+                    {this.state.meals&&this.state.meals.map(meal => {const id = uuidv4(); 
+            return  <li key={id} className="meal">
+                        <img className="meal__select" onClick={()=>this.showAddTo(meal, id)} src={select} alt="plus symbol"/>
+                        <img className="meal__image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={meal.label}/>
+                        <div className="meal__details">
+                            <span className="meal__name">
                                 {meal.label}
                             </span>
-                            <span>
+                            <span className="meal__calories">
                                 {`${Math.ceil(meal.calories / meal.yield)} cals`}
                             </span>
                         </div>
                     </li>
                     })}
                 </ul>
-                <button style={{ display: this.state.previous ? "flex" : "none" }} onClick={this.handlePrevious}>PREVIOUS</button>
-                <button onClick={this.handleNext}>NEXT</button>
-                    {/* Modal */}
+                <div className="search__button">
+                    <button className="search__button-previous" style={{ display: this.state.previous ? "flex" : "none" }} onClick={this.handlePrevious}>PREVIOUS</button>
+                    <button className="search__button-page">{this.state.page}</button>
+                    <button className="search__button-next" onClick={this.handleNext}>NEXT</button>
+                </div>
                     <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
-                    {/* Add to modal */}
                     <AddToModal 
-                    display={this.state.display} 
-                    meal={this.state.selectedMeal}
-                    id={this.state.selectedMealId}
-                    addToDate={this.handleAdd} 
-                    resetDisplay={this.resetDisplay}
+                        display={this.state.display} 
+                        meal={this.state.selectedMeal}
+                        id={this.state.selectedMealId}
+                        addToDate={this.handleAdd} 
+                        resetDisplay={this.resetDisplay}
                     />
             </div>
         );
