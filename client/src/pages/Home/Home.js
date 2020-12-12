@@ -15,50 +15,35 @@ function Home() {
             <div className="summary">
                 <h2 className="summary__title">Weekly Meal Planning Made Easy</h2>
                 <div className="summary__container">
-                    <div className="summary">
-                        <div>
-                            <img alt="browsing through meals"/>
-                            <h3>Browse</h3>
+                        <div className="summary__browse">
+                            <img className="summary__browse-image" alt="browsing through meals"/>
+                            <h3 className="summary__browse-title">Browse</h3>
                         </div>
-                        <div>
-                            <img alt="planning weekly meals"/>
-                            <h3>Plan</h3>
+                        <div className="summary__plan">
+                            <img className="summary__plan-image" alt="planning weekly meals"/>
+                            <h3 className="summary__plan-title">Plan</h3>
                         </div>
-                    </div>
-                    <div className="summary">
-                        <div>
-                            <img alt="grocery shopping"/>
-                            <h3>Shop</h3>
+                        <div className="summary__shop">
+                            <img className="summary__shop-image" alt="grocery shopping"/>
+                            <h3 className="summary__shop-title">Shop</h3>
                         </div>
-                        <div>
-                            <img alt="cooking meals"/>
-                            <h3>Cook</h3>
-                        </div>
-                    </div>
                 </div>
-                <Link to="/search">
-                    <button className="home__button">Browse Meals</button>
+                <Link className="home__link" to="/search">
+                    Browse Meals
                 </Link>
             </div>
             <div className="home__card">
                 <h1 className="home__card-title">Plan Your Meals in Minutes</h1>
                 <img className="home__card-image" alt="meal plan snapshot"/>
-                <Link to="/search">
-                    <button className="home__button">Begin Planning</button>
+                <Link className="home__link" to="/search">
+                    Browse Meals
                 </Link>
             </div>
             <div className="home__card">
                 <h1 className="home__card-title">Grocery List Simplified</h1>
-                <img className="home__card-image" alt="grocery list snapshot"/>
-                <Link to="/search">
-                    <button className="home__button">Save Time</button>
-                </Link>
-            </div>
-            <div className="home__card">
-                <h1 className="home__card-title">What Are You Waiting For?</h1>
-                <img className="home__card-image" alt="recipe snapshot"/>
-                <Link to="/search">
-                    <button className="home__button">Start Cooking</button>
+                <img className="home__card-image--alt" alt="grocery list snapshot"/>
+                <Link className="home__link" to="/search">
+                    Browse Meals
                 </Link>
             </div>
         </div>
