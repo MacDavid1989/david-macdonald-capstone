@@ -192,15 +192,15 @@ class Search extends Component {
                 <ul className="search__list">
                     {this.state.meals&&this.state.meals.map(meal => {const id = uuidv4(); 
             return  <li key={id} className="meal">
-                        <img className="meal__select" onClick={()=>this.showAddTo(meal, id)} src={select} alt="plus symbol"/>
                         <img className="meal__image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={meal.label}/>
                         <div className="meal__details">
                             <span className="meal__name">
                                 {meal.label}
                             </span>
-                            <span className="meal__calories">
+                            {/* <span className="meal__calories">
                                 {`${Math.ceil(meal.calories / meal.yield)} cals`}
-                            </span>
+                            </span> */}
+                            <span className="meal__select" onClick={()=>this.showAddTo(meal, id)}>+</span>
                         </div>
                     </li>
                     })}
