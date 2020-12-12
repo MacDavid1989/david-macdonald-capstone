@@ -1,0 +1,7 @@
+@use './typography' as *;
+@include font-regular;
+@include font-demi;
+@include font-bold;
+
+$font-family-global: 'Nunito';
+$font-size-global: 62.5%;

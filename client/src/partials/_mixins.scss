@@ -1,0 +1,31 @@
+@use './variables' as *;
+
+// Global Boundary Reset
+@mixin boundary-reset {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+};
+
+// Global Font Base
+@mixin font-stack {
+    font-family: $font-family-global;
+    font-size: $font-size-global;
+};
+
+// Global Flexbox 
+@mixin flex-control($display, $direction, $wrap, $align, $self, $justify) {
+    display: $display;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    align-items: $align;
+    align-self: $self;
+    justify-content: $justify;
+};
+
+// Global Media Query
+@mixin breakpoint ($width) {
+    @media (min-width: $width) {
+        @content;
+    }    
+}

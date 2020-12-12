@@ -1,0 +1,38 @@
+// Typography import for the required font at normal weight
+@mixin font-bold {
+    @font-face {
+        font-family: 'Nunito';
+        src: url("../assets/fonts/Nunito-Bold.ttf") format("truetype"), 
+            url("../assets/fonts/Nunito-Bold.woff") format("woff"), 
+            url("../assets/fonts/Nunito-Bold.woff2") format("woff2");
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    };
+};
+
+// Typography import for the required font at demi-bold weight
+@mixin font-demi {
+    @font-face {
+        font-family: 'Nunito';
+        src: url("../assets/fonts/Nunito-SemiBold.ttf") format("truetype"), 
+            url("../assets/fonts/Nunito-SemiBold.woff") format("woff"), 
+            url("../assets/fonts/Nunito-SemiBold.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    };
+};
+
+// Typography import for the required font at bold weight
+@mixin font-regular {
+    @font-face {
+        font-family: 'Nunito';
+        src: url("../assets/fonts/Nunito-Regular.ttf") format("truetype"), 
+            url("../assets/fonts/Nunito-Regular.woff") format("woff"), 
+            url("../assets/fonts/Nunito-Regular.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    };
+};

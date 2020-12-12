@@ -1,0 +1,71 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .hero {
+        display: flex;
+        justify-content: center;
+        background-color: #27ded9b3;
+        width: 100%;
+        height: 53.8rem;
+        font-family: "Nunito SemiBold";
+
+        &__title{
+
+        }
+        &__image {
+
+        }
+    }
+
+    .summary{
+        &__title{
+
+        }
+        &__contatiner{
+
+        }
+        &__browse{
+            &-image{
+
+            }
+            &-title{
+
+            }
+        }
+        &__plan{
+            &-image{
+
+            }
+            &-title{
+
+            }
+        }
+        &__shop{
+            &-image{
+
+            }
+            &-title{
+
+            }
+        }
+    }
+
+    &__link {
+
+    }
+
+    &__card {
+        &-title{
+
+        }
+        &-image{
+
+            &--alt {
+
+            }
+        }
+    }
+}
