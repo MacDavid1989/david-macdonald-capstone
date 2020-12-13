@@ -40,12 +40,12 @@ class MyMeals extends Component {
             remove: true
         })
         
-        prevS.week===getWeek(new Date())&&this.state.week===52&&
+        prevS.week===getWeek(new Date())&&getWeek(new Date())===1&&this.state.week===52&&
         this.setState({
             remove: false
         })
 
-        prevS.week===52&&this.state.week===getWeek(new Date())&&
+        prevS.week===52&&this.state.week===getWeek(new Date())&&getWeek(new Date())===1&&
         this.setState({
             remove: true
         })
