@@ -10,7 +10,7 @@ import { letters as randomQuery } from '../../utils/randomLetter';
 
 class Search extends Component {
     state = {
-        query: randomQuery[Math.floor(Math.random() * randomQuery.length)],
+        query: '',
         mealType: randomMealType[Math.floor(Math.random() * randomMealType.length)],
         meals: '',
         from: 0,
@@ -66,9 +66,9 @@ class Search extends Component {
         const API_ID = process.env.REACT_APP_API_ID;
         const API_KEY = process.env.REACT_APP_API_KEY;
         const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
-        const QUERY = this.state.query;
+        const QUERY = this.state.query || randomQuery[Math.floor(Math.random() * randomQuery.length)];
 
-        this.state.query&&this.state.mealType&&!this.state.meals&&
+        (this.state.query||QUERY)&&this.state.mealType&&!this.state.meals&&
         axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
         .then(response => {
             this.setState({
@@ -180,7 +180,7 @@ class Search extends Component {
                     <h1 className="search__banner-title">Browse Grub</h1>
                     <h2 className="search__banner-subtitle">1.2 million delicious recipes at your fingertips</h2>
                     <form className="search__form">
-                        <input className="search__form-input" type='search' name='searchIngredient' placeholder="Search Meals" value={this.state.query} onChange={this.changeSearchIngredient}/>
+                        <input className="search__form-input" type='text' name='searchIngredient' placeholder="Search Recipes..." value={this.state.query} onChange={this.changeSearchIngredient}/>
                         <select className="search__form-select" name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
                             <option className="search__form-option" value="breakfast">Breakfast</option>
                             <option className="search__form-option" value="lunch">Lunch</option>
