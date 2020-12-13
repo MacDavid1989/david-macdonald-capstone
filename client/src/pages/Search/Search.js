@@ -205,15 +205,23 @@ class Search extends Component {
                             {/* <span className="meal__calories">
                                 {`${Math.ceil(meal.calories / meal.yield)} cals`}
                             </span> */}
-                            <span className="meal__select" onClick={()=>this.showAddTo(meal, id)}><img className="meal__select-icon" src={plus} alt="plus sign"/></span>
+                            <span className="meal__select" onClick={()=>this.showAddTo(meal, id)}>
+                                <img className="meal__select-icon" src={plus} alt="plus sign"/>
+                            </span>
                         </div>
                     </li>
                     })}
                 </ul>
                 <div className="search__button">
-                    <span className="search__button-arrow" onClick={this.handlePrevious}><img style={{ visibility: this.state.previous ? "visible" : "hidden" }}  className="search__button-arrow__icon" src={leftArrow} alt="left arrow"/></span>
-                    <span className="search__button-page">{this.state.page}</span>
-                    <span className="search__button-arrow" onClick={this.handleNext}><img className="search__button-arrow__icon" src={rightArrow} alt="right arrow"/></span>
+                    <span className="search__button-arrow" onClick={this.handlePrevious}>
+                        <img style={{ visibility: this.state.previous ? "visible" : "hidden" }}  className="search__button-arrow__icon" src={leftArrow} alt="left arrow"/>
+                    </span>
+                    <span className="search__button-page">
+                        {this.state.page}
+                    </span>
+                    <span className="search__button-arrow" onClick={this.handleNext}>
+                        <img className="search__button-arrow__icon" src={rightArrow} alt="right arrow"/>
+                    </span>
                 </div>
                     <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
                     <AddToModal 

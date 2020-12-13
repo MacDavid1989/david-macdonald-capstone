@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { getWeek } from 'date-fns'
 import axios from 'axios';
 import RecipeModal from '../../components/RecipeModal'
-import remove from '../../assets/icons/remove.svg'
 import '../../scss/MyMeals.scss';
+import leftArrow from '../../assets/icons/long-arrow-left.svg'
+import rightArrow from '../../assets/icons/long-arrow-right.svg'
+import plus from '../../assets/icons/plus-green.svg'
 
 class MyMeals extends Component {
      // state for meal search and select page
@@ -107,144 +109,45 @@ class MyMeals extends Component {
 
     render() {
         return (
-            <div>
-                <h1>My Meals</h1>
-                <button onClick={this.handlePrevious}>previous</button>
-                <h1>{this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}</h1>
-                <button onClick={this.handleNext}>next</button>
-                <h2>Sunday</h2>
-                <ul className="mealList">
+            <div className="menu">
+                <div className="menu__banner">
+                    <h1 className="menu__banner-title">Menu</h1>
+                    <h2 className="menu_banner-subtitle">Your weekly meal planner</h2>
+                    <div className="menu__container">
+                        <img className="menu__arrow" onClick={this.handlePrevious} src={leftArrow} alt="left arrow"/>
+                        <span className="menu__week">
+                            {this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}
+                        </span>
+                        <img className="menu__arrow" onClick={this.handleNext} src={rightArrow} alt="right arrow"/>
+                    </div>
+                </div>
+                <h3 className="menu__date">Sunday</h3>
+                <ul className="menu__list">
                     {this.state.myMeals&&this.state.myMeals.map(meal =>
                     meal.date==='Sunday'&&meal.week===this.state.week&&
-                    <li key={meal.id} className="mealCard">
-                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
-                        <div className="mealCard-details">
-                            <span>
-                                {meal.name}
-                            </span>
-                            <span>
-                                {`${meal.calories} cals`}
-                            </span>
-                        </div>
+                    <li key={meal.id} className="card">
+                        <img className="card__image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
+                        <span className="card__name">
+                            {meal.name}
+                        </span>
+                        {/* <span >
+                            {`${meal.calories} cals`}
+                        </span> */}
+                        <img className="card__arrow" src={rightArrow} alt="right arrow"/>
+                        <span className="card__remove" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemove(meal.id)}>
+                            <img className="card__remove-icon" src={plus} alt="plus sign"/>
+                        </span>
                     </li>
                     )}
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                        <span className="menu__link-add">
+                            <img className="menu__link-icon" src={plus} alt="plus sign"/>
+                        </span>
+                        <span className="menu__link-text">
+                            Add another meal
+                        </span>
+                    </Link>
                 </ul>
-                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
-                <h2>Monday</h2>
-                <ul className="mealList">
-                    {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Monday'&&meal.week===this.state.week&&
-                    <li key={meal.id} className="mealCard">
-                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
-                        <div className="mealCard-details">
-                            <span>
-                                {meal.name}
-                            </span>
-                            <span>
-                                {`${meal.calories} cals`}
-                            </span>
-                        </div>
-                    </li>
-                    )}
-                </ul>
-                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
-                <h2>Tuesday</h2>
-                <ul className="mealList">
-                    {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Tuesday'&&meal.week===this.state.week&&
-                    <li key={meal.id} className="mealCard">
-                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
-                        <div className="mealCard-details">
-                            <span>
-                                {meal.name}
-                            </span>
-                            <span>
-                                {`${meal.calories} cals`}
-                            </span>
-                        </div>
-                    </li>
-                    )}
-                </ul>
-                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
-                <h2>Wednesday</h2>
-                <ul className="mealList">
-                    {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Wednesday'&&meal.week===this.state.week&&
-                    <li key={meal.id} className="mealCard">
-                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
-                        <div className="mealCard-details">
-                            <span>
-                                {meal.name}
-                            </span>
-                            <span>
-                                {`${meal.calories} cals`}
-                            </span>
-                        </div>
-                    </li>
-                    )}
-                </ul>
-                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
-                <h2>Thursday</h2>
-                <ul className="mealList">
-                    {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Thursday'&&meal.week===this.state.week&&
-                    <li key={meal.id} className="mealCard">
-                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
-                        <div className="mealCard-details">
-                            <span>
-                                {meal.name}
-                            </span>
-                            <span>
-                                {`${meal.calories} cals`}
-                            </span>
-                        </div>
-                    </li>
-                    )}
-                </ul>
-                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
-                <h2>Friday</h2>
-                <ul className="mealList">
-                    {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Friday'&&meal.week===this.state.week&&
-                    <li key={meal.id} className="mealCard">
-                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
-                        <div className="mealCard-details">
-                            <span>
-                                {meal.name}
-                            </span>
-                            <span>
-                                {`${meal.calories} cals`}
-                            </span>
-                        </div>
-                    </li>
-                    )}
-                </ul>
-                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
-                <h2>Saturday</h2>
-                <ul className="mealList">
-                    {this.state.myMeals&&this.state.myMeals.map(meal =>
-                    meal.date==='Saturday'&&meal.week===this.state.week&&
-                    <li key={meal.id} className="mealCard">
-                        <img style={{ display: this.state.remove ? "flex" : "none" }} className="mealCard-select" onClick={()=>this.handleRemove(meal.id)} src={remove} alt="minus symbol"/>
-                        <img className="mealCard-image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
-                        <div className="mealCard-details">
-                            <span>
-                                {meal.name}
-                            </span>
-                            <span>
-                                {`${meal.calories} cals`}
-                            </span>
-                        </div>
-                    </li>
-                    )}
-                </ul>
-                <Link style={{ display: this.state.remove ? "flex" : "none" }} to="/search">Add another meal</Link>
                 {/* Modal */}
                 <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
             </div>
