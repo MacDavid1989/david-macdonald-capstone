@@ -3,38 +3,36 @@
 
 .footer {
     display: flex;
-    justify-content: space-between;
-    z-index: 11;
+    justify-content: center;
     width: 100%;
-    height: 18.8rem;
+    height: 19rem;
     background-color: #27DED9;
-    padding: 4rem 8rem;
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        padding: 4rem 0 0 0;
+        width: 108rem;
+    }
 
     &__logo {
-        font-size: 2rem;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
+        height: 3.3rem;
+        width: 9.4rem;
     }
 
     &__links {
         display: flex;
-        justify-content: space-evenly;
-
+        
         &-text {
             color: #FFF;
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 22px;
             text-decoration: none;
-
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: bold;
+            
             &--alt {
+                @extend .footer__links-text;
                 margin: 0 4rem;
-                color: #FFF;
-                font-size: 16px;
-                font-weight: bold;
-                line-height: 22px;
-                text-decoration: none;
             }
         }
     }
