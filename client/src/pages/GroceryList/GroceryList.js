@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import remove from '../../assets/icons/remove.svg'
 import { getWeek } from 'date-fns'
 import { weightConversion } from '../../utils/weightConversion'
 import '../../scss/GroceryList.scss';
 import unchecked from '../../assets/icons/checkbox-unchecked.svg';
 import checked from '../../assets/icons/checkbox-checked.svg'
-
+import leftArrow from '../../assets/icons/short-arrow-left.svg'
+import rightArrow from '../../assets/icons/short-arrow-right.svg'
+import longRightArrow from '../../assets/icons/long-arrow-right.svg'
+import plus from '../../assets/icons/plus-green.svg'
+import remove from '../../assets/icons/remove-plus.svg'
 class GroceryList extends Component {
     state = {
         groceries: '',
@@ -147,11 +150,18 @@ class GroceryList extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Grocery List</h1>
-                <button onClick={this.handlePrevious}>previous</button>
-                <h1>{this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}</h1>
-                <button onClick={this.handleNext}>next</button>
+            <div className="grocery">
+                <div className="grocery__banner">
+                    <h1 className="grocery__banner-title">Grocery List</h1>
+                    <h2 className="grocery__banner-subtitle">Buy precisely what you need</h2>
+                    <div className="grocery__container">
+                        <img className="grocery__arrow" onClick={this.handlePrevious} src={leftArrow} alt="left arrow"/>
+                        <span className="grocery__week">
+                            {this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}
+                        </span>
+                        <img className="grocery__arrow" onClick={this.handleNext} src={rightArrow} alt="right arrow"/>
+                    </div>
+                </div>
                 <form style={{ display: this.state.remove ? "flex" : "none" }} onSubmit={this.handleAddGrocery}>
                     <input required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item name"/>
                     <input required type="number" name="itemWeight" placeholder="Add item weight"/>
