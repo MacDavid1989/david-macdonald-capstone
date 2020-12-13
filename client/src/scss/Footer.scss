@@ -1,40 +1,28 @@
 @use '../partials/variables' as *;
 @use '../partials/mixins' as *;
 
-.nav {
-    width: 100%;
-    height: 6.5rem;
-    background-color: #FFF;
+.footer {
     display: flex;
-    justify-content: center;
-    position: fixed;
-    z-index: 100;
-
-    &__container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 108rem;
-        height: 6.5rem;
-    }
+    justify-content: space-between;
+    z-index: 11;
+    width: 100%;
+    height: 18.8rem;
+    background-color: #27DED9;
+    padding: 4rem 8rem;
 
     &__logo {
         font-size: 2rem;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
     }
 
     &__links {
         display: flex;
         justify-content: space-evenly;
-        
-        .active {
-            color: #27DED9;
-        }
 
         &-text {
-            color: #444444;
+            color: #FFF;
             font-size: 16px;
             font-weight: bold;
             line-height: 22px;
@@ -42,7 +30,7 @@
 
             &--alt {
                 margin: 0 4rem;
-                color: #444444;
+                color: #FFF;
                 font-size: 16px;
                 font-weight: bold;
                 line-height: 22px;

@@ -5,3 +5,9 @@
   @include boundary-reset;
   @include font-stack;
 }
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

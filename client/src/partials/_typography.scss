@@ -1,5 +1,5 @@
-// Typography import for the required font at normal weight
-@mixin font-bold {
+// Typography import for the Nunito font at normal weight
+@mixin nunito-bold {
     @font-face {
         font-family: 'Nunito';
         src: url("../assets/fonts/Nunito-Bold.ttf") format("truetype"), 
@@ -11,8 +11,8 @@
     };
 };
 
-// Typography import for the required font at demi-bold weight
-@mixin font-demi {
+// Typography import for the Nunito font at demi-bold weight
+@mixin nunito-demi {
     @font-face {
         font-family: 'Nunito';
         src: url("../assets/fonts/Nunito-SemiBold.ttf") format("truetype"), 
@@ -24,13 +24,52 @@
     };
 };
 
-// Typography import for the required font at bold weight
-@mixin font-regular {
+// Typography import for the Nunito font at bold weight
+@mixin nunito-regular {
     @font-face {
         font-family: 'Nunito';
         src: url("../assets/fonts/Nunito-Regular.ttf") format("truetype"), 
             url("../assets/fonts/Nunito-Regular.woff") format("woff"), 
             url("../assets/fonts/Nunito-Regular.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    };
+};
+
+// Typography import for the Raleway font at normal weight
+@mixin raleway-bold {
+    @font-face {
+        font-family: 'Raleway';
+        src: url("../assets/fonts/Raleway-Bold.ttf") format("truetype"), 
+            url("../assets/fonts/Raleway-Bold.woff") format("woff"), 
+            url("../assets/fonts/Raleway-Bold.woff2") format("woff2");
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    };
+};
+
+// Typography import for the Raleway font at demi-bold weight
+@mixin raleway-demi {
+    @font-face {
+        font-family: 'Raleway';
+        src: url("../assets/fonts/Raleway-SemiBold.ttf") format("truetype"), 
+            url("../assets/fonts/Raleway-SemiBold.woff") format("woff"), 
+            url("../assets/fonts/Raleway-SemiBold.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    };
+};
+
+// Typography import for the Raleway font at bold weight
+@mixin raleway-regular {
+    @font-face {
+        font-family: 'Raleway';
+        src: url("../assets/fonts/Raleway-Regular.ttf") format("truetype"), 
+            url("../assets/fonts/Raleway-Regular.woff") format("woff"), 
+            url("../assets/fonts/Raleway-Regular.woff2") format("woff2");
         font-weight: normal;
         font-style: normal;
         font-display: swap;

@@ -1,7 +1,10 @@
 @use './typography' as *;
-@include font-regular;
-@include font-demi;
-@include font-bold;
+@include nunito-regular;
+@include nunito-demi;
+@include nunito-bold;
+@include raleway-regular;
+@include raleway-demi;
+@include raleway-bold;
 
 $font-family-global: 'Nunito';
 $font-size-global: 62.5%;
