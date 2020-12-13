@@ -131,9 +131,10 @@
             align-items: center;
             height: 4rem;
             width: 4rem;
-            background-color: #67E7E4;
+            background-color: #FFF;
             border-radius: 100%;
-            box-shadow: 0 0.4rem 0.6rem 0 #67e7e480;
+            border: 2px solid #27DED9;
+            box-shadow: 0 4px 6px 0 rgba(103,231,228,0.5);
             color: #FFFFFF;
             font-size: 1.6rem;
             line-height: 1.6rem;
@@ -181,16 +182,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 0 14.2rem 0;
+        margin: 0 0 10rem 0;
 
         &-arrow {
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #45454554;
-            font-size: 4.8rem;
-            font-weight: bold;
-            line-height: 1.6rem;
         }
 
         &-page {
@@ -199,9 +196,9 @@
             align-items: center;
             height: 4rem;
             width: 4rem;
-            background-color: #67E7E4;
+            background-color: #27DED9;
             border-radius: 100%;
-            box-shadow: 0 0.4rem 0.6rem 0 #67e7e480;
+            box-shadow: 0 0.4rem 0.6rem 0 #67E7E4;
             color: #FFFFFF;
             font-size: 1.6rem;
             line-height: 1.6rem;

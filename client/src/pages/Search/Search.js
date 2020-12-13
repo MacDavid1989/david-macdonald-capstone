@@ -7,6 +7,9 @@ import RecipeModal from '../../components/RecipeModal'
 import AddToModal from '../../components/AddToModal'
 import { mealType as randomMealType } from '../../utils/randomMealType';
 import { letters as randomQuery } from '../../utils/randomLetter';
+import plus from '../../assets/icons/plus-green.svg'
+import leftArrow from '../../assets/icons/long-arrow-left.svg'
+import rightArrow from '../../assets/icons/long-arrow-right.svg'
 
 class Search extends Component {
     state = {
@@ -54,11 +57,13 @@ class Search extends Component {
     }
 
     componentWillUnmount() {
-        sessionStorage.setItem('query', this.state.query);
-        sessionStorage.setItem('mealType', this.state.mealType);
-        sessionStorage.setItem('from', this.state.from);
-        sessionStorage.setItem('to', this.state.to);
-        sessionStorage.setItem('page', this.state.page);
+        if(this.state.query){
+            sessionStorage.setItem('query', this.state.query);
+            sessionStorage.setItem('mealType', this.state.mealType);
+            sessionStorage.setItem('from', this.state.from);
+            sessionStorage.setItem('to', this.state.to);
+            sessionStorage.setItem('page', this.state.page);
+        }
     }
 
     getMeals = () => {
@@ -200,15 +205,15 @@ class Search extends Component {
                             {/* <span className="meal__calories">
                                 {`${Math.ceil(meal.calories / meal.yield)} cals`}
                             </span> */}
-                            <span className="meal__select" onClick={()=>this.showAddTo(meal, id)}>+</span>
+                            <span className="meal__select" onClick={()=>this.showAddTo(meal, id)}><img className="meal__select-icon" src={plus} alt="plus sign"/></span>
                         </div>
                     </li>
                     })}
                 </ul>
                 <div className="search__button">
-                    <span className="search__button-arrow" style={{ display: this.state.previous ? "flex" : "none" }} onClick={this.handlePrevious}>&#8592;</span>
+                    <span className="search__button-arrow" onClick={this.handlePrevious}><img style={{ visibility: this.state.previous ? "visible" : "hidden" }}  className="search__button-arrow__icon" src={leftArrow} alt="left arrow"/></span>
                     <span className="search__button-page">{this.state.page}</span>
-                    <span className="search__button-arrow" onClick={this.handleNext}>&#8594;</span>
+                    <span className="search__button-arrow" onClick={this.handleNext}><img className="search__button-arrow__icon" src={rightArrow} alt="right arrow"/></span>
                 </div>
                     <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
                     <AddToModal 
