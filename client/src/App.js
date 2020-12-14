@@ -18,7 +18,7 @@ function App() {
                 <Route path="/" exact component={Home}/>
                 <Route path="/search" component={Search}/>
                 <Route path="/my meals" component={MyMeals}/>
-                {/* <Route path="/grocery list" component={GroceryList}/> */}
+                <Route path="/grocery list" component={GroceryList}/>
             </Switch>
             <Footer/>
         </Router>
