@@ -17,6 +17,7 @@ function Footer() {
                         <Link className="footer__links-text" to="/my meals">Menu</Link>
                         <Link className="footer__links-text" to="/grocery list">Grocery List</Link>
                     </div>
+                    <div id="edamam-badge" data-color="white"></div>
                 </div>
             </footer>
         </>

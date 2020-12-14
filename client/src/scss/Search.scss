@@ -6,10 +6,10 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height: calc(100% - 31.4rem);
+    min-height: calc(100vh - 31.4rem);
 
     @include breakpoint(768px) {
-        min-height: calc(100% - 28.4rem);
+        min-height: calc(100vh - 28.4rem);
     }
   
     &__banner {
