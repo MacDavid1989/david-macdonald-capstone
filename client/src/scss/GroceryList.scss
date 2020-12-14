@@ -97,33 +97,48 @@
     }
     
     &__user {
-        margin: 7.2rem 0 0 0;
-        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 6.4rem 1.6rem 2.4rem;
+        width: 100%;
+
+        @include breakpoint(768px) {
+            padding: 7.2rem 0 2.4rem;
+        }
 
         &-title {
-            font-family: 'Raleway';
-            width: 74.9rem;
+            margin: 0 0 0.8rem;
+            width: 100%;
             text-align: left;
-            margin: 0.8rem 0;
+            font-family: 'Raleway';
+            font-size: 2.4rem;
+            line-height: 3.2rem;      
             color: #444444;
-            font-size: 24px;
-            line-height: 29px;   
+   
+            @include breakpoint(768px) {
+            margin: 0 0 1.6rem;
+            width: 72rem;
+            }
         }
 
         &-form {
-            height: 6.4rem;
-            width: 74.9rem;
-            border-radius: 15px;
-            background-color: #FFFFFF;
-            box-shadow: 0 0.5rem 1.5rem 0 #23083d17;
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            margin: 0 0 1.6rem;
+            box-shadow: 0 0.5rem 1.5rem 0 #23083d17;
+            border-radius: 1.5rem;
             padding: 1.6rem;
+            width: 100%;
+            height: 6.4rem;
+            background-color: #FFFFFF;
+
+            @include breakpoint(768px) {
             margin: 0 0 2.4rem;
+            width: 72rem;
+                padding: 1.6rem 2.4rem;
+            }
         }
 
         &-add {
@@ -131,31 +146,36 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 3.6rem;
-            width: 3.6rem;
-            background-color: #FFF;
-            outline: none;
-            border-radius: 100%;
-            border: 2px solid #27DED9;
-            box-shadow: 0 4px 6px 0 rgba(103,231,228,0.5);
             margin: 0 1.6rem 0 0;
+            outline: none;
+            box-shadow: 0 4px 6px 0 rgba(103,231,228,0.5);
+            border: 2px solid #27DED9;
+            border-radius: 100%;
+            width: 3.6rem;
+            height: 3.6rem;
+            background-color: #FFF;
 
-        }
-
-        &-icon {
-
+            @include breakpoint(768px) {
+                margin: 0 2.4rem 0 0;
+            }  
         }
 
         &-item {
-            height: 4.8rem;
-            width: 46rem;
-            background-color: #FFFFFF;
             outline: none;
             border: none;
-            color: #444444;
+            width: calc(100% - 18.4rem);
+            height: 4.8rem;
+            background-color: #FFFFFF;
             font-size: 1.6rem;
-            line-height: 2.2rem;
-            
+            line-height: 2.4rem;
+            color: #444444;
+            margin: 0 1.6rem 0 0;
+      
+            @include breakpoint(768px) {
+                width: 42.6rem;
+                margin: 0 2.4rem 0 0;
+            }
+                
             &::placeholder{
                 color: #44444454;
             }
@@ -163,7 +183,7 @@
 
         &-weight {
             height: 4.8rem;
-            width: 13rem;
+            width: 10rem;
             background-color: #FFFFFF;
             outline: none;
             border: none;
@@ -172,10 +192,16 @@
             font-size: 1.6rem;
             line-height: 2.2rem;
             padding: 0 0 0 1.6rem;   
-            margin: 0 2.4rem 0 auto;
+            margin: 0 1.6rem 0 0;
             overflow: hidden;
             text-align: right; 
 
+            @include breakpoint(768px) {
+                margin: 0 2.4rem 0 0;
+                width: 13rem;
+                padding: 0 0 0 2.4rem;   
+            }
+            
             &::placeholder{
                 color: #44444454;
             }
@@ -189,55 +215,77 @@
     }
 
     &__recipe {
-        margin: 0.8rem 0 4.8rem 0;
-        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 0 1.6rem 4rem;
+        width: 100%;
+
+        @include breakpoint(768px) {
+            padding: 0 0 4.8rem;
+        }
 
         &-title {
-            font-family: 'Raleway';
-            width: 74.9rem;
+            margin: 0 0 0.8rem;
+            width: 100%;
             text-align: left;
-            margin: 0.8rem 0;
+            font-family: 'Raleway';
+            font-size: 2.4rem;
+            line-height: 3.2rem;      
             color: #444444;
-            font-size: 24px;
-            line-height: 29px; 
-
+   
+            @include breakpoint(768px) {
+                margin: 0 0 1.6rem;
+                width: 72rem;
+            }
         }
     }
 
     &__list {
         list-style-type: none;
-        width: 74.9rem;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+    
+        @include breakpoint(768px) {
+            width: 72rem;
+        }
     }
-
+    
     .item {
-        height: 6.4rem;
-        width: 74.9rem;
-        border-radius: 15px;
-        background-color: #FFFFFF;
-        box-shadow: 0 0.5rem 1.5rem 0 #23083d17;
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        margin: 0 0 1.6rem;
+        box-shadow: 0 0.5rem 1.5rem 0 #23083d17;
+        border-radius: 1.5rem;
         padding: 1.6rem;
-        margin: 0 0 2.4rem;
+        width: 100%;
+        height: 6.4rem;
+        background-color: #FFFFFF;
 
+        @include breakpoint(768px) {
+            margin: 0 0 2.4rem;
+            padding: 1.6rem 2.4rem;
+        }
+        
         &__select {
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 3.6rem;
+            border: 0.1rem solid #DEE2E6;
             width: 3.6rem;
-            border: 1.11px solid #DEE2E6;
+            height: 3.6rem;
             border-radius: 100%;
             margin: 0 1.6rem 0 0;
 
+            @include breakpoint(768px) {
+                margin: 0 2.4rem 0 0;
+    
+            }
+            
             &-check {
                 @extend .item__select;
                 background-color: #27DED9;
@@ -251,6 +299,14 @@
             font-weight: 600;
             line-height: 22px;
             text-transform: capitalize;
+        
+            @include breakpoint(768px) {
+                
+            }
+
+            @include breakpoint(1128px) {
+                
+            }
         }
 
         &__weight {
@@ -259,7 +315,13 @@
             font-weight: 600;
             line-height: 22px;
             margin: 0 3.2rem 0 auto;
+            min-width: 4.4rem;
+            text-align: right;
 
+            @include breakpoint(768px) {
+                margin: 0 3.2rem 0 auto;
+            }
+        
             &--alt {
                 @extend .item__weight;
                 margin: 0 0 0 auto;
@@ -268,9 +330,13 @@
 
         &__remove {
             cursor: pointer;
-            visibility: hidden;
+            visibility: initial;
             margin: 0 0 0 1.6rem;
             transform: rotate(45deg);
+        
+            @include breakpoint(1280px) {
+                visibility: hidden;
+            }
         }
 
         &:hover {

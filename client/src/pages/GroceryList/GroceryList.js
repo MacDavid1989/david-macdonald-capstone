@@ -169,8 +169,8 @@ class GroceryList extends Component {
                         <button className="grocery__user-add" type="submit">
                                 <img className="grocery__user-icon" src={plus} alt="plus sign"/>
                         </button>
-                        <input className="grocery__user-item" required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item name"/>
-                        <input className="grocery__user-weight" required type="number" name="itemWeight" placeholder="Add weight (g)"/>
+                        <input className="grocery__user-item" required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item"/>
+                        <input className="grocery__user-weight" required type="number" name="itemWeight" placeholder="Weight (g)"/>
                     </form>
                     <ul className="grocery__list">
                     {this.state.groceries&&this.state.groceries.map(grocery =>
