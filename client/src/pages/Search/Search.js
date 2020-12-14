@@ -17,7 +17,7 @@ class Search extends Component {
         mealType: randomMealType[Math.floor(Math.random() * randomMealType.length)],
         meals: '',
         from: 0,
-        to: 12,
+        to: 24,
         page: 1,
         display: false,
         previous: false,
@@ -41,11 +41,11 @@ class Search extends Component {
     }
 
     componentDidUpdate(_prevP, prevS) {
-        prevS.from===12&&this.state.from===0&&
+        prevS.from===24&&this.state.from===0&&
         this.setState({
             previous: false
         })
-        prevS.from===0&&this.state.from===12&&
+        prevS.from===0&&this.state.from===24&&
         this.setState({
             previous: true
         })
@@ -73,7 +73,7 @@ class Search extends Component {
         const MEAL = `&mealType=${this.state.mealType}&from=${this.state.from}&to=${this.state.to}`;
         const QUERY = this.state.query || randomQuery[Math.floor(Math.random() * randomQuery.length)];
 
-        (this.state.query||QUERY)&&this.state.mealType&&!this.state.meals&&
+        (this.state.query||QUERY)&&this.state.mealType&&//!this.state.meals&&
         axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
         .then(response => {
             this.setState({
@@ -85,6 +85,10 @@ class Search extends Component {
     changeSearchIngredient = (e) => {
         this.setState({
             meals: '',
+            from: 0,
+            to: 24,
+            page: 1,
+            previous: false,
             query: e.target.value.toLowerCase()
         }, this.getMeals)   
     }
@@ -92,6 +96,10 @@ class Search extends Component {
     changeMealType = (e) => {
         this.setState({
             meals: '',
+            from: 0,
+            to: 24,
+            page: 1,
+            previous: false,
             mealType: e.target.value
         }, this.getMeals)
     }
@@ -99,8 +107,8 @@ class Search extends Component {
     handleNext = () => {
         this.setState({
             meals: '',
-            from: this.state.from + 12,
-            to: this.state.to + 12,
+            from: this.state.from + 24,
+            to: this.state.to + 24,
             page: this.state.page + 1
         }, this.getMeals)
     }
@@ -109,8 +117,8 @@ class Search extends Component {
         (this.state.from > 0)&&
         this.setState({
             meals: '',
-            from: this.state.from - 12,
-            to: this.state.to - 12,
+            from: this.state.from - 24,
+            to: this.state.to - 24,
             page: this.state.page - 1
         }, this.getMeals)
     }

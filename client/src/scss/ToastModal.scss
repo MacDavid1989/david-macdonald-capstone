@@ -4,21 +4,21 @@
 .toast {
     position: fixed;
     z-index: 1000;
-    top: 3.9rem;
+    top: 8.9rem;
     left: center;
-    height: 5.2rem;
+    min-height: 5.2rem;
     width: 52rem;
     border: 1px solid #1E853F;
     border-radius: 6px;
     background-color: #DCF9DF;
     justify-content: center;
     align-items: center;
-    padding: 0 1.6rem;
+    padding: 0.8rem 1.6rem;
     animation: dropIn 5s infinite;
 
     @keyframes dropIn {
         0% {
-          transform: translateY(-9.1rem);
+          transform: translateY(-20rem);
         }
         20% {
             transform: translateY(0rem);
@@ -27,7 +27,7 @@
           transform: translateY(0rem);
         }
         100% {
-            transform: translateY(-9.1rem);
+            transform: translateY(-20rem);
           }
       }
 
