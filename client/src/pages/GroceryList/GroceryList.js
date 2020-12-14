@@ -10,6 +10,8 @@ import rightArrow from '../../assets/icons/short-arrow-right.svg'
 import longRightArrow from '../../assets/icons/long-arrow-right.svg'
 import plus from '../../assets/icons/plus-green.svg'
 import remove from '../../assets/icons/remove-plus.svg'
+import check from '../../assets/icons/check.svg'
+
 class GroceryList extends Component {
     state = {
         groceries: '',
@@ -53,12 +55,12 @@ class GroceryList extends Component {
             remove: true
         })
         
-        prevS.week===getWeek(new Date())&&this.state.week===52&&
+        prevS.week===getWeek(new Date())&&getWeek(new Date())===1&&this.state.week===52&&
         this.setState({
             remove: false
         })
 
-        prevS.week===52&&this.state.week===getWeek(new Date())&&
+        prevS.week===52&&this.state.week===getWeek(new Date())&&getWeek(new Date())===1&&
         this.setState({
             remove: true
         })
@@ -167,17 +169,24 @@ class GroceryList extends Component {
                         Your Items
                     </h2 >
                     <form className="grocery__user-form" style={{ display: this.state.remove ? "flex" : "none" }} onSubmit={this.handleAddGrocery}>
+                        <button className="grocery__user-add" type="submit">
+                                <img className="grocery__user-icon" src={plus} alt="plus sign"/>
+                        </button>
                         <input className="grocery__user-item" required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item name"/>
-                        <input className="grocery__user-weight" required type="number" name="itemWeight" placeholder="Add item weight"/>
-                        <button className="grocery__user-button" type="submit">Add</button>
+                        <input className="grocery__user-weight" required type="number" name="itemWeight" placeholder="Add weight (g)"/>
                     </form>
                     <ul className="grocery__list">
                     {this.state.groceries&&this.state.groceries.map(grocery =>
                         grocery.category==="user item"&&grocery.week===this.state.week&&
                         <li key={grocery.id} className="item" style={{ display: "flex"}}>
-                            <img className="item__select" onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
+                            <span onClick={()=>this.crossOffItem(grocery.id)} className={grocery.isCompleted?"item__select-check":"item__select"}>
+                                <img className="item__select-icon" src={grocery.isCompleted?check:undefined} alt=""/>
+                            </span>
                             <span className="item__name" style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                                {`${grocery.food.toLowerCase()} ${weightConversion(grocery.weight)}`}
+                                {`${grocery.food.toLowerCase()}`}
+                            </span>
+                            <span className="item__weight--alt">
+                                {`${weightConversion(grocery.weight)}`}
                             </span>
                             <img className="item__remove" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
                         </li>
@@ -192,9 +201,14 @@ class GroceryList extends Component {
                     {this.state.groceries&&this.state.groceries.map(grocery =>
                         grocery.category!=="user item"&&grocery.week===this.state.week&&
                         <li key={grocery.id} className="item" style={{ display: "flex"}}>
-                            <img className="item__select" onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
+                            <span onClick={()=>this.crossOffItem(grocery.id)} className={grocery.isCompleted?"item__select-check":"item__select"}>
+                                <img className="item__select-icon"  src={grocery.isCompleted?check:undefined} alt=""/>
+                            </span>
                             <span className="item__name" style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                                {`${grocery.food.toLowerCase()} ${weightConversion(grocery.weight)}`}
+                                {`${grocery.food.toLowerCase()}`}
+                            </span>
+                            <span className="item__weight">
+                                {`${weightConversion(grocery.weight)}`}
                             </span>
                         </li>
                         )}
