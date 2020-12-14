@@ -153,7 +153,7 @@ class RecipeModal extends Component {
                     </div>
                 </div>
             </div>
-            <ToastModal toast={this.state.toast} resetToast={this.resetToast} meal={this.state.meal.label} day={this.state.day} week={this.state.week}/>
+            <ToastModal toast={this.state.toast} resetToast={this.resetToast} day={this.state.day} week={this.state.week}/>
             </>
         );
     }

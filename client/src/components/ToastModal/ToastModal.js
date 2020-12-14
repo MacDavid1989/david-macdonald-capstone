@@ -26,7 +26,7 @@ class RecipeModal extends Component {
                 <span className="toast__select">
                     <img className="toast__select-icon" src={check} alt=""/>
                 </span>
-                <h1 className="toast__title">{`Successfully added ${this.props.meal} to ${this.props.day} of ${this.props.week===getWeek(new Date())?'Current Week': 'Week '+this.props.week}`}</h1>
+                <h1 className="toast__title">{`Successfully added to ${this.props.day} for ${this.props.week===getWeek(new Date())?'the Current Week': 'Week '+this.props.week}`}</h1>
             </div>
         );
     }

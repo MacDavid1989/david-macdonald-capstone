@@ -3,49 +3,73 @@
 
 .toast {
     position: fixed;
-    z-index: 1000;
-    top: 8.9rem;
+    top: 9.5rem;
     left: center;
-    min-height: 5.2rem;
-    width: 52rem;
-    border: 1px solid #1E853F;
-    border-radius: 6px;
-    background-color: #DCF9DF;
+    z-index: 1000;
     justify-content: center;
     align-items: center;
+    border: 1px solid #1E853F;
+    border-radius: 6px;
     padding: 0.8rem 1.6rem;
+    width: 28.8rem;
+    min-height: 4rem;
+    background-color: #DCF9DF;
     animation: dropIn 5s infinite;
 
+    @include breakpoint(768px) {
+        top: 6.5rem;
+        width: 52rem;
+        padding: 1.6rem 2.4rem;
+    }
+
+    @include breakpoint(1128px) {
+        
+    }
+    
     @keyframes dropIn {
+
         0% {
           transform: translateY(-20rem);
         }
+
         20% {
             transform: translateY(0rem);
-          }
+        }
+
         80% {
           transform: translateY(0rem);
         }
+
         100% {
             transform: translateY(-20rem);
-          }
-      }
+        }
+    }
 
     &__select {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 1.6rem;
-        width: 1.6rem;
-        border-radius: 100%;
         margin: 0 1.6rem 0 0;
-        background-color: #DCF9DF;
         border: 0.2rem solid #1E853F;
+        border-radius: 100%;
+        width: 1.6rem;
+        height: 1.6rem;
+        background-color: #DCF9DF;
+
+        @include breakpoint(768px) {
+            margin: 0 2.4rem 0 0;
+        }
+
     }
 
     &__title {
         color: #1E853F;
-        font-size: 16px;
-        line-height: 22px;      
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        width: calc(100% - 3.2rem);      
+
+        @include breakpoint(768px) {
+            width: calc(100% - 4rem);      
+        }
     }
 }
