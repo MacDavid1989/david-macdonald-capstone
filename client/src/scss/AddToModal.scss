@@ -2,49 +2,70 @@
 @use '../partials/mixins' as *;
 
 .addTo  {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
     flex-direction: column;
     justify-content: flex-end;
-    position: fixed;
-    z-index: 10;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: calc(100vh - 9.5rem);
+    background-color: #00000080;
 
+    @include breakpoint(768px) {
+        height: calc(100vh - 6.5rem);    
+    }
+
+    @include breakpoint(1128px) {
+        
+    }
+    
     &__frame {
         display: flex;
         flex-direction: column;
         align-items: center;
         position: relative;
+        box-shadow: 0 0.5rem 1.5rem 0 #23083d17;
+        border-radius: 2.4rem 2.4rem 1.5rem 1.5rem;
+        padding: 4rem 1.6rem;      
         width: 100%;
-        border-radius: 24px 24px 15px 15px;
         background-color: #FFFFFF;
-        box-shadow: 0 5px 15px 0 rgba(35,8,61,0.09);
-        padding: 4rem 0;      
+
+        @include breakpoint(768px) {
+            padding: 4.8rem 0;      
+        }
     }
 
     &__remove {
         cursor: pointer;
         position: absolute;
-        top: 2.4rem;
-        right: 2.4rem;
-        margin: 0 0 0 1.6rem;
+        top: 1.6rem;
+        right: 1.6rem;
         transform: rotate(45deg);
+ 
+        @include breakpoint(768px) {
+            top: 2.4rem;
+            right: 2.4rem;
+        }
     }
     
     &__container {
-        width: 46rem;
-        height: 4.8rem;
-        border-radius: 4.1rem;
-        background-color: #FFFFFF;
         box-shadow: 0 0.6rem 0.6rem 0 #90909040;
-        outline: none;
-        border: none;
         display: flex;
         justify-content: space-between;
-        padding: 1.3rem 1.6rem;   
-        margin: 0 0 3.2rem;
+        margin: 0 0 2.4rem;
+        outline: none;
+        border: none;
+        border-radius: 4rem;
+        padding: 1.2rem 1.6rem;   
+        width: 28.8rem;
+        height: 4.8rem;
+        background-color: #FFFFFF;
+ 
+        @include breakpoint(768px) {
+            padding: 1.2rem 2.4rem;   
+            width: 46rem;
+        }
     }
 
     &__arrow {
@@ -52,47 +73,67 @@
     }
 
     &__week {
-        color: #444444;
         font-size: 1.6rem;
-        line-height: 2.2rem;
         font-weight: 600;
+        line-height: 2.4rem;
+        color: #444444;
     }
     
 
     &__title {
-        color: #444444;
-        font-family: 'Raleway';
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 29px;
         margin: 0 0 1.6rem;
+        font-family: 'Raleway';
+        font-size: 2.4rem;
+        font-weight: 500;
+        line-height: 3.2rem;
+        color: #444444;
+ 
+        @include breakpoint(768px) {
+            margin: 0 0 2.4rem;
+        }
     }
 
     &__subtitle {
-        color: #444444;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 22px;
         margin: 0 0 1.6rem;
+        text-align: center;
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 2.4rem;
+        color: #444444;
+
+        @include breakpoint(768px) {
+            margin: 0 0 2.4rem;
+        }
     }
 
     &__date {
-        width: 46rem;
-        padding: 0 6rem;
-        margin: 0 0 2.4rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 0 0 1.6rem;
+        padding: 0 4rem;
+        width: 28.8rem;
 
+        @include breakpoint(768px) {
+            margin: 0 0 2.4rem;
+            padding: 0 6rem;
+            width: 46rem;
+        }
+        
         &:last-of-type {
             margin: 0;
         }
 
         &-title {
-            color: #444444;
-            font-size: 18px;
+            font-size: 1.6rem;
             font-weight: bold;
-            line-height: 24px;
+            line-height: 2.4rem;
+            color: #444444;
+ 
+            @include breakpoint(768px) {
+                font-size: 1.8rem;
+                line-height: 2.6rem;
+            }
         }
     }
 
@@ -101,14 +142,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 3.2rem;
-        width: 3.2rem;
-        background-color: #FFF;
+        box-shadow: 0 0.4rem 0.6rem 0 #67e7e480;
+        border: 0.2rem solid #27DED9;
         border-radius: 100%;
-        border: 2px solid #27DED9;
-        box-shadow: 0 4px 6px 0 rgba(103,231,228,0.5);
-        color: #FFFFFF;
+        width: 3.2rem;
+        height: 3.2rem;
         font-size: 1.6rem;
         line-height: 1.6rem;
+        background-color: #FFF;
+        color: #FFFFFF;
     }
 }
