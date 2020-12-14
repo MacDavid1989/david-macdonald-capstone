@@ -3,11 +3,8 @@ import axios from 'axios';
 import { getWeek } from 'date-fns'
 import { weightConversion } from '../../utils/weightConversion'
 import '../../scss/GroceryList.scss';
-import unchecked from '../../assets/icons/checkbox-unchecked.svg';
-import checked from '../../assets/icons/checkbox-checked.svg'
 import leftArrow from '../../assets/icons/short-arrow-left.svg'
 import rightArrow from '../../assets/icons/short-arrow-right.svg'
-import longRightArrow from '../../assets/icons/long-arrow-right.svg'
 import plus from '../../assets/icons/plus-green.svg'
 import remove from '../../assets/icons/remove-plus.svg'
 import check from '../../assets/icons/check.svg'

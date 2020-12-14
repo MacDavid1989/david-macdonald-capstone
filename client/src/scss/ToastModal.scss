@@ -14,16 +14,16 @@
     justify-content: center;
     align-items: center;
     padding: 0 1.6rem;
-    animation: dropIn 3s infinite;
+    animation: dropIn 5s infinite;
 
     @keyframes dropIn {
         0% {
           transform: translateY(-9.1rem);
         }
-        25% {
+        20% {
             transform: translateY(0rem);
           }
-        75% {
+        80% {
           transform: translateY(0rem);
         }
         100% {

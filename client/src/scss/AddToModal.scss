@@ -25,6 +25,7 @@
     }
 
     &__remove {
+        cursor: pointer;
         position: absolute;
         top: 2.4rem;
         right: 2.4rem;
@@ -47,7 +48,7 @@
     }
 
     &__arrow {
-
+        cursor: pointer;
     }
 
     &__week {
@@ -96,6 +97,7 @@
     }
 
     &__select {
+        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
