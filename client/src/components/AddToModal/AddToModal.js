@@ -115,43 +115,43 @@ class RecipeModal extends Component {
                     </div>
                     <div className="addTo__date">
                         <span className="addTo__date-title">Sunday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Sunday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Sunday'})}} className="addTo__select">
+                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Sunday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Sunday'}); this.closeAddTo()}} className="addTo__select">
                             <img className="addTo__select-icon" src={plus} alt="plus sign"/>
                         </span>
                     </div>
                     <div className="addTo__date">
                         <span className="addTo__date-title">Monday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Monday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Monday'})}} className="addTo__select">
+                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Monday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Monday'}); this.closeAddTo()}} className="addTo__select">
                             <img className="addTo__select-icon" src={plus} alt="plus sign"/>
                         </span>
                     </div>
                     <div className="addTo__date">
                         <span className="addTo__date-title">Tuesday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Tuesday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Tuesday'})}} className="addTo__select">
+                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Tuesday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Tuesday'}); this.closeAddTo()}} className="addTo__select">
                             <img className="addTo__select-icon" src={plus} alt="plus sign"/>
                         </span>
                     </div>
                     <div className="addTo__date">
                         <span className="addTo__date-title">Wednesday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Wednesday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Wednesday'})}} className="addTo__select">
+                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Wednesday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Wednesday'}); this.closeAddTo()}} className="addTo__select">
                             <img className="addTo__select-icon" src={plus} alt="plus sign"/>
                         </span>
                     </div>
                     <div className="addTo__date">
                         <span className="addTo__date-title">Thursday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Thursday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Thursday'})}} className="addTo__select">
+                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Thursday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Thursday'}); this.closeAddTo()}} className="addTo__select">
                             <img className="addTo__select-icon" src={plus} alt="plus sign"/>
                         </span>
                     </div>
                     <div className="addTo__date">
                         <span className="addTo__date-title">Friday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Friday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Friday'})}} className="addTo__select">
+                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Friday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Friday'}); this.closeAddTo()}} className="addTo__select">
                             <img className="addTo__select-icon" src={plus} alt="plus sign"/>
                         </span>
                     </div>
                     <div className="addTo__date">
                         <span className="addTo__date-title">Saturday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Saturday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Saturday'})}} className="addTo__select">
+                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Saturday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Saturday'}); this.closeAddTo()}} className="addTo__select">
                             <img className="addTo__select-icon" src={plus} alt="plus sign"/>
                         </span>
                     </div>

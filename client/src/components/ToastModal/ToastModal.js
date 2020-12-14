@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../scss/ToastModal.scss';
 import { getWeek } from 'date-fns';
+import check from '../../assets/icons/check-green.svg'
 
 class RecipeModal extends Component {
     state = {
@@ -21,10 +22,11 @@ class RecipeModal extends Component {
 
     render() {
         return (
-            <div className="toast" style={{ display: this.state.display ? "initial" : "none" }}>
-                <div className="toast__frame">
-                <h1>{`Successfully added ${this.props.meal} to ${this.props.day} of ${this.props.week===getWeek(new Date())?'Current Week': 'Week '+this.props.week}`}</h1>
-                </div>
+            <div className="toast" style={{ display: this.state.display ? "flex" : "none" }}>
+                <span className="toast__select">
+                    <img className="toast__select-icon" src={check} alt=""/>
+                </span>
+                <h1 className="toast__title">{`Successfully added ${this.props.meal} to ${this.props.day} of ${this.props.week===getWeek(new Date())?'Current Week': 'Week '+this.props.week}`}</h1>
             </div>
         );
     }

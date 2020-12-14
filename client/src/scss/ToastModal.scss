@@ -1,32 +1,51 @@
+@use '../partials/variables' as *;
+@use '../partials/mixins' as *;
+
 .toast {
-    position: absolute;
-    z-index: 10;
-    top: 8rem;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #FFF;
+    position: fixed;
+    z-index: 1000;
+    top: 3.9rem;
+    left: center;
+    height: 5.2rem;
+    width: 52rem;
+    border: 1px solid #1E853F;
+    border-radius: 6px;
+    background-color: #DCF9DF;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1.6rem;
+    animation: dropIn 3s infinite;
 
-    &__frame {
+    @keyframes dropIn {
+        0% {
+          transform: translateY(-9.1rem);
+        }
+        25% {
+            transform: translateY(0rem);
+          }
+        75% {
+          transform: translateY(0rem);
+        }
+        100% {
+            transform: translateY(-9.1rem);
+          }
+      }
+
+    &__select {
         display: flex;
+        align-items: center;
         justify-content: center;
-        position: relative;
-        width: 100%;
-        height: 100%;
-        padding: 4rem;
+        height: 1.6rem;
+        width: 1.6rem;
+        border-radius: 100%;
+        margin: 0 1.6rem 0 0;
+        background-color: #DCF9DF;
+        border: 0.2rem solid #1E853F;
     }
 
-    &__close {
-        position: fixed;
-        left: 5rem;
-    }
-
-    &__source {
-        width: 75%;
-        height: 100%;
-        border-radius: 2rem;
-        outline: none;
-        border: none;
-        box-shadow: rgba(0, 0, 0, 0.1) 0 0.1rem 2rem 0;
+    &__title {
+        color: #1E853F;
+        font-size: 16px;
+        line-height: 22px;      
     }
 }
