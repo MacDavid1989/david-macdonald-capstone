@@ -16,6 +16,9 @@ router.get('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const groceries = getGroceries();
+    const userItems = getUserItems();
+    const recipeItems = getIngredients();
+
     groceries.forEach(item => {
         if(item.id===req.params.id){
             if(item.isCompleted===false){
@@ -25,7 +28,30 @@ router.put('/:id', (req, res) => {
             }
         }
     })
+    userItems.forEach(item => {
+        if(item.id===req.params.id){
+            if(item.isCompleted===false){
+                return item.isCompleted = true;
+            } else {
+                return item.isCompleted = false;
+            }
+        }
+    })
+
+    recipeItems.forEach(item => {
+        if(item.id===req.params.id){
+            if(item.isCompleted===false){
+                return item.isCompleted = true;
+            } else {
+                return item.isCompleted = false;
+            }
+        }
+    })
+
     writeGroceries(groceries)
+    writeUserItems(userItems)
+    writeIngredients(recipeItems)
+
     return res.status(204).json({ success: true})
 })
 
