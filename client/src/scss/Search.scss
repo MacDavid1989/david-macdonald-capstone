@@ -21,7 +21,7 @@
         width: 100%;
         height: 24.5rem;
         background-color: #27DED9;
-        padding: 9.8rem 0 5.4rem;
+        padding: 9.8rem 1.6rem 5.4rem;
 
         @include breakpoint(768px) {
             display: flex;
@@ -32,99 +32,62 @@
             width: 100%;
             height: 24.5rem;
             background-color: #27DED9;
-            padding: 9.8rem 0 5.4rem;
+            padding: 9.8rem 2.4rem 5.4rem;
         }
     
         @include breakpoint(1128px) {
             display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        width: 100%;
-        height: 24.5rem;
-        background-color: #27DED9;
-        padding: 9.8rem 0 5.4rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            height: 24.5rem;
+            background-color: #27DED9;
+            padding: 9.8rem 0 5.4rem;
         }
             
         &-title {
-            width: 49.3rem;
+            width: 28.8rem;
             color: #FFFFFF;
             font-family: 'Raleway';
-            font-size: 4.8rem;
+            font-size: 3.6rem;
             font-weight: bold;
-            line-height: 56px;
+            line-height: 4.4rem;
             text-align: center;
-            margin: 0 0 1.6rem;
+            margin: 0 0 0.8rem;
 
             @include breakpoint(768px) {
-                width: 49.3rem;
-                color: #FFFFFF;
-                font-family: 'Raleway';
+                width: 50rem;
                 font-size: 4.8rem;
-                font-weight: bold;
                 line-height: 56px;
-                text-align: center;
                 margin: 0 0 1.6rem;
             }
-        
-            @include breakpoint(1128px) {
-                width: 49.3rem;
-            color: #FFFFFF;
-            font-family: 'Raleway';
-            font-size: 4.8rem;
-            font-weight: bold;
-            line-height: 56px;
-            text-align: center;
-            margin: 0 0 1.6rem;
-            }
-                  }
+        }
 
         &-subtitle {
-            width: 54.2rem;
+            width: 28.8rem;
             color: #FFFFFF;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 600;
             line-height: 2.2rem;
             text-align: center;
 
             @include breakpoint(768px) {
-                width: 54.2rem;
-                color: #FFFFFF;
+                width: 55rem;
                 font-size: 1.6rem;
-                font-weight: 600;
-                line-height: 2.2rem;
-                text-align: center;
+                line-height: 2.4rem;
             }
-        
-            @include breakpoint(1128px) {
-                width: 54.2rem;
-            color: #FFFFFF;
-            font-size: 1.6rem;
-            font-weight: 600;
-            line-height: 2.2rem;
-            text-align: center;
-            }
-                  }
+        }
     }
 
     &__form {
         position: absolute;
         bottom: -2.4rem;
-
-        @include breakpoint(768px) {
-            position: absolute;
-            bottom: -2.4rem;
-        }
-    
-        @include breakpoint(1128px) {
-            position: absolute;
-        bottom: -2.4rem;
-        }
       
         &-input {
             height: 4.8rem;
-            width: 46rem;
+            width: 28.8rem;
             border-radius: 4.1rem;
             background-image: url('../assets/icons/icon-search.svg');
             background-repeat: no-repeat;
@@ -137,7 +100,6 @@
             font-size: 1.6rem;
             line-height: 2.2rem;
             padding: 1.3rem 14rem 1.3rem 4.8rem;   
-            margin: 0 2.4rem 0 0;
  
             @include breakpoint(768px) {
                 height: 4.8rem;
@@ -194,13 +156,13 @@
             right: 0.8rem;
             bottom: 0.7rem;
             height: 3.2rem;
-            width: 13rem;
+            width: 12rem;
             border-top-right-radius: 4.1rem;
             border-bottom-right-radius: 4.1rem;
             appearance: none;
             background-image: url(../assets/icons/chevron-down.svg);
             background-repeat: no-repeat;
-            background-position: 10.5rem center;
+            background-position: 9.5rem center;
             background-color: #FFFFFF;
             outline: none;
             border: none;
@@ -209,7 +171,6 @@
             font-size: 1.6rem;
             line-height: 2.2rem;
             padding: 0 1.6rem;   
-            margin: 0 2.4rem 0 0;       
 
             @include breakpoint(768px) {
                 cursor: pointer;
@@ -262,17 +223,15 @@
 
         &-option {
             height: 4.8rem;
-            width: 20rem;
+            width: 12rem;
             border-radius: 4.1rem;
             background-color: #FFFFFF;
             box-shadow: 0 0.6rem 0.6rem 0 #90909040;
             outline: none;
             border: none;
             color: #444444;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             line-height: 2.2rem;
-            padding: 1.3rem 4.8rem;   
-            margin: 0 2.4rem 0 0;
  
             @include breakpoint(768px) {
                 height: 4.8rem;
@@ -307,16 +266,16 @@
     }
 
     &__list {
-        width: 108rem;
-        padding: 8rem 0 4.8rem;
+        width: 100%;
+        padding: 8rem 1.6rem 4rem;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         list-style-type: none;
 
         @include breakpoint(768px) {
-            width: 108rem;
-            padding: 8rem 0 4.8rem;
+            width: 100%;
+            padding: 8rem 2.4rem 4rem;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -325,19 +284,19 @@
     
         @include breakpoint(1128px) {
             width: 108rem;
-        padding: 8rem 0 4.8rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        list-style-type: none;
+            padding: 8rem 0 4.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style-type: none;
         }
           }
 
     .meal {
         cursor: pointer;
         position: relative;
-        height: 25.2rem;
-        width: 25.2rem;
+        height: 28.8rem;
+        width: 28.8rem;
         margin: 0 2.4rem 2.4rem 0;
         border-radius: 1.5rem;
         box-shadow: 0 0.5rem 1.5rem 0 #23083d17;
