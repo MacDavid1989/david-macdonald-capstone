@@ -185,7 +185,7 @@ class GroceryList extends Component {
                             <span className="item__name" style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
                                 {`${grocery.food.toLowerCase()}`}
                             </span>
-                            <span className="item__weight--alt">
+                            <span className={this.state.remove?"item__weight--alt":"item__weight"}>
                                 {`${weightConversion(grocery.weight)}`}
                             </span>
                             <img className="item__remove" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
