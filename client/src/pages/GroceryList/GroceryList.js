@@ -162,40 +162,44 @@ class GroceryList extends Component {
                         <img className="grocery__arrow" onClick={this.handleNext} src={rightArrow} alt="right arrow"/>
                     </div>
                 </div>
-                <form style={{ display: this.state.remove ? "flex" : "none" }} onSubmit={this.handleAddGrocery}>
-                    <input required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item name"/>
-                    <input required type="number" name="itemWeight" placeholder="Add item weight"/>
-                    <button type="submit">Add</button>
-                </form>
-                <h2>
-                    Your Items
-                </h2>
-                <ul>
-                {this.state.groceries&&this.state.groceries.map(grocery =>
-                grocery.category==="user item"&&grocery.week===this.state.week&&
-                    <li key={grocery.id} className="groceryList" style={{ display: "flex"}}>
-                        <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
-                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                            {`${weightConversion(grocery.weight)} of ${grocery.food.toLowerCase()}`}
-                        </span>
-                        <img className="groceryList-select" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
-                    </li>
+                <div className="grocery__user">
+                    <h2 className="grocery__user-title">
+                        Your Items
+                    </h2 >
+                    <form className="grocery__user-form" style={{ display: this.state.remove ? "flex" : "none" }} onSubmit={this.handleAddGrocery}>
+                        <input className="grocery__user-item" required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item name"/>
+                        <input className="grocery__user-weight" required type="number" name="itemWeight" placeholder="Add item weight"/>
+                        <button className="grocery__user-button" type="submit">Add</button>
+                    </form>
+                    <ul className="grocery__list">
+                    {this.state.groceries&&this.state.groceries.map(grocery =>
+                        grocery.category==="user item"&&grocery.week===this.state.week&&
+                        <li key={grocery.id} className="item" style={{ display: "flex"}}>
+                            <img className="item__select" onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
+                            <span className="item__name" style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
+                                {`${grocery.food.toLowerCase()} ${weightConversion(grocery.weight)}`}
+                            </span>
+                            <img className="item__remove" style={{ display: this.state.remove ? "flex" : "none" }} onClick={()=>this.handleRemoveGrocery(grocery.id)} src={remove} alt="minus symbol"/>
+                        </li>
                     )}
-                </ul>
-                <h2>
-                    Recipe Items
-                </h2>
-                <ul>
-                {this.state.groceries&&this.state.groceries.map(grocery =>
-                grocery.category!=="user item"&&grocery.week===this.state.week&&
-                    <li key={grocery.id} className="groceryList" style={{ display: "flex"}}>
-                        <img onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
-                        <span style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
-                            {`${weightConversion(grocery.weight)} of ${grocery.food.toLowerCase()}`}
-                        </span>
-                    </li>
-                    )}
-                </ul>
+                    </ul>
+                </div>
+                <div className="grocery__recipe">
+                    <h2 className="grocery__recipe-title">
+                        Recipe Items
+                    </h2>
+                    <ul className="grocery__list">
+                    {this.state.groceries&&this.state.groceries.map(grocery =>
+                        grocery.category!=="user item"&&grocery.week===this.state.week&&
+                        <li key={grocery.id} className="item" style={{ display: "flex"}}>
+                            <img className="item__select" onClick={()=>this.crossOffItem(grocery.id)} src={grocery.isCompleted?checked:unchecked} alt="unchecked box"/>
+                            <span className="item__name" style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
+                                {`${grocery.food.toLowerCase()} ${weightConversion(grocery.weight)}`}
+                            </span>
+                        </li>
+                        )}
+                    </ul>
+                </div>
             </div>
         );
     }
