@@ -91,7 +91,7 @@
 
     &__week {
         font-size: 1.6rem;
-        line-height: 2.2rem;
+        line-height: 2.4rem;
         font-weight: 600;
         color: #444444;
     }
@@ -117,8 +117,8 @@
             color: #444444;
    
             @include breakpoint(768px) {
-            margin: 0 0 1.6rem;
-            width: 72rem;
+                margin: 0 0 1.6rem;
+                width: 72rem;
             }
         }
 
@@ -135,9 +135,9 @@
             background-color: #FFFFFF;
 
             @include breakpoint(768px) {
-            margin: 0 0 2.4rem;
-            width: 72rem;
+                margin: 0 0 2.4rem;
                 padding: 1.6rem 2.4rem;
+                width: 72rem;
             }
         }
 
@@ -148,8 +148,8 @@
             align-items: center;
             margin: 0 1.6rem 0 0;
             outline: none;
-            box-shadow: 0 4px 6px 0 rgba(103,231,228,0.5);
-            border: 2px solid #27DED9;
+            box-shadow: 0 0.4rem 0.6rem 0 rgba(103,231,228,0.5);
+            border: 0.2rem solid #27DED9;
             border-radius: 100%;
             width: 3.6rem;
             height: 3.6rem;
@@ -161,6 +161,7 @@
         }
 
         &-item {
+            margin: 0 1.6rem 0 0;
             outline: none;
             border: none;
             width: calc(100% - 18.4rem);
@@ -169,11 +170,10 @@
             font-size: 1.6rem;
             line-height: 2.4rem;
             color: #444444;
-            margin: 0 1.6rem 0 0;
       
             @include breakpoint(768px) {
-                width: 42.6rem;
                 margin: 0 2.4rem 0 0;
+                width: 42.6rem;
             }
                 
             &::placeholder{
@@ -182,24 +182,23 @@
         }
 
         &-weight {
-            height: 4.8rem;
-            width: 10rem;
-            background-color: #FFFFFF;
+            margin: 0 1.6rem 0 0;
             outline: none;
             border: none;
-            border-left: 1px solid #C1C1C1;
-            color: #444444;
-            font-size: 1.6rem;
-            line-height: 2.2rem;
+            border-left: 0.1rem solid #C1C1C1;
             padding: 0 0 0 1.6rem;   
-            margin: 0 1.6rem 0 0;
-            overflow: hidden;
+            width: 10rem;
+            height: 4.8rem;
+            background-color: #FFFFFF;
             text-align: right; 
+            font-size: 1.6rem;
+            line-height: 2.4rem;
+            color: #444444;
 
             @include breakpoint(768px) {
                 margin: 0 2.4rem 0 0;
-                width: 13rem;
                 padding: 0 0 0 2.4rem;   
+                width: 13rem;
             }
             
             &::placeholder{
@@ -243,10 +242,10 @@
 
     &__list {
         list-style-type: none;
-        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 100%;
     
         @include breakpoint(768px) {
             width: 72rem;
@@ -275,11 +274,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 1.6rem 0 0;
             border: 0.1rem solid #DEE2E6;
+            border-radius: 100%;
             width: 3.6rem;
             height: 3.6rem;
-            border-radius: 100%;
-            margin: 0 1.6rem 0 0;
 
             @include breakpoint(768px) {
                 margin: 0 2.4rem 0 0;
@@ -294,29 +293,21 @@
         }
 
         &__name {
-            color: #222222;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 22px;
             text-transform: capitalize;
-        
-            @include breakpoint(768px) {
-                
-            }
-
-            @include breakpoint(1128px) {
-                
-            }
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 2.4rem;
+            color: #222222;
         }
 
         &__weight {
-            color: #6C757D;
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 22px;
             margin: 0 3.2rem 0 auto;
             min-width: 4.4rem;
             text-align: right;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 2.4rem;
+            color: #6C757D;
 
             @include breakpoint(768px) {
                 margin: 0 3.2rem 0 auto;
@@ -331,8 +322,8 @@
         &__remove {
             cursor: pointer;
             visibility: initial;
-            margin: 0 0 0 1.6rem;
             transform: rotate(45deg);
+            margin: 0 0 0 1.6rem;
         
             @include breakpoint(1280px) {
                 visibility: hidden;
