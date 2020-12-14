@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import '../../scss/Footer.scss';
 import logo from '../../assets/icons/grubbery-white.svg'
 
@@ -9,13 +9,13 @@ function Footer() {
         <>
             <footer className="footer">
                 <div className="footer__container">
-                    <NavLink className="footer__logo" to="/">
+                    <Link className="footer__logo" to="/">
                         <img src={logo} alt="grubbery logo"/>
-                    </NavLink>
+                    </Link>
                     <div className="footer__links">
-                        <NavLink className="footer__links-text" to="/search">Browse Recipes</NavLink>
-                        <NavLink className="footer__links-text--alt" to="/my meals">Menu</NavLink>
-                        <NavLink className="footer__links-text" to="/grocery list">Grocery List</NavLink>
+                        <Link className="footer__links-text" to="/search">Browse Recipes</Link>
+                        <Link className="footer__links-text" to="/my meals">Menu</Link>
+                        <Link className="footer__links-text" to="/grocery list">Grocery List</Link>
                     </div>
                 </div>
             </footer>
