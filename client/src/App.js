@@ -12,15 +12,15 @@ function App() {
 
     return (
         <Router>
-        <Nav/>
-        <Spacer/>
-        {/* <Switch> */}
-            {/* <Route path="/" exact component={Home}/> */}
-            {/* <Route path="/search" component={Search}/> */}
-            {/* <Route path="/my meals" component={MyMeals}/> */}
-            {/* <Route path="/grocery list" component={GroceryList}/> */}
-        {/* </Switch> */}
-        <Footer/>
+            <Nav/>
+            <Spacer/>
+            <Switch>
+                <Route path="/" exact component={Home}/>
+                {/* <Route path="/search" component={Search}/> */}
+                {/* <Route path="/my meals" component={MyMeals}/> */}
+                {/* <Route path="/grocery list" component={GroceryList}/> */}
+            </Switch>
+            <Footer/>
         </Router>
     );
 }
