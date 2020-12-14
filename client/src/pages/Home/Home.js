@@ -37,7 +37,7 @@ function Home() {
                         <img className="home__link-icon" src={arrow} alt="arrow right"/>
                     </Link>
                 </div>
-                <div className="home__card">
+                <div className="home__card--alt">
                     <h1 className="home__card-title">Plan your meals for the week in just minutes</h1>
                     <img className="home__card-image--alt" alt="meal plan snapshot"/>
                     <Link className="home__link" to="/search">
