@@ -14,7 +14,7 @@ function Nav() {
                     </NavLink>
                     <div className="nav__links">
                         <NavLink className="nav__links-text" to="/search">Browse Recipes</NavLink>
-                        <NavLink className="nav__links-text--alt" to="/my meals">Menu</NavLink>
+                        <NavLink className="nav__links-text" to="/my meals">Menu</NavLink>
                         <NavLink className="nav__links-text" to="/grocery list">Grocery List</NavLink>
                     </div>
                 </div>

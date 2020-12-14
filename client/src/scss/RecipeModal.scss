@@ -1,3 +1,6 @@
+@use '../partials/variables' as *;
+@use '../partials/mixins' as *;
+
 .recipe {
     justify-content: center;
     position: fixed;
