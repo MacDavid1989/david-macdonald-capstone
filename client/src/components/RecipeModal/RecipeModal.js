@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../scss/RecipeModal.scss';
-import close from '../../assets/icons/reply.svg'
+import close from '../../assets/icons/long-arrow-left.svg'
 
 class RecipeModal extends Component {
     state = {
@@ -23,7 +23,7 @@ class RecipeModal extends Component {
 
     render() {
         return (
-            <div className="recipe" style={{ display: this.state.display ? "initial" : "none" }}>
+            <div className="recipe" style={{ display: this.state.display ? "flex" : "none" }}>
                 <div className="recipe__frame">
                     <img className="recipe__close" src={close} alt="x symbol" onClick={this.closeIframe} />
                     <iframe className="recipe__source" title="selected meal recipe website" src={this.props.src}></iframe>

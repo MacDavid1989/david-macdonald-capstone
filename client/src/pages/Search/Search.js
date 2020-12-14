@@ -169,7 +169,7 @@ class Search extends Component {
             selectedMealId: id
         })
     }
-
+    
     resetDisplay = () => {
         this.setState({
             display: false,
@@ -177,9 +177,18 @@ class Search extends Component {
             selectedMealId: ''
         })
     }
-
+    
     render() {
         return (
+            <>
+            <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
+            <AddToModal 
+                display={this.state.display} 
+                meal={this.state.selectedMeal}
+                id={this.state.selectedMealId}
+                addToDate={this.handleAdd} 
+                resetDisplay={this.resetDisplay}
+            />
             <div className="search">
                 <div className="search__banner">
                     <h1 className="search__banner-title">Browse Grub</h1>
@@ -223,15 +232,8 @@ class Search extends Component {
                         <img className="search__button-arrow__icon" src={rightArrow} alt="right arrow"/>
                     </span>
                 </div>
-                    <RecipeModal resetSrc={this.resetSrc} src={this.state.src}/>
-                    <AddToModal 
-                        display={this.state.display} 
-                        meal={this.state.selectedMeal}
-                        id={this.state.selectedMealId}
-                        addToDate={this.handleAdd} 
-                        resetDisplay={this.resetDisplay}
-                    />
             </div>
+            </>
         );
     }
 }
