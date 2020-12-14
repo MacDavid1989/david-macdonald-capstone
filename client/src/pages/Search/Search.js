@@ -202,7 +202,7 @@ class Search extends Component {
                     <h1 className="search__banner-title">Browse Grub</h1>
                     <h2 className="search__banner-subtitle">Search over 1.5 million delicious recipes</h2>
                     <form className="search__form">
-                        <input className="search__form-input" type='text' name='searchIngredient' placeholder="Search Recipes..." value={this.state.query} onChange={this.changeSearchIngredient}/>
+                        <input className="search__form-input" type='text' name='searchIngredient' placeholder="Search Recipes" value={this.state.query} onChange={this.changeSearchIngredient}/>
                         <select className="search__form-select" name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
                             <option className="search__form-option" value="breakfast">Breakfast</option>
                             <option className="search__form-option" value="lunch">Lunch</option>
