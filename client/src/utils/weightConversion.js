@@ -2,8 +2,8 @@ export const weightConversion = (weight) => {
     const roundedWeight = Math.ceil(weight);
 
     if ((roundedWeight / 1000) >= 1){
-        return (roundedWeight / 1000) + ' kilograms'
+        return (roundedWeight / 1000) + ' kg'
     } else {
-        return roundedWeight + ' grams'
+        return roundedWeight + ' g'
     }
 }
