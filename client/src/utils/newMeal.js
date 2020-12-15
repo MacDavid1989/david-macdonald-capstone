@@ -1,3 +1,4 @@
+// returns a meal object with a week and date value that contains an array of ingredients with unique ids
 export function newMeal(meal, ingredients, week, id, date) {
     const newMealObject = {
         id: id,

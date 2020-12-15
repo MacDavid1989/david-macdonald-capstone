@@ -22,7 +22,9 @@ class Grocery extends Component {
         remove: true,
 
     }
-
+    
+    // makes the GET request to the grocery route with the current week to fetch the items that match the week id
+    // the response is then sorted based on if they are completed or not upon rendering.
     getGroceries = () => {
         axios.get(`http://localhost:8080/groceries/${this.state.week}`)
         .then(res => {
@@ -36,8 +38,6 @@ class Grocery extends Component {
     }
 
     componentDidMount() {
-        // makes the GET request to the grocery route with the current week to fetch the items that match the week id
-        // the response is then sorted based on if they are completed or not upon rendering.
        this.getGroceries()
     }
 

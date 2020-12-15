@@ -104,7 +104,7 @@
             bottom: 0.7rem;
             outline: none;
             border: none;
-            border-left: 1px solid #C1C1C1;
+            border-left: 0.1rem solid #C1C1C1;
             border-top-right-radius: 4.1rem;
             border-bottom-right-radius: 4.1rem;
             padding: 0 1.6rem;   
@@ -257,9 +257,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 6px 0 #67e7e480;
+            box-shadow: 0 0.4rem 0.6rem 0 #67e7e480;
             margin: 0 0 0 auto;
-            border: 2px solid #27DED9;
+            border: 0.4rem solid #27DED9;
             border-radius: 100%;
             width: 4rem;
             height: 4rem;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../scss/Home.scss';
 import arrow from '../../assets/icons/long-arrow-right-white.svg';
+import '../../scss/Home.scss';
 
 // Home page component
 function Home() {

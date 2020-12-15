@@ -1,11 +1,10 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import './scss/App.scss';
-import Nav from './components/Nav'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Nav from './components/Nav';
 import Spacer from './components/Spacer';
-import Home from './pages/Home'
-import Browse from './pages/Browse'
-import Menu from './pages/Menu'
-import Grocery from './pages/Grocery'
+import Home from './pages/Home';
+import Browse from './pages/Browse';
+import Menu from './pages/Menu';
+import Grocery from './pages/Grocery';
 import Footer from './components/Footer';
 
 function App() {

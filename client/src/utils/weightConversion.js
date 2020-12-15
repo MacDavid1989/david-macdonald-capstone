@@ -1,3 +1,4 @@
+// converts weight to grams or kilograms and returns a string
 export const weightConversion = (weight) => {
     const roundedWeight = Math.ceil(weight);
 
