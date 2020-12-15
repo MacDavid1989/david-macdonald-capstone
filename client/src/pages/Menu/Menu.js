@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getWeek } from 'date-fns'
 import axios from 'axios';
 import RecipeModal from '../../components/RecipeModal'
-import '../../scss/MyMeals.scss';
+import '../../scss/Menu.scss';
 import leftArrow from '../../assets/icons/short-arrow-left.svg'
 import rightArrow from '../../assets/icons/short-arrow-right.svg'
 import longRightArrow from '../../assets/icons/long-arrow-right.svg'
@@ -114,7 +114,7 @@ class MyMeals extends Component {
             <div className="menu">
                 <div className="menu__banner">
                     <h1 className="menu__banner-title">Menu</h1>
-                    <h2 className="menu__banner-subtitle">Your weekly meal planner</h2>
+                    <h2 className="menu__banner-subtitle">Your weekly meal plan</h2>
                     <div className="menu__container">
                         <img className="menu__arrow" onClick={this.handlePrevious} src={leftArrow} alt="left arrow"/>
                         <span className="menu__week">

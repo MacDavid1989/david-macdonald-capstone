@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { getWeek } from 'date-fns'
 import { weightConversion } from '../../utils/weightConversion'
-import '../../scss/GroceryList.scss';
+import '../../scss/Grocery.scss';
 import leftArrow from '../../assets/icons/short-arrow-left.svg'
 import rightArrow from '../../assets/icons/short-arrow-right.svg'
 import plus from '../../assets/icons/plus-green.svg'
