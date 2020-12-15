@@ -11,7 +11,7 @@ getAllGroceries = (req, res) => {
     const userItems = groceryModel.getUserItems()
     // filters the items that match the req.params.id and passes them through the sort function
     const groceryUser = groceryModel.groceryList(userItems.filter(items => items.week === parseInt(req.params.id)))
-    
+    console.log(groceryUser.foodId)
     // responds with the spread values of the two sorted arrays above
     res.status(200).json([...groceryRecipe, ...groceryUser])
 }
