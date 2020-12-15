@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getWeek } from 'date-fns';
-import '../../scss/AddToModal.scss';
+// imported component
 import ToastModal from '../ToastModal'
+// imported functions
+import { days as daysOfTheWeek } from '../../utils/daysOfTheWeek'
+// imported icons
 import leftArrow from '../../assets/icons/short-arrow-left.svg'
 import rightArrow from '../../assets/icons/short-arrow-right.svg'
 import plus from '../../assets/icons/plus-green.svg'
 import remove from '../../assets/icons/remove-plus.svg'
+// styling
+import '../../scss/AddToModal.scss';
 
-class RecipeModal extends Component {
+// AddToModal component
+class AddToModal extends Component {
+    // state keys: display determines if the modal is rendered, week to id are values for creating the meal object
+    // previous determines if the previous arrow is shown, toast determines if the ToastModal is rendered, day is
+    // the value sent to the ToastModal for the message
     state = {
         display: false,
         week: getWeek(new Date()),
@@ -18,6 +27,7 @@ class RecipeModal extends Component {
         day: ''
     }
 
+    // onClick handler to close modal by calling the resetDisplay function and setting display state
     closeAddTo = () => {
         this.props.resetDisplay();
         this.setState({
@@ -26,6 +36,7 @@ class RecipeModal extends Component {
     };
 
     componentDidUpdate(_prevP, prevS) {
+        // when the sate is updated after mount sets the display to true to keep modal rendered and passes props value to state values
         (prevS.display === false) && this.props.display &&
         this.setState({
             display: true,
@@ -33,33 +44,39 @@ class RecipeModal extends Component {
             id: this.props.id
         });
 
+        // as the weeks update keeps the modal displayed
         prevS.week !== this.state.week &&
         this.setState({
             display: true,
         });
 
+        // if moving to a week less than the current week then removes the ability to delete meals
         prevS.week===(getWeek(new Date())+1)&&this.state.week===(getWeek(new Date()))&&
         this.setState({
             previous: false
         })
 
+        // if moving from a week less than the current week then gives the ability to delete meals
         prevS.week===getWeek(new Date())&&this.state.week===(getWeek(new Date())+1)&&
         this.setState({
             previous: true
         })
         
+        // if moving from the first week of the year to the last week then removes the delete meals button
         prevS.week===1&&this.state.week===getWeek(new Date())&&
         this.setState({
             previous: false
         })
 
+        // if moving from the last week of the year to the new year then shows the delete meals if the current week is the 1st week
         prevS.week===getWeek(new Date())&&this.state.week===1&&
         this.setState({
             previous: true
         })
-
     }
 
+    // onClick handler for the previous week arrow which decrements by 1 or sets it to 52
+    // if its the previous year 
     handlePrevious = () => {
         if(this.state.week===1){
             this.setState({
@@ -74,6 +91,8 @@ class RecipeModal extends Component {
         }
     }
 
+    // onClick handler for the next week arrow which increments the week by one or
+    // sets it to 1 if it's the new year
     handleNext = () => {
         if(this.state.week===52){
             this.setState({
@@ -88,6 +107,7 @@ class RecipeModal extends Component {
         }
     }
 
+    // function to reset the ToastModal on close
     resetToast = () => {
         this.setState({
             toast: false
@@ -97,66 +117,59 @@ class RecipeModal extends Component {
     render() {
         return (
             <>
-            <div className="addTo" style={{ display: this.state.display ? "flex" : "none" }}>
-                <div className="addTo__frame">
-                    <img onClick={this.closeAddTo} className="addTo__remove" src={remove} alt="x"/>
-                    <h3 className="addTo__title">Add to Menu</h3>
-                    <span className="addTo__subtitle">Select the week and day you would like to add the meal</span>
-                    <div className="addTo__container">
-                        <img style={{ visibility: this.state.previous ? "initial" : "hidden" }} className="addTo__arrow" onClick={this.handlePrevious} src={leftArrow} alt="left arrow"/>
-                        <span className="addTo__week">
-                            {this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}
+                <div className="addTo" style={{ display: this.state.display ? "flex" : "none" }}>
+                    <div className="addTo__frame">
+                        <img onClick={this.closeAddTo} className="addTo__remove" src={remove} alt="x"/>
+                        <h3 className="addTo__title">
+                            Add to Menu
+                        </h3>
+                        <span className="addTo__subtitle">
+                            Select the week and day you would like to add the meal
                         </span>
-                        <img className="addTo__arrow" onClick={this.handleNext} src={rightArrow} alt="right arrow"/>
-                    </div>
-                    <div className="addTo__date">
-                        <span className="addTo__date-title">Sunday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Sunday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Sunday'}); this.closeAddTo()}} className="addTo__select">
-                            <img className="addTo__select-icon" src={plus} alt="plus sign"/>
-                        </span>
-                    </div>
-                    <div className="addTo__date">
-                        <span className="addTo__date-title">Monday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Monday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Monday'}); this.closeAddTo()}} className="addTo__select">
-                            <img className="addTo__select-icon" src={plus} alt="plus sign"/>
-                        </span>
-                    </div>
-                    <div className="addTo__date">
-                        <span className="addTo__date-title">Tuesday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Tuesday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Tuesday'}); this.closeAddTo()}} className="addTo__select">
-                            <img className="addTo__select-icon" src={plus} alt="plus sign"/>
-                        </span>
-                    </div>
-                    <div className="addTo__date">
-                        <span className="addTo__date-title">Wednesday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Wednesday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Wednesday'}); this.closeAddTo()}} className="addTo__select">
-                            <img className="addTo__select-icon" src={plus} alt="plus sign"/>
-                        </span>
-                    </div>
-                    <div className="addTo__date">
-                        <span className="addTo__date-title">Thursday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Thursday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Thursday'}); this.closeAddTo()}} className="addTo__select">
-                            <img className="addTo__select-icon" src={plus} alt="plus sign"/>
-                        </span>
-                    </div>
-                    <div className="addTo__date">
-                        <span className="addTo__date-title">Friday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Friday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Friday'}); this.closeAddTo()}} className="addTo__select">
-                            <img className="addTo__select-icon" src={plus} alt="plus sign"/>
-                        </span>
-                    </div>
-                    <div className="addTo__date">
-                        <span className="addTo__date-title">Saturday</span>
-                        <span onClick={()=> {this.props.addToDate(this.state.meal, this.state.id, 'Saturday', this.state.week); this.props.resetDisplay(); this.setState({toast: true, day: 'Saturday'}); this.closeAddTo()}} className="addTo__select">
-                            <img className="addTo__select-icon" src={plus} alt="plus sign"/>
-                        </span>
+                        {/* Week selector */}
+                        <div className="addTo__container">
+                            <img 
+                                style={{ visibility: this.state.previous ? "initial" : "hidden" }} 
+                                className="addTo__arrow" 
+                                onClick={this.handlePrevious} 
+                                src={leftArrow} 
+                                alt="left arrow"
+                            />
+                            <span className="addTo__week">
+                                {this.state.week===getWeek(new Date())?`Current Week`:`Week ${this.state.week}`}
+                            </span>
+                            <img className="addTo__arrow" onClick={this.handleNext} src={rightArrow} alt="right arrow"/>
+                        </div>
+                        {/* Days of the week to add meals mapped from the days array */}
+                    {daysOfTheWeek.map( (day, i) =>
+                        <Fragment key={i}>
+                            <div className="addTo__date">
+                                <span className="addTo__date-title">{day}</span>
+                                <span 
+                                    onClick={()=> {
+                                        this.props.addToDate(this.state.meal, this.state.id, day, this.state.week); 
+                                        this.props.resetDisplay(); 
+                                        this.setState({toast: true, day: day}); 
+                                        this.closeAddTo()
+                                    }} 
+                                    className="addTo__select"
+                                >
+                                    <img className="addTo__select-icon" src={plus} alt="plus sign"/>
+                                </span>
+                            </div>
+                        </Fragment> 
+                    )}
                     </div>
                 </div>
-            </div>
-            <ToastModal toast={this.state.toast} resetToast={this.resetToast} day={this.state.day} week={this.state.week}/>
+                <ToastModal 
+                    toast={this.state.toast} 
+                    resetToast={this.resetToast} 
+                    day={this.state.day} 
+                    week={this.state.week}
+                    />
             </>
         );
     }
 }
 
-export default RecipeModal;
+export default AddToModal;
