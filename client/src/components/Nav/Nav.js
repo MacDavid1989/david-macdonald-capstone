@@ -13,9 +13,9 @@ function Nav() {
                         <img src={logo} alt="grubbery logo"/>
                     </NavLink>
                     <div className="nav__links">
-                        <NavLink className="nav__links-text" to="/search">Browse Recipes</NavLink>
-                        <NavLink className="nav__links-text" to="/my meals">Menu</NavLink>
-                        <NavLink className="nav__links-text" to="/grocery list">Grocery List</NavLink>
+                        <NavLink className="nav__links-text" to="/browse">Browse Recipes</NavLink>
+                        <NavLink className="nav__links-text" to="/menu">Menu</NavLink>
+                        <NavLink className="nav__links-text" to="/grocery">Grocery List</NavLink>
                     </div>
                 </div>
             </nav>

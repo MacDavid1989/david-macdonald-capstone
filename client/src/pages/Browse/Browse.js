@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../scss/Search.scss';
+import '../../scss/Browse.scss';
 import axios from 'axios';
 import select from '../../assets/icons/add.svg'
 import { v4 as uuidv4 } from 'uuid';

@@ -141,7 +141,7 @@ class MyMeals extends Component {
                         </span>
                     </li>
                 )}
-                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/browse">
                         <span className="menu__link-add">
                             <img className="menu__link-icon" src={plus} alt="plus sign"/>
                         </span>
@@ -166,7 +166,7 @@ class MyMeals extends Component {
                         </span>
                     </li>
                 )}
-                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/browse">
                         <span className="menu__link-add">
                             <img className="menu__link-icon" src={plus} alt="plus sign"/>
                         </span>
@@ -191,7 +191,7 @@ class MyMeals extends Component {
                         </span>
                     </li>
                 )}
-                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/browse">
                         <span className="menu__link-add">
                             <img className="menu__link-icon" src={plus} alt="plus sign"/>
                         </span>
@@ -216,7 +216,7 @@ class MyMeals extends Component {
                         </span>
                     </li>
                 )}
-                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/browse">
                         <span className="menu__link-add">
                             <img className="menu__link-icon" src={plus} alt="plus sign"/>
                         </span>
@@ -241,7 +241,7 @@ class MyMeals extends Component {
                         </span>
                     </li>
                 )}
-                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/browse">
                         <span className="menu__link-add">
                             <img className="menu__link-icon" src={plus} alt="plus sign"/>
                         </span>
@@ -266,7 +266,7 @@ class MyMeals extends Component {
                         </span>
                     </li>
                 )}
-                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/browse">
                         <span className="menu__link-add">
                             <img className="menu__link-icon" src={plus} alt="plus sign"/>
                         </span>
@@ -291,7 +291,7 @@ class MyMeals extends Component {
                         </span>
                     </li>
                 )}
-                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/search">
+                    <Link className="menu__link" style={{ display: this.state.remove ? "flex" : "none" }} to="/browse">
                         <span className="menu__link-add">
                             <img className="menu__link-icon" src={plus} alt="plus sign"/>
                         </span>

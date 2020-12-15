@@ -32,7 +32,7 @@ function Home() {
                                 <h3 className="summary__topic-title">Shop</h3>
                             </div>
                     </div>
-                    <Link className="home__link" to="/search">
+                    <Link className="home__link" to="/browse">
                         <span className="home__link-text">Start Planning</span>
                         <img className="home__link-icon" src={arrow} alt="arrow right"/>
                     </Link>
@@ -40,7 +40,7 @@ function Home() {
                 <div className="home__card--alt">
                     <h1 className="home__card-title">Plan your meals for the week in just minutes</h1>
                     <img className="home__card-image--alt" alt="meal plan snapshot"/>
-                    <Link className="home__link" to="/search">
+                    <Link className="home__link" to="/browse">
                         <span className="home__link-text">Browse Recipes</span>
                         <img className="home__link-icon" src={arrow} alt="arrow right"/>
                     </Link>
@@ -48,7 +48,7 @@ function Home() {
                 <div className="home__card">
                     <h1 className="home__card-title">What are you waiting for? Save time & eat well!</h1>
                     <img className="home__card-image" alt="grocery list snapshot"/>
-                    <Link className="home__link" to="/search">
+                    <Link className="home__link" to="/browse">
                         <span className="home__link-text">Start Cooking</span>
                         <img className="home__link-icon" src={arrow} alt="arrow right"/>
                     </Link>

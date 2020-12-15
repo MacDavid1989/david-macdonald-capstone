@@ -13,9 +13,9 @@ function Footer() {
                         <img src={logo} alt="grubbery logo"/>
                     </Link>
                     <div className="footer__links">
-                        <Link className="footer__links-text" to="/search">Browse Recipes</Link>
-                        <Link className="footer__links-text" to="/my meals">Menu</Link>
-                        <Link className="footer__links-text" to="/grocery list">Grocery List</Link>
+                        <Link className="footer__links-text" to="/browse">Browse Recipes</Link>
+                        <Link className="footer__links-text" to="/menu">Menu</Link>
+                        <Link className="footer__links-text" to="/grocery">Grocery List</Link>
                     </div>
                     <div id="edamam-badge" data-color="white"></div>
                 </div>
