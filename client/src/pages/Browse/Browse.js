@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+// imported functions
 import { mealType as randomMealType } from '../../utils/randomMealType';
 import { randomLetter as randomQuery } from '../../utils/randomLetter';
 import { newIngredient as getIngredient } from '../../utils/newIngredient'
 import { newMeal as getMeal } from '../../utils/newMeal'
+// imported components
 import RecipeModal from '../../components/RecipeModal'
 import AddToModal from '../../components/AddToModal'
+// imported icons
 import plus from '../../assets/icons/plus-green.svg'
 import leftArrow from '../../assets/icons/long-arrow-left.svg'
 import rightArrow from '../../assets/icons/long-arrow-right.svg'
+// styling
 import '../../scss/Browse.scss';
 
 // Browse Recipes component
@@ -29,7 +33,6 @@ class Browse extends Component {
         selectedMeal: '',
         selectedMealId: ''
     }
-
 
     componentDidMount() {
         // Upon mounting, checks if there is data stored in session storage and sets state to those values
