@@ -11,6 +11,7 @@ import plus from '../../assets/icons/plus-green.svg'
 import leftArrow from '../../assets/icons/long-arrow-left.svg'
 import rightArrow from '../../assets/icons/long-arrow-right.svg'
 import { newIngredient as getIngredient } from '../../utils/newIngredient'
+import { newMeal as getMeal } from '../../utils/newMeal'
 
 // Browse Recipes component
 class Browse extends Component {
@@ -145,21 +146,18 @@ class Browse extends Component {
         }, this.getAPIMeals)
     }
 
-
+    // onClick handler for adding a meal to the server, calls getIngredients to create an ingredients object
+    // with a new unique id, week value, and mealId. Only if an ingredients object is created will the POST
+    // request be made to the server with a meal object returned from the getMeal function. Upon successful POST
+    // a POST request is then made to the groceries route to add the ingredients to the list 
     handleAdd = (meal, id, date, week) => {
         const ingredients = meal.ingredients.map(ingredient => {
             return  getIngredient(ingredient,week,id)
         })
-        axios.post(`http://localhost:8080/meals`, {
-            id: id,
-            date: date,
-            week: week,
-            calories: Math.ceil(meal.calories / meal.yield),
-            name: meal.label,
-            image: meal.image,
-            url: meal.url,
-            ingredients: ingredients
-        }).then(()=>{
+        
+        ingredients&&
+        axios.post(`http://localhost:8080/meals`, getMeal(meal, ingredients, week, id, date))
+        .then(()=>{
             axios.post(`http://localhost:8080/groceries`, { plan: true })
             .then()
             .catch()
@@ -167,18 +165,22 @@ class Browse extends Component {
         .catch(console.error)
     }
 
+    // onClick handler to render Recipe Modal by changing the src state value with the url of the recipe
     showIframe = (src) => {
         this.setState({
             src: src
         })
     }
 
+    // onCLick handler resets the src value upon closing the modal so as to remain undisplayed
     resetSrc = () => {
         this.setState({
             src: ''
         })
     }
 
+    // onClick handler passes the meal and id to the AddTo modal and sets display so as to change the display condition
+    // from none to flex
     showAddTo = (meal, id) => {
         this.setState({
             display: true,
@@ -187,6 +189,7 @@ class Browse extends Component {
         })
     }
     
+    // onCLick handler resets the values needed to render and display the AddTo modal
     resetDisplay = () => {
         this.setState({
             display: false,
@@ -195,6 +198,7 @@ class Browse extends Component {
         })
     }
     
+    // Browse recipes component
     render() {
         return (
             <>
@@ -207,6 +211,7 @@ class Browse extends Component {
                     resetDisplay={this.resetDisplay}
                 />
                 <div className="search">
+                    {/* Banner denoted by turquoise background */}
                     <div className="search__banner">
                         <h1 className="search__banner-title">
                             Browse Recipes
@@ -214,6 +219,7 @@ class Browse extends Component {
                         <h2 className="search__banner-subtitle">
                             Search over 1.5 million delicious recipes
                         </h2>
+                        {/*  Search and Select inputs for browsing recipe data */}
                         <form className="search__form">
                             <input 
                                 className="search__form-input" 
@@ -222,7 +228,12 @@ class Browse extends Component {
                                 value={this.state.query} 
                                 onChange={this.changeSearchIngredient}
                             />
-                            <select className="search__form-select" name='mealType' value={this.state.mealType} onChange={this.changeMealType}>
+                            <select 
+                                className="search__form-select" 
+                                name='mealType' 
+                                value={this.state.mealType} 
+                                onChange={this.changeMealType}
+                            >
                                 <option className="search__form-option" value="breakfast">
                                     Breakfast
                                 </option>
@@ -238,10 +249,16 @@ class Browse extends Component {
                             </select>
                         </form>
                     </div>
+                    {/* Recipe cards rendered utilizing map of the data received from the API */}
                     <ul className="search__list">
             {this.state.meals&&this.state.meals.map(meal => {const id = uuidv4(); 
                 return  <li key={id} className="meal">
-                            <img className="meal__image" onClick={()=>this.showIframe(meal.url)} src={meal.image} alt={meal.label}/>
+                            <img 
+                                className="meal__image" 
+                                onClick={()=>this.showIframe(meal.url)} 
+                                src={meal.image} 
+                                alt={meal.label}
+                            />
                             <div className="meal__details">
                                 <span className="meal__name">
                                     {meal.label}
@@ -253,6 +270,7 @@ class Browse extends Component {
                         </li>
             })}
                     </ul>
+                    {/* Page navigation for previous and next cards */}
                     <div className="search__button">
                         <span className="search__button-arrow" onClick={this.handlePrevious}>
                             <img 
