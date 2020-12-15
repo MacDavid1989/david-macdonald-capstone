@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import '../../scss/Footer.scss';
 import logo from '../../assets/icons/grubbery-white.svg'
+import '../../scss/Footer.scss';
 
 function Footer() {
 
@@ -13,9 +13,15 @@ function Footer() {
                         <img src={logo} alt="grubbery logo"/>
                     </Link>
                     <div className="footer__links">
-                        <Link className="footer__links-text" to="/browse">Browse Recipes</Link>
-                        <Link className="footer__links-text" to="/menu">Menu</Link>
-                        <Link className="footer__links-text" to="/grocery">Grocery List</Link>
+                        <Link className="footer__links-text" to="/browse">
+                            Browse Recipes
+                        </Link>
+                        <Link className="footer__links-text" to="/menu">
+                            Menu
+                        </Link>
+                        <Link className="footer__links-text" to="/grocery">
+                            Grocery List
+                        </Link>
                     </div>
                     <div id="edamam-badge" data-color="white"></div>
                 </div>

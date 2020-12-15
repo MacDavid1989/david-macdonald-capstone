@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import '../../scss/RecipeModal.scss';
 import close from '../../assets/icons/long-arrow-left.svg'
+import '../../scss/RecipeModal.scss';
 
+// Recipe modal component
 class RecipeModal extends Component {
     state = {
         display: false,
     }
 
+    // onClick handler to close modal by calling the resetSrc function and setting display state
     closeIframe = () => {
         this.props.resetSrc();
         this.setState({
@@ -15,6 +17,7 @@ class RecipeModal extends Component {
     };
 
     componentDidUpdate(_prevP, prevS) {
+        // when the sate is updated after mount sets the display to true to keep modal rendered and passes props value to state values
         (prevS.display === false) && this.props.src &&
         this.setState({
             display: true,

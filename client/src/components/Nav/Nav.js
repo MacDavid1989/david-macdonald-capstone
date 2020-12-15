@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
-import '../../scss/Nav.scss';
 import logo from '../../assets/icons/grubbery.svg'
+import '../../scss/Nav.scss';
 
 function Nav() {
 
@@ -13,9 +13,15 @@ function Nav() {
                         <img src={logo} alt="grubbery logo"/>
                     </NavLink>
                     <div className="nav__links">
-                        <NavLink className="nav__links-text" to="/browse">Browse Recipes</NavLink>
-                        <NavLink className="nav__links-text" to="/menu">Menu</NavLink>
-                        <NavLink className="nav__links-text" to="/grocery">Grocery List</NavLink>
+                        <NavLink className="nav__links-text" to="/browse">
+                            Browse Recipes
+                        </NavLink>
+                        <NavLink className="nav__links-text" to="/menu">
+                            Menu
+                        </NavLink>
+                        <NavLink className="nav__links-text" to="/grocery">
+                            Grocery List
+                        </NavLink>
                     </div>
                 </div>
             </nav>
