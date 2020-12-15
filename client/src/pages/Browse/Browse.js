@@ -214,7 +214,7 @@ class Browse extends Component {
                 />
                 <div className="search">
                     {/* Banner denoted by turquoise background */}
-                    <div className="search__banner">
+                    <section className="search__banner">
                         <h1 className="search__banner-title">
                             Browse Recipes
                         </h1>
@@ -250,7 +250,7 @@ class Browse extends Component {
                                 </option>
                             </select>
                         </form>
-                    </div>
+                    </section>
                     {/* Recipe cards rendered utilizing map of the data received from the API */}
                     <ul className="search__list">
             {this.state.meals&&this.state.meals.map(meal => {const id = uuidv4(); 
