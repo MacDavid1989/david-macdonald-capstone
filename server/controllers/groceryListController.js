@@ -2,9 +2,11 @@ const groceryModel = require('../model/groceryListModel');
 const { v4: uuidv4 } = require("uuid");
 
 getAllGroceries = (req, res) => {
-    const groceries = groceryModel.getGroceries()
-    const grocery = groceryModel.groceryList(groceries.filter(items => items.week === parseInt(req.params.id)))
-    res.status(200).json(grocery)
+    const ingredients = groceryModel.getIngredients()
+    const groceryRecipe = groceryModel.groceryList(ingredients.filter(items => items.week === parseInt(req.params.id)))
+    const userItems = groceryModel.getUserItems()
+    const groceryUser = groceryModel.groceryList(userItems.filter(items => items.week === parseInt(req.params.id)))
+    res.status(200).json([...groceryRecipe, ...groceryUser])
 }
 
 updateIsCompleted = (req, res) => {
