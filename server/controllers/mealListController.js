@@ -3,6 +3,7 @@ const mealModel= require('../model/mealListModel');
 getAllMeals = (_req, res) => {
     // fetches and responds with the array of all meals
     const meals = mealModel.getMeals()
+    
     res.status(200).json(meals)
 }
 
@@ -26,6 +27,7 @@ deleteMeal = (req, res) => {
     // fetches all meals, filters out the meal matching the req.params.id, and writes the new array to the server 
     const meals = mealModel.getMeals().filter(meal => meal.id!==req.params.id)
     mealModel.writeMeals(meals)
+
     return res.status(200).json({ success: true})
 }
 
