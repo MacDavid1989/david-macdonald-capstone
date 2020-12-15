@@ -22,38 +22,12 @@ updateIsCompleted = (req, res) => {
     const userItems = groceryModel.getUserItems();
     const recipeItems = groceryModel.getIngredients();
 
-    const groceriesUpdate = groceryModel.setIsCompleted(groceries,req.params.id);
-    const userItemsUpdate = groceryModel.setIsCompleted(userItems,req.params.id);
-    const recipeItemsUpdate = groceryModel.setIsCompleted(recipeItems,req.params.id);
+    // updates isCompleted value of item matching req.params.id
+    const groceriesUpdate = groceryModel.setIsCompleted(groceries, req.params.id);
+    const userItemsUpdate = groceryModel.setIsCompleted(userItems, req.params.id);
+    const recipeItemsUpdate = groceryModel.setIsCompleted(recipeItems, req.params.id);
 
-    // groceries.forEach(item => {
-    //     if(item.id===req.params.id){
-    //         if(item.isCompleted===false){
-    //             return item.isCompleted = true;
-    //         } else {
-    //             return item.isCompleted = false;
-    //         }
-    //     }
-    // })
-    // userItems.forEach(item => {
-    //     if(item.id===req.params.id){
-    //         if(item.isCompleted===false){
-    //             return item.isCompleted = true;
-    //         } else {
-    //             return item.isCompleted = false;
-    //         }
-    //     }
-    // })
-    // recipeItems.forEach(item => {
-    //     if(item.id===req.params.id){
-    //         if(item.isCompleted===false){
-    //             return item.isCompleted = true;
-    //         } else {
-    //             return item.isCompleted = false;
-    //         }
-    //     }
-    // })
-
+    // overwrites data files with the update values
     groceryModel.writeGroceries(groceriesUpdate)
     groceryModel.writeUserItems(userItemsUpdate)
     groceryModel.writeIngredients(recipeItemsUpdate)
@@ -62,34 +36,33 @@ updateIsCompleted = (req, res) => {
 }
 
 addGroceryItem = (req, res) => {
+    // checks if the incoming request is from the meal plan page
     if(req.body.plan){
+        // spreads fetched data for user items and recipe ingredients containing the ingredients from the 
+        // newly selected meal into a single array and overwrites the data file
         const groceries = [...groceryModel.getUserItems(), ...groceryModel.getIngredients()]
         groceryModel.writeGroceries(groceries)
+        
         return res.status(201).json({ success: true})
     } else {
-        const newGrocery = {
-            id: uuidv4(),
-            food: req.body.food.toLowerCase(),
-            weight: req.body.weight,
-            week: req.body.week,
-            category: "user item",
-            isCompleted: req.body.isCompleted
-        }
-        const userItems = groceryModel.getUserItems()
-        userItems.unshift(newGrocery)
-        groceryModel.writeUserItems(userItems)
+        // passes req.body into the function to generate and write a new item object to the data file
+        const newGroceryItem = groceryModel.addNewUserItem(req.body)
+        
+        // spreads the fetched user item and recipe ingredients data into an array and overwrites the data file
         const groceries = [...groceryModel.getUserItems(), ...groceryModel.getIngredients()]
         groceryModel.writeGroceries(groceries)
-        return res.status(201).json(newGrocery)
+        
+        return res.status(201).json(newGroceryItem)
     }
 }
 
 deleteGroceryItem = (req, res) => {
+    // fetches user items and writes a filtered array without the items matching req.params.id to the data file
     const userItems = groceryModel.getUserItems()
-    const groceries = groceryModel.getGroceries()
-
     groceryModel.writeUserItems(userItems.filter(item=>item.id!==req.params.id))
     
+    // fetches grocery items and writes a filtered array without the items matching req.params.id to the data file
+    const groceries = groceryModel.getGroceries()
     groceryModel.writeGroceries(groceries.filter(item=>item.id!==req.params.id))
 
     res.status(200).json({ success: true})

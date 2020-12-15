@@ -109,6 +109,25 @@ addNewIngredients = (newIngredients) => {
     writeIngredients(ingredients)
 }
 
+addNewUserItem = (newUserItem) => {
+    // creates new user item object and provides a unique id
+    const item = {
+        id: uuidv4(),
+        food: newUserItem.food.toLowerCase(),
+        weight: newUserItem.weight,
+        week: newUserItem.week,
+        category: "user item",
+        isCompleted: newUserItem.isCompleted
+    }
+
+    // fetches all user items and adds the new item object to the array then overwrites the data file
+    const userItems = getUserItems()
+    userItems.unshift(item)
+    writeUserItems(userItems)
+
+    return item
+}
+
 setIsCompleted = (itemArray, id) => {
     itemArray.forEach(item => {
         if(item.id===id){
@@ -135,5 +154,6 @@ module.exports = {
     writeUserItems,
     addNewMeal,
     addNewIngredients,
+    addNewUserItem,
     setIsCompleted
 }
