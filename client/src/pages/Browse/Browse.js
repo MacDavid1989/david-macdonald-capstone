@@ -10,6 +10,7 @@ import { randomLetter as randomQuery } from '../../utils/randomLetter';
 import plus from '../../assets/icons/plus-green.svg'
 import leftArrow from '../../assets/icons/long-arrow-left.svg'
 import rightArrow from '../../assets/icons/long-arrow-right.svg'
+import { newIngredient as getIngredient } from '../../utils/newIngredient'
 
 // Browse Recipes component
 class Browse extends Component {
@@ -32,7 +33,7 @@ class Browse extends Component {
 
     componentDidMount() {
         // Upon mounting, checks if there is data stored in session storage and sets state to those values
-        // then calls getMeals function after state is changed
+        // then calls getAPIMeals function after state is changed
         if(sessionStorage.getItem('query')&&sessionStorage.getItem('mealType')){
             this.setState({
                 query: sessionStorage.getItem('query'),
@@ -40,10 +41,10 @@ class Browse extends Component {
                 from: parseInt(sessionStorage.getItem('from')),
                 to: parseInt(sessionStorage.getItem('to')),
                 page: parseInt(sessionStorage.getItem('page')),
-            }, this.getMeals)
+            }, this.getAPIMeals)
         } else {
-        // if there is no data in session storage then the getMeals function will be called to fetch random meals
-            this.getMeals()
+        // if there is no data in session storage then the getAPIMeals function will be called to fetch random meals
+            this.getAPIMeals()
         }    
     }
 
@@ -79,13 +80,13 @@ class Browse extends Component {
     }
 
     // makes a GET request to the API in order to fetch meals
-    getMeals = () => {
+    getAPIMeals = () => {
         // variables obtained from the process.env object
         const API_URL = process.env.REACT_APP_API_URL;
         const API_ID = process.env.REACT_APP_API_ID;
         const API_KEY = process.env.REACT_APP_API_KEY;
 
-        // values set based on state or a random value generate from data files to provide queries for the GET request
+        // values set based on state or a random value generate from functions to provide queries for the GET request
         const MEAL = `&mealType=${this.state.mealType || randomMealType()}&from=${this.state.from}&to=${this.state.to}`;
         const QUERY = this.state.query || randomQuery();
 
@@ -108,7 +109,7 @@ class Browse extends Component {
             page: 1,
             previous: false,
             query: e.target.value.toLowerCase()
-        }, this.getMeals)   
+        }, this.getAPIMeals)   
     }
 
     // onChange handler for the select input
@@ -120,7 +121,7 @@ class Browse extends Component {
             page: 1,
             previous: false,
             mealType: e.target.value
-        }, this.getMeals)
+        }, this.getAPIMeals)
     }
 
     // onClick handler for the next page arrow
@@ -130,7 +131,7 @@ class Browse extends Component {
             from: this.state.from + 24,
             to: this.state.to + 24,
             page: this.state.page + 1
-        }, this.getMeals)
+        }, this.getAPIMeals)
     }
 
     // onClick handler for the previous page arrow; does nothing when on page 1 
@@ -141,27 +142,13 @@ class Browse extends Component {
             from: this.state.from - 24,
             to: this.state.to - 24,
             page: this.state.page - 1
-        }, this.getMeals)
+        }, this.getAPIMeals)
     }
 
 
     handleAdd = (meal, id, date, week) => {
         const ingredients = meal.ingredients.map(ingredient => {
-           const newIngredient = {
-                id: uuidv4(),
-                week: week,
-                mealId: id,
-                quantity: ingredient.quantity,
-                measure: ingredient.measure,
-                food: ingredient.food,
-                foodId: ingredient.foodId,
-                weight: ingredient.weight,
-                category: ingredient.foodCategory,
-                image: ingredient.image,
-                isCompleted: false
-            }
-
-            return newIngredient
+            return  getIngredient(ingredient,week,id)
         })
         axios.post(`http://localhost:8080/meals`, {
             id: id,
