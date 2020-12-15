@@ -50,18 +50,6 @@ groceryList = (ingredients) => {
         }
     }
 
-    // ingredients.sort((a, b) => {
-    //     let fa = a.foodId
-    //     let fb = b.foodId
-    //     if (fa < fb) {
-    //         return -1;
-    //     }
-    //     if (fa > fb) {
-    //         return 1;
-    //     }
-    //     return 0;
-    // })
-
     ingredients.sort((a, b) => {
         let fa = !a.category || a.category.toLowerCase()
         let fb = !b.category || b.category.toLowerCase()
@@ -121,6 +109,20 @@ addNewIngredients = (newIngredients) => {
     writeIngredients(ingredients)
 }
 
+setIsCompleted = (itemArray, id) => {
+    itemArray.forEach(item => {
+        if(item.id===id){
+            if(item.isCompleted===false){
+                return item.isCompleted = true;
+            } else {
+                return item.isCompleted = false;
+            }
+        }
+    })
+
+    return itemArray;
+}
+
 module.exports = {
     groceryList,
     getMeals,
@@ -132,5 +134,6 @@ module.exports = {
     writeGroceries,
     writeUserItems,
     addNewMeal,
-    addNewIngredients
+    addNewIngredients,
+    setIsCompleted
 }

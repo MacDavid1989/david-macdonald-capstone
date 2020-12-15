@@ -4,20 +4,20 @@ const cors = require('cors');
 const mealList = require('./routes/mealListRoute')
 const groceryList = require('./routes/groceryListRoute')
 
-// utilize environment variables
+// utilize environment variables via process.env object
 require('dotenv').config();
 const PORT = process.env.PORT || 5000;
 
-// enable cross-origin resource sharing
+// allow cross-origin resource sharing
 app.use(cors())
 
-// middleware that parses json
+// request.body middleware
 app.use(express.json())
 
-// meals route for user meals
+// route for user selected meals
 app.use('/meals', mealList);
 
-// grocery route for user list
+// route for grocery list
 app.use('/groceries', groceryList);
 
 app.listen(PORT, () => {

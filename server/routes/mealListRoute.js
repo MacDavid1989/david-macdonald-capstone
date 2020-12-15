@@ -2,13 +2,13 @@ const express = require('express')
 const router = express.Router();
 const mealListController = require('../controllers/mealListController')
 
-// get route for meals to be rendered on my meals page
+// GET route for list of meals selected by the user
 router.get('/', mealListController.getAllMeals)
 
-// post route for meals to be added for user
+// POST route for adding a meal to the server
 router.post('/', mealListController.postMeal)
 
-// delete route for removing meals from my meals page
+// DELETE route for removing a meal from the server
 router.delete('/:id', mealListController.deleteMeal)
 
 module.exports = router;
