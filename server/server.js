@@ -4,7 +4,6 @@ const cors = require('cors');
 const mealList = require('./routes/mealListRoute')
 const groceryList = require('./routes/groceryListRoute')
 
-
 // utilize environment variables
 require('dotenv').config();
 const PORT = process.env.PORT || 5000;

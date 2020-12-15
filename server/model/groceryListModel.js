@@ -5,7 +5,6 @@ const ingredientsFile = './data/ingredients.json';
 const groceriesFile = './data/groceries.json';
 const userItemsFile = './data/userItems.json';
 
-
 groceryList = (ingredients) => {
     ingredients.sort((a, b) => {
         let fa = a.foodId
@@ -17,7 +16,6 @@ groceryList = (ingredients) => {
             return 1;
         }
         return 0;
-        
     })
 
     for(i=0; i < ingredients.length; i++){
@@ -31,8 +29,8 @@ groceryList = (ingredients) => {
     }
 
     ingredients.sort((a, b) => {
-        let fa = a.category.toLowerCase()
-        let fb = b.category.toLowerCase()
+        let fa = a.food
+        let fb = b.food
         if (fa < fb) {
             return -1;
         }
@@ -40,7 +38,40 @@ groceryList = (ingredients) => {
             return 1;
         }
         return 0;
-        
+    })
+
+    for(i=0; i < ingredients.length; i++){
+        while(ingredients[i+1] !== undefined && 
+            (ingredients[i].food.toLowerCase().replace(/-/g, ' ') === ingredients[i+1].food.toLowerCase().replace(/-/g, ' ') 
+            || (ingredients[i].food.toLowerCase().replace(/-/g, ' ') + 's') === ingredients[i+1].food.toLowerCase().replace(/-/g, ' ') 
+            || ingredients[i].food.toLowerCase().replace(/-/g, ' ') === (ingredients[i+1].food.toLowerCase().replace(/-/g, ' ') + 's'))){
+                ingredients[i].weight = ingredients[i].weight + ingredients[i+1].weight
+                ingredients.splice(i+1, 1)
+        }
+    }
+
+    // ingredients.sort((a, b) => {
+    //     let fa = a.foodId
+    //     let fb = b.foodId
+    //     if (fa < fb) {
+    //         return -1;
+    //     }
+    //     if (fa > fb) {
+    //         return 1;
+    //     }
+    //     return 0;
+    // })
+
+    ingredients.sort((a, b) => {
+        let fa = !a.category || a.category.toLowerCase()
+        let fb = !b.category || b.category.toLowerCase()
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;  
     })
 
     return ingredients
