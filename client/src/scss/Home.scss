@@ -51,18 +51,24 @@
             font-weight: bold;
 
             @include breakpoint(768px) {
-                width: 45rem;
+                width: 50rem;
                 text-align: left;
-                font-size: 4.8rem;
-                line-height: 5.6rem;
-            }  
+                font-size: calc(4.8rem + (0.8 / 36) * (100vw - 76.8rem));
+                line-height: calc(5.6rem + (0.8 / 36) * (100vw - 76.8rem));
+            }
+            
+            @include breakpoint(1128px) {
+                font-size: 5.6rem;
+                line-height: 6.4rem;
+            }
         }
 
         &__image {
             position: absolute;
             right: center;
             bottom: -8rem;
-            border: 0.1rem solid #979797;
+            box-shadow: 0 0.5rem 1.5rem 0 #23083d66;
+            border: none;
             border-radius: 2.5rem;
             width: 18.8rem;
             height: 40rem;
@@ -140,7 +146,8 @@
                 margin: 0 0 2.4rem 0;
                 width: 17.5rem;
                 height: 37.5rem;
-                border: 0.1rem solid #979797;
+                box-shadow: 0 0.5rem 1.5rem 0 #23083d33;
+                border: 0.1rem solid #E9E9E9;
                 border-radius: 2.5rem;
                 background-color: #D8D8D8;
 
@@ -244,7 +251,8 @@
         &-image {
             width: 17.5rem;
             height: 37.5rem;
-            border: 0.1rem solid #979797;
+            box-shadow: 0 0.5rem 1.5rem 0 #23083d33;
+            border: 0.1rem solid #E9E9E9;
             border-radius: 2.5rem;
             background-color: #D8D8D8;
 
@@ -256,6 +264,8 @@
             &--alt {
                 @extend .home__card-image;
                 width: calc(28.8rem + (43.2/44.8) * (100vw - 32rem));
+                object-position: center;
+                object-fit: cover; 
 
                 @include breakpoint(768px) {
                     width: 72rem;  

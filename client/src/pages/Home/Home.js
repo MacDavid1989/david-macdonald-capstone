@@ -1,6 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import arrow from '../../assets/icons/long-arrow-right-white.svg';
+// imported images
+import hero from '../../assets/images/hero.png'
+import browse from '../../assets/images/browse.png'
+import largePlan from '../../assets/images/largePlan.png'
+import plan from '../../assets/images/plan.png'
+import recipe from '../../assets/images/recipe.png'
+import shop from '../../assets/images/shop.png'
+// styling
 import '../../scss/Home.scss';
 
 // Home page component
@@ -15,7 +23,7 @@ function Home() {
                         <h1 className="hero__title">
                             Meet Your Favorite Time Saver
                         </h1>
-                        <img className="hero__image" alt="mobile snapshot of search page"/>
+                        <img className="hero__image" src={hero} alt="mobile snapshot of search page"/>
                     </div>
                 </header>
                 {/* Summary section denoted by 3 mobile screen shot panels */}
@@ -26,21 +34,21 @@ function Home() {
                     <div className="summary__container">
                             {/* Browse page screenshot */}
                             <div className="summary__topic">
-                                <img className="summary__topic-image" alt="browsing through meals"/>
+                                <img className="summary__topic-image" src={browse} alt="browsing through meals"/>
                                 <h3 className="summary__topic-title">
                                     Browse
                                 </h3>
                             </div>
                             {/* Menu page screenshot */}
                             <div className="summary__topic">
-                                <img className="summary__topic-image" alt="planning weekly meals"/>
+                                <img className="summary__topic-image" src={plan} alt="planning weekly meals"/>
                                 <h3 className="summary__topic-title">
                                     Plan
                                 </h3>
                             </div>
                             {/* Grpcery page screenshot */}
                             <div className="summary__topic">
-                                <img className="summary__topic-image" alt="grocery shopping"/>
+                                <img className="summary__topic-image" src={shop} alt="grocery shopping"/>
                                 <h3 className="summary__topic-title">
                                     Shop
                                 </h3>
@@ -58,7 +66,7 @@ function Home() {
                     <h2 className="home__card-title">
                         Plan your meals for the week in just minutes.
                     </h2>
-                    <img className="home__card-image--alt" alt="meal plan snapshot"/>
+                    <img className="home__card-image--alt" src={largePlan} alt="meal plan snapshot"/>
                     <Link className="home__link" to="/browse">
                         <span className="home__link-text">
                             Browse Recipes
@@ -71,7 +79,7 @@ function Home() {
                     <h2 className="home__card-title">
                         What are you waiting for - Save time, eat well.
                     </h2>
-                    <img className="home__card-image" alt="grocery list snapshot"/>
+                    <img className="home__card-image" src={recipe} alt="grocery list snapshot"/>
                     <Link className="home__link" to="/browse">
                         <span className="home__link-text">
                             Start Cooking
