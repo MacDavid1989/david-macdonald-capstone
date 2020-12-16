@@ -15,6 +15,8 @@ import remove from '../../assets/icons/remove-plus.svg'
 // styling
 import '../../scss/Menu.scss';
 
+const SERV_URL = process.env.REACT_APP_LOCAL_HOST;
+
 // Weekly menu component
 class Menu extends Component {
      // state keys: myMeals are the user selected meals from the meals route, display to src are used to render Recipe modal, week by default is the current week,
@@ -29,7 +31,7 @@ class Menu extends Component {
 
     componentDidMount() {
         // upon mounting makes GET request to server for meals and sets state upon successful response
-        axios.get(`http://localhost:8080/meals`)
+        axios.get(`${SERV_URL}/meals`)
         .then(res => {
             this.setState({
                 myMeals: res.data
@@ -66,14 +68,14 @@ class Menu extends Component {
     // onClick handler to make a DELETE request with the id of the selected meal, then on successful response, makes a GET
     // request to render the new meals and update the grocery items to have the removed ingredients removed from the list 
     handleRemove = (id) => {
-        axios.delete(`http://localhost:8080/meals/${id}`)
+        axios.delete(`${SERV_URL}/meals/${id}`)
         .then(()=>{
-            axios.get(`http://localhost:8080/meals`)
+            axios.get(`${SERV_URL}/meals`)
             .then(res => {
                 this.setState({
                     myMeals: res.data
                 });
-                axios.post(`http://localhost:8080/groceries`, { plan: true })
+                axios.post(`${SERV_URL}/groceries`, { plan: true })
                 .then()
                 .catch()
             }).catch()

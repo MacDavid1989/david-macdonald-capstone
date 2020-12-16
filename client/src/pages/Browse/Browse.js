@@ -16,6 +16,8 @@ import rightArrow from '../../assets/icons/long-arrow-right.svg'
 // styling
 import '../../scss/Browse.scss';
 
+const SERV_URL = process.env.REACT_APP_LOCAL_HOST;
+
 // Browse Recipes component
 class Browse extends Component {
     // state keys: query to page are search related, display is for the Recipe Modal state, previous is for rendering the back arrow,
@@ -158,9 +160,9 @@ class Browse extends Component {
         })
         
         ingredients&&
-        axios.post(`http://localhost:8080/meals`, getMeal(meal, ingredients, week, id, date))
+        axios.post(`${SERV_URL}/meals`, getMeal(meal, ingredients, week, id, date))
         .then(()=>{
-            axios.post(`http://localhost:8080/groceries`, { plan: true })
+            axios.post(`${SERV_URL}/groceries`, { plan: true })
             .then()
             .catch()
         })

@@ -12,6 +12,8 @@ import check from '../../assets/icons/check.svg'
 // styling
 import '../../scss/Grocery.scss';
 
+const SERV_URL = process.env.REACT_APP_LOCAL_HOST;
+
 class Grocery extends Component {
     // state key: groceries holds the list of grocery items from the grocery route, week by default holds the current value of the current week
     // display determines whether the form to add an item will be viewable, and remove determines is the delete button is viewable 
@@ -26,7 +28,7 @@ class Grocery extends Component {
     // makes the GET request to the grocery route with the current week to fetch the items that match the week id
     // the response is then sorted based on if they are completed or not upon rendering.
     getGroceries = () => {
-        axios.get(`http://localhost:8080/groceries/${this.state.week}`)
+        axios.get(`${SERV_URL}/groceries/${this.state.week}`)
         .then(res => {
             this.setState({
                 groceries: res.data.sort((x, y) => {
@@ -73,7 +75,7 @@ class Grocery extends Component {
 
     // onClick handler to make a DELETE request based on the id of the item then renders the new grocery list upon successful response
     handleRemoveGrocery = (id) => {
-        axios.delete(`http://localhost:8080/groceries/${id}`)
+        axios.delete(`${SERV_URL}/groceries/${id}`)
         .then(()=>{
             this.getGroceries()
         })
@@ -83,7 +85,7 @@ class Grocery extends Component {
     // onSubmit handler which posts a new user grocery item to the server and upon a successful response makes a new GET request
     handleAddGrocery = (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:8080/groceries`, { 
+        axios.post(`${SERV_URL}/groceries`, { 
             food: e.target.itemName.value,
             weight: parseInt(e.target.itemWeight.value),
             week: this.state.week,
@@ -130,7 +132,7 @@ class Grocery extends Component {
 
     //onClick handler that updates the isCompleted value of the item based on id and makes a new GET request at a successful response
     crossOffItem = (id) => {
-        axios.put(`http://localhost:8080/groceries/${id}`)
+        axios.put(`${SERV_URL}/groceries/${id}`)
         .then(() => {
             this.getGroceries()
         })
