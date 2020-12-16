@@ -1,4 +1,4 @@
-# david-macDonald-capstone
+# Grubbery Web App
 
 Server deployed on Heroku at: https://grubbery-app.herokuapp.com/
 
