@@ -1,4 +1,4 @@
-# Grubbery Web App
+# Grubbery Web App - Sprint 1 Completed
 
 Server deployed on Heroku at: https://grubbery-app.herokuapp.com/
 
