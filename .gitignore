@@ -13,6 +13,7 @@ node_modules
 
 # css
 *.css
+*.css.map
 *.min.css
 *.min.css.map
 
