@@ -16,7 +16,7 @@ import rightArrow from '../../assets/icons/long-arrow-right.svg'
 // styling
 import '../../scss/Browse.scss';
 
-const SERV_URL = process.env.REACT_APP_LOCAL_HOST;
+const SERV_URL = process.env.REACT_APP_LOCAL_HOST || 'http://localhost:5000';
 
 // Browse Recipes component
 class Browse extends Component {

@@ -12,7 +12,7 @@ import check from '../../assets/icons/check.svg'
 // styling
 import '../../scss/Grocery.scss';
 
-const SERV_URL = process.env.REACT_APP_LOCAL_HOST;
+const SERV_URL = process.env.REACT_APP_LOCAL_HOST || 'http://localhost:5000';
 
 class Grocery extends Component {
     // state key: groceries holds the list of grocery items from the grocery route, week by default holds the current value of the current week

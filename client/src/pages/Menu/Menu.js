@@ -15,7 +15,7 @@ import remove from '../../assets/icons/remove-plus.svg'
 // styling
 import '../../scss/Menu.scss';
 
-const SERV_URL = process.env.REACT_APP_LOCAL_HOST;
+const SERV_URL = process.env.REACT_APP_LOCAL_HOST || 'http://localhost:5000';
 
 // Weekly menu component
 class Menu extends Component {
