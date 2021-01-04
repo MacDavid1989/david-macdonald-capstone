@@ -12,6 +12,17 @@ function Nav() {
                     <NavLink className="nav__logo" to="/">
                         <img src={logo} alt="grubbery logo"/>
                     </NavLink>
+                    <div className="nav__burger">
+                        <div>
+
+                        </div>
+                        <div>
+                            
+                        </div>
+                        <div>
+
+                        </div>
+                    </div>
                     <div className="nav__links">
                         <NavLink className="nav__links-text" to="/browse">
                             Browse Recipes
