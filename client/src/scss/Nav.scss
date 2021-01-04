@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 9.5rem;
+    height: 6.5rem;
     background-color: #FFF;
     padding: 0 1.6rem;
 
@@ -40,10 +40,13 @@
     &__logo {
         height: 3.3rem;
         width: 9.4rem;
-        margin: 0 0 0.8rem;
 
         @include breakpoint(768px) {
             margin: 0;
+        }
+
+        &-alt {
+            z-index: 100;
         }
     }
 
@@ -51,8 +54,11 @@
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        position: relative;
+        z-index: 100;
         height: 2rem;
         width: 2rem;
+        cursor: pointer;
 
         @include breakpoint(768px) {
             display: none;
@@ -104,15 +110,18 @@
     }
 
     &__links {
-        display: none;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        width: 16rem;
+        align-items: center;
+        width: 100%;
         background-color: #FFF;
         position: fixed;
         top: 0;
         right: 0;
         height: 100vh;
+        padding: 9.5rem 1.6rem 0;
+        transform: translateX(100%);
+        transition: all 0.3s linear;
 
         @include breakpoint(768px) {
             display: flex;
@@ -124,18 +133,61 @@
             top: unset;
             right: unset;
             height: unset;
+            transform: unset;
+            padding: unset;
+            transition: unset;
+        }
+
+
+        &-alt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            background-color: #FFF;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            padding: 9.5rem 1.6rem 0;
+            transform: translateX(0);
+            transition: all 0.3s linear;
+
+            .active {
+                color: #27DED9;
+            }
+
+            @include breakpoint(768px) {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: initial;
+                width: 33rem;
+                position: unset;
+                top: unset;
+                right: unset;
+                height: unset;
+                padding: unset;
+                transition: unset;
+                transform: unset;
+            }
         }
         
+        .active {
+            color: #27DED9;
+        }
+
         &-text {
             text-decoration: none;
             font-size: 1.6rem;
             font-weight: bold;
             line-height: 2.4rem;
             color: #444444;
-        }
+            margin: 0 0 3rem;
 
-        .active {
-            color: #27DED9;
+            @include breakpoint(768px) {
+                margin: 0;
+            }
         }
     }
 }
