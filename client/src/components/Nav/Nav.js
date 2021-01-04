@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'
 import logo from '../../assets/icons/grubbery.svg'
 import '../../scss/Nav.scss';
 
 function Nav() {
+
+    const [open, setOpen] = useState(false)
 
     return (
         <>
@@ -12,12 +14,12 @@ function Nav() {
                     <NavLink className="nav__logo" to="/">
                         <img src={logo} alt="grubbery logo"/>
                     </NavLink>
-                    <div className="nav__burger">
+                    <div className={open ? "nav__burger-alt" : "nav__burger"} onClick={() => {setOpen(!open);  console.log(open)}}>
                         <div>
 
                         </div>
                         <div>
-                            
+
                         </div>
                         <div>
 
