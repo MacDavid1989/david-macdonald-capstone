@@ -7,7 +7,7 @@ import { weightConversion } from '../../utils/weightConversion'
 import leftArrow from '../../assets/icons/short-arrow-left.svg'
 import rightArrow from '../../assets/icons/short-arrow-right.svg'
 import plus from '../../assets/icons/plus-green.svg'
-import remove from '../../assets/icons/remove-plus.svg'
+import removeIcon from '../../assets/icons/remove-plus.svg'
 import check from '../../assets/icons/check.svg'
 // styling
 import '../../scss/Grocery.scss';
@@ -90,34 +90,22 @@ function Grocery(props) {
     //     })
     // }
     
-    // useEffect(()=> {
-    //     // checks to see if the week value has changed and then makes a get request for the groceries based on the week id
-    //     getGroceries()
+    useEffect(()=> {
+        // checks to see if the week value has changed and then makes a get request for the groceries based on the week id
+        getGroceries()
+        console.log(week)
+        // // if moving to a week less than the current week then removes the ability to delete meals
+        week===(getWeek(new Date())-1)&&
+        setRemove(false)
 
-    //     // if moving to a week less than the current week then removes the ability to delete meals
-    //     prevS.week===getWeek(new Date())&&this.state.week===(getWeek(new Date())-1)&&
-    //     this.setState({
-    //         remove: false
-    //     })
-
-    //     // if moving from a week less than the current week then gives the ability to delete meals
-    //     prevS.week===(getWeek(new Date())-1)&&this.state.week===(getWeek(new Date()))&&
-    //     this.setState({
-    //         remove: true
-    //     })
-        
-    //     // if moving from the first week of the year to the last week then removes the delete meals button
-    //     prevS.week===getWeek(new Date())&&getWeek(new Date())===1&&this.state.week===52&&
-    //     this.setState({
-    //         remove: false
-    //     })
-
-    //     // if moving from the last week of the year to the new year then shows the delete meals if the current week is the 1st week
-    //     prevS.week===52&&this.state.week===getWeek(new Date())&&getWeek(new Date())===1&&
-    //     this.setState({
-    //         remove: true
-    //     })
-    // }, [week])
+        // // if moving from a week less than the current week then gives the ability to delete meals
+        week===(getWeek(new Date()))&&
+        setRemove(true)
+  
+        // // if moving from the first week of the year to the last week then removes the delete meals button
+        getWeek(new Date())===1&&week===52&&
+        setRemove(false)
+    }, [week])
 
     // onClick handler to make a DELETE request based on the id of the item then renders the new grocery list upon successful response
     // handleRemoveGrocery = (id) => {
@@ -284,7 +272,7 @@ function Grocery(props) {
                                 className="item__remove" 
                                 style={{ display: remove ? "flex" : "none" }} 
                                 onClick={()=>handleRemoveGrocery(grocery.id)} 
-                                src={remove} 
+                                src={removeIcon} 
                                 alt="minus symbol"
                             />
                         </li>
