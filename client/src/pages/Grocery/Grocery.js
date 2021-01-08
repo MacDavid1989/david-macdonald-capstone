@@ -32,13 +32,10 @@ function Grocery(props) {
         .catch(console.error)
     }
 
-    // calls getGroceries after mounting
-    useEffect(()=>{
-        getGroceries()
-    })
-
     // performs callback every time week changes on render
     useEffect(()=>{
+        getGroceries()
+
         // if moving to a week less than the current week then removes the ability to delete meals
         week===(getWeek(new Date())-1)&&setRemove(false)
 
@@ -49,51 +46,45 @@ function Grocery(props) {
         getWeek(new Date())===1&&week===52&&setRemove(false)
     }, [week])
 
-    // onClick handler to make a DELETE request based on the id of the item then renders the new grocery list upon successful response
+    // onClick handler to make a DELETE request based on the id of the item then renders 
+    // the new grocery list upon successful response
     const handleRemoveGrocery = (id) => {
         axios.delete(`${SERV_URL}/groceries/${id}`)
         .then(()=>getGroceries())
         .catch()
     } 
 
-    // onSubmit handler which posts a new user grocery item to the server and upon a successful response makes a new GET request
+    // onSubmit handler which posts a new user grocery item to the server and upon a successful 
+    // response makes a new GET request
     const handleAddGrocery = (e) => {
         e.preventDefault()
-        console.log(newUserItem(e,week))
+
         axios.post(`${SERV_URL}/groceries`, newUserItem(e, week))
-        .then(() => {
-            getGroceries()
-        })
+        .then(() => getGroceries())
         .catch()
+
         e.target.reset()
     } 
 
     // onClick handler for the previous week arrow which decrements by 1 or sets it to 52
     // if its the previous year 
     const handlePrevious = () => {
-        if(week===1){
-            setWeek(52);
-        } else {
-            setWeek(week - 1);
-        }
+        week===1&&setWeek(52)
+        week!==1&&setWeek(week - 1)
     }
 
     // onClick handler for the next week arrow which increments the week by one or
     // sets it to 1 if it's the new year
     const handleNext = () => {
-        if(week===52){
-            setWeek(1);
-        } else {
-            setWeek(week + 1);
-        }
+        week===52&&setWeek(1)
+        week!==52&&setWeek(week + 1)
     }
 
-    //onClick handler that updates the isCompleted value of the item based on id and makes a new GET request at a successful response
+    //onClick handler that updates the isCompleted value of the item based on id and 
+    // makes a new GET request at a successful response
     const crossOffItem = (id) => {
         axios.put(`${SERV_URL}/groceries/${id}`)
-        .then(() => {
-            getGroceries()
-        })
+        .then(() => getGroceries())
         .catch()
     }
 
@@ -108,11 +99,19 @@ function Grocery(props) {
                     Buy precisely what you need
                 </h2>
                 <div className="grocery__container">
-                    <img className="grocery__arrow" onClick={handlePrevious} src={leftArrow} alt="left arrow"/>
+                    <img className="grocery__arrow" 
+                        onClick={handlePrevious} 
+                        src={leftArrow} 
+                        alt="left arrow"
+                    />
                     <span className="grocery__week">
                         {week===getWeek(new Date())?`Current Week`:`Week ${week}`}
                     </span>
-                    <img className="grocery__arrow" onClick={handleNext} src={rightArrow} alt="right arrow"/>
+                    <img className="grocery__arrow" 
+                        onClick={handleNext} 
+                        src={rightArrow} 
+                        alt="right arrow"
+                    />
                 </div>
             </header>
             {/* User items list section */}
@@ -121,21 +120,39 @@ function Grocery(props) {
                     Your Items
                 </h2 >
                 {/* Add item form */}
-                <form className="grocery__user-form" style={{ display: remove ? "flex" : "none" }} onSubmit={handleAddGrocery}>
+                <form className="grocery__user-form" 
+                    style={{ display: remove ? "flex" : "none" }} 
+                    onSubmit={handleAddGrocery}
+                >
                     <button className="grocery__user-add" type="submit">
                             <img className="grocery__user-icon" src={plus} alt="plus sign"/>
                     </button>
-                    <input className="grocery__user-item" required type="text" pattern="[A-Za-z -]{3,}" name="itemName" placeholder="Add item"/>
-                    <input className="grocery__user-weight" required type="number" name="itemWeight" placeholder="Weight (g)"/>
+                    <input className="grocery__user-item" 
+                        required 
+                        type="text" 
+                        pattern="[A-Za-z -]{3,}" 
+                        name="itemName" 
+                        placeholder="Add item"
+                    />
+                    <input className="grocery__user-weight" 
+                        required 
+                        type="number" 
+                        name="itemWeight" 
+                        placeholder="Weight (g)"
+                    />
                 </form>
                 {/* User added grocery list */}
                 <ul className="grocery__list">
                 {groceries&&groceries.map(grocery => grocery.category==="user item"&&grocery.week===week&&
                     <li key={grocery.id} className="item" style={{ display: "flex"}}>
-                        <span onClick={()=>crossOffItem(grocery.id)} className={grocery.isCompleted?"item__select-check":"item__select"}>
+                        <span onClick={()=>crossOffItem(grocery.id)} 
+                            className={grocery.isCompleted?"item__select-check":"item__select"}
+                        >
                             <img className="item__select-icon" src={grocery.isCompleted?check:undefined} alt=""/>
                         </span>
-                        <span className="item__name" style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
+                        <span className="item__name" 
+                            style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}
+                        >
                             {`${grocery.food.toLowerCase()}`}
                         </span>
                         <span className={remove?"item__weight--alt":"item__weight"}>
@@ -162,10 +179,14 @@ function Grocery(props) {
                 {groceries&&groceries.map(grocery =>
                     grocery.category!=="user item"&&grocery.week===week&&
                     <li key={grocery.id} className="item" style={{ display: "flex"}}>
-                        <span onClick={()=>crossOffItem(grocery.id)} className={grocery.isCompleted?"item__select-check":"item__select"}>
+                        <span onClick={()=>crossOffItem(grocery.id)} 
+                            className={grocery.isCompleted?"item__select-check":"item__select"}
+                        >
                             <img className="item__select-icon"  src={grocery.isCompleted?check:undefined} alt=""/>
                         </span>
-                        <span className="item__name" style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}>
+                        <span className="item__name" 
+                            style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}
+                        >
                             {`${grocery.food.toLowerCase()}`}
                         </span>
                         <span className="item__weight">
