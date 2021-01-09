@@ -17,7 +17,6 @@ function AddToModal (props) {
     // state keys: display determines if the modal is rendered, week to id are values for creating the meal object
     // previous determines if the previous arrow is shown, toast determines if the ToastModal is rendered, day is
     // the value sent to the ToastModal for the message
-
     const [ display, setDisplay] = useState(false)
     const [ week, setWeek] = useState(getWeek(new Date()))
     const [ meal, setMeal] = useState('')
@@ -33,6 +32,7 @@ function AddToModal (props) {
     };
 
     useEffect(()=>{
+        // only on first mount sets display state to true and sets Meal and Id the respective props values
         display===false&&props.display&&
         setDisplay(true)
         setMeal(props.meal)
@@ -65,7 +65,7 @@ function AddToModal (props) {
 
     // function to reset the ToastModal on close
     const resetToast = () => {
-         setToast(false)
+        setToast(false)
     }
 
     return (

@@ -30,7 +30,7 @@ function Grocery(props) {
         axios.get(`${SERV_URL}/groceries/${week}`)
         .then(res => setGroceries(res.data.sort((x, y) => (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1)))
         .catch(console.error)
-    },[week])
+    }, [week])
 
     // performs callback every time week changes on render
     useEffect(()=>{
@@ -182,7 +182,7 @@ function Grocery(props) {
                         <span onClick={()=>crossOffItem(grocery.id)} 
                             className={grocery.isCompleted?"item__select-check":"item__select"}
                         >
-                            <img className="item__select-icon"  src={grocery.isCompleted?check:undefined} alt=""/>
+                            <img className="item__select-icon" src={grocery.isCompleted?check:undefined} alt=""/>
                         </span>
                         <span className="item__name" 
                             style={{ textDecoration: grocery.isCompleted ? "line-through" : "none" }}
