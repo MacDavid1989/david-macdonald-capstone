@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { getWeek } from 'date-fns'
 // imported functions
@@ -26,11 +26,11 @@ function Grocery(props) {
 
     // makes the GET request to the grocery route with the current week to fetch the items that match the week id
     // the response is then sorted based on if they are completed or not upon rendering.
-     const getGroceries = () => {
+    const getGroceries = useCallback(() => {
         axios.get(`${SERV_URL}/groceries/${week}`)
         .then(res => setGroceries(res.data.sort((x, y) => (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1)))
         .catch(console.error)
-    }
+    },[week])
 
     // performs callback every time week changes on render
     useEffect(()=>{
@@ -44,7 +44,7 @@ function Grocery(props) {
   
         // if moving from the first week of the year to the last week then removes the delete meals button
         getWeek(new Date())===1&&week===52&&setRemove(false)
-    }, [week])
+    }, [week, getGroceries])
 
     // onClick handler to make a DELETE request based on the id of the item then renders 
     // the new grocery list upon successful response
