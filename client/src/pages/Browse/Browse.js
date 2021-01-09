@@ -155,6 +155,7 @@ class Browse extends Component {
     // request be made to the server with a meal object returned from the getMeal function. Upon successful POST
     // a POST request is then made to the groceries route to add the ingredients to the list 
     handleAdd = (meal, id, date, week) => {
+        console.log(meal, id)
         const ingredients = meal.ingredients.map(ingredient => {
             return  getIngredient(ingredient,week,id)
         })
