@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';
 import { getWeek } from 'date-fns';
 // imported component
 import ToastModal from '../ToastModal'
@@ -27,6 +27,14 @@ class AddToModal extends Component {
         day: ''
     }
 
+    // const [ display, setDisplay] = useState(false)
+    // const [ week, setWeek] = useState(getWeek(new Date()))
+    // const [ meal, setMeal] = useState('')
+    // const [ id, setId] = useState('')
+    // const [ previous, setPrevious] = useState(false)
+    // const [ toast, setToast] = useState(false)
+    // const [ day, setDay] = useState('')
+
     // onClick handler to close modal by calling the resetDisplay function and setting display state
     closeAddTo = () => {
         this.props.resetDisplay();
@@ -34,6 +42,11 @@ class AddToModal extends Component {
             display: false,
         });
     };
+
+    // const closeAddTo = () => {
+    //     props.resetDisplay();
+    //     setDisplay(false)
+    // };
 
     componentDidUpdate(_prevP, prevS) {
         // when the sate is updated after mount sets the display to true to keep modal rendered and passes props value to state values
@@ -75,6 +88,23 @@ class AddToModal extends Component {
         })
     }
 
+    // useEffect(()=>{
+    //     display===false&&props.display&&
+    //     setDisplay(true)&&setMeal(props.meal)&&setId(props.id)
+    
+    //     setDisplay(true)
+        
+    //     // if moving to a week greater than the current week add the ability to go to a previous week
+    //     week===(getWeek(new Date())+1)&&setPrevious(true)
+
+    //     // if it is the current week then remove ability to go to a previous week
+    //     week===(getWeek(new Date()))&&setPrevious(false)
+
+    //     // if the next week is the new year then add the ability to go back to a previous week
+    //     getWeek(new Date())===52&&week===1&&setPrevious(true)
+
+    // }, [week, display])
+
     // onClick handler for the previous week arrow which decrements by 1 or sets it to 52
     // if its the previous year 
     handlePrevious = () => {
@@ -90,6 +120,11 @@ class AddToModal extends Component {
             })
         }
     }
+
+    // const handlePrevious = () => {
+    //     week===1&&setWeek(52)&&setDisplay(true)
+    //     week!==1&&setWeek(week - 1)&&setDisplay(true)
+    // }
 
     // onClick handler for the next week arrow which increments the week by one or
     // sets it to 1 if it's the new year
@@ -107,12 +142,21 @@ class AddToModal extends Component {
         }
     }
 
+    // const handleNext = () => {
+    //     week===52&&setWeek(1)&&setDisplay(true)
+    //     week!==52&&setWeek(week + 1)&&setDisplay(true)
+    // }
+
     // function to reset the ToastModal on close
     resetToast = () => {
         this.setState({
             toast: false
         })
     }
+
+    // const resetToast = () => {
+    //      setToast(false)
+    // }
 
     render() {
         return (
