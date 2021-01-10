@@ -1,92 +1,88 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { getWeek } from 'date-fns'
+import { getWeek } from 'date-fns';
 // imported functions
-import { weightConversion } from '../../utils/weightConversion'
-import { newUserItem } from '../../utils/newUserItem'
+import { weightConversion } from '../../utils/weightConversion';
+import { newUserItem } from '../../utils/newUserItem';
 // imported icons
-import leftArrow from '../../assets/icons/short-arrow-left.svg'
-import rightArrow from '../../assets/icons/short-arrow-right.svg'
-import plus from '../../assets/icons/plus-green.svg'
-import removeIcon from '../../assets/icons/remove-plus.svg'
-import check from '../../assets/icons/check.svg'
+import leftArrow from '../../assets/icons/short-arrow-left.svg';
+import rightArrow from '../../assets/icons/short-arrow-right.svg';
+import plus from '../../assets/icons/plus-green.svg';
+import removeIcon from '../../assets/icons/remove-plus.svg';
+import check from '../../assets/icons/check.svg';
 // styling
 import '../../scss/Grocery.scss';
 
 // server url
 const SERV_URL = process.env.REACT_APP_LOCAL_HOST || 'http://localhost:5000';
 
-function Grocery(props) {
+function Grocery () {
     // state key: groceries holds the list of grocery items from the grocery route, week by default 
     // holds the current value of the current week display determines whether the form to add an 
     // item will be viewable, and remove determines is the delete button is viewable 
-    const [ groceries, setGroceries] = useState('')
-    const [ week, setWeek] = useState(getWeek(new Date()))
-    const [ remove, setRemove] = useState(true)
+    const [ groceries, setGroceries] = useState('');
+    const [ week, setWeek] = useState(getWeek(new Date()));
+    const [ remove, setRemove] = useState(true);
 
     // makes the GET request to the grocery route with the current week to fetch the items that match the week id
     // the response is then sorted based on if they are completed or not upon rendering.
     const getGroceries = useCallback(() => {
         axios.get(`${SERV_URL}/groceries/${week}`)
         .then(res => setGroceries(res.data.sort((x, y) => (x.isCompleted === y.isCompleted)? 0 : x.isCompleted? 1 : -1)))
-        .catch(console.error)
-    }, [week])
+        .catch(console.error);
+    }, [week]);
 
     // performs callback every time week changes on render
     useEffect(()=>{
-        getGroceries()
+        getGroceries();
 
-        // if moving to a week less than the current week then removes the ability to delete meals
-        week===(getWeek(new Date())-1)&&setRemove(false)
-
-        // if moving from a week less than the current week then gives the ability to delete meals
-        week===(getWeek(new Date()))&&setRemove(true)
+        // if the current week then gives the ability to add items
+        week===(getWeek(new Date()))&&setRemove(true);
   
-        // if moving from the first week of the year to the last week then removes the delete meals button
-        getWeek(new Date())===1&&week===52&&setRemove(false)
-    }, [week, getGroceries])
+        // if moving to a previous week then removes the ability to add items
+        (week===(getWeek(new Date())-1)||(getWeek(new Date())===1&&week===52))&&setRemove(false);
+
+    }, [week, getGroceries]);
 
     // onClick handler to make a DELETE request based on the id of the item then renders 
     // the new grocery list upon successful response
     const handleRemoveGrocery = (id) => {
         axios.delete(`${SERV_URL}/groceries/${id}`)
         .then(()=>getGroceries())
-        .catch()
-    } 
+        .catch();
+    }; 
 
     // onSubmit handler which posts a new user grocery item to the server and upon a successful 
     // response makes a new GET request
     const handleAddGrocery = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         axios.post(`${SERV_URL}/groceries`, newUserItem(e, week))
         .then(() => getGroceries())
-        .catch()
+        .catch();
 
-        e.target.reset()
-    } 
+        e.target.reset();
+    };
 
     // onClick handler for the previous week arrow which decrements by 1 or sets it to 52
     // if its the previous year 
     const handlePrevious = () => {
-        week===1&&setWeek(52)
-        week!==1&&setWeek(week - 1)
-    }
+        week===1?setWeek(52):setWeek(week - 1);
+    };
 
     // onClick handler for the next week arrow which increments the week by one or
     // sets it to 1 if it's the new year
     const handleNext = () => {
-        week===52&&setWeek(1)
-        week!==52&&setWeek(week + 1)
-    }
+        week===52?setWeek(1):setWeek(week + 1);
+    };
 
     //onClick handler that updates the isCompleted value of the item based on id and 
     // makes a new GET request at a successful response
     const crossOffItem = (id) => {
         axios.put(`${SERV_URL}/groceries/${id}`)
         .then(() => getGroceries())
-        .catch()
-    }
+        .catch();
+    };
 
     return (
         <div className="grocery">
@@ -125,7 +121,7 @@ function Grocery(props) {
                     onSubmit={handleAddGrocery}
                 >
                     <button className="grocery__user-add" type="submit">
-                            <img className="grocery__user-icon" src={plus} alt="plus sign"/>
+                        <img className="grocery__user-icon" src={plus} alt="plus sign"/>
                     </button>
                     <input className="grocery__user-item" 
                         required 
@@ -198,6 +194,6 @@ function Grocery(props) {
             </section>
         </div>
     );
-}
+};
 
 export default Grocery;
