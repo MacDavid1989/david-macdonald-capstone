@@ -125,6 +125,6 @@ function AddToModal ({ displayAddTo , mealAddTo, idAddTo, addToDate, resetDispla
             />
         </>
     );
-}
+};
 
 export default AddToModal;
