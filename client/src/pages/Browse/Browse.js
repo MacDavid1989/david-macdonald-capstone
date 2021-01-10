@@ -56,13 +56,15 @@ function Browse () {
         // if there is no data in session storage then the getAPIMeals function will be called to fetch random meals
         getAPIMeals();
 
-        // sets session storage when a search value is entered into the field and the page will be unmounted
+        // sets session storage when a search value is entered into the field
         return ()=> {
-            sessionStorage.setItem('query', query);
-            sessionStorage.setItem('mealType', mealType);
-            sessionStorage.setItem('from', from);
-            sessionStorage.setItem('to', to);
-            sessionStorage.setItem('page', page);
+            if(query&&mealType){
+                sessionStorage.setItem('query', query);
+                sessionStorage.setItem('mealType', mealType);
+                sessionStorage.setItem('from', from);
+                sessionStorage.setItem('to', to);
+                sessionStorage.setItem('page', page);
+            };
         };
     });
 
@@ -190,6 +192,9 @@ function Browse () {
                             value={mealType} 
                             onChange={changeMealType}
                         >
+                            <option className="search__form-option" value="">
+                                Select meal
+                            </option>
                             <option className="search__form-option" value="breakfast">
                                 Breakfast
                             </option>
