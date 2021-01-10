@@ -19,8 +19,9 @@ const SERV_URL = process.env.REACT_APP_LOCAL_HOST || 'http://localhost:5000';
 
 // Weekly menu component
 function Menu (props) {
-     // state keys: myMeals are the user selected meals from the meals route, display to src are used to render Recipe modal, week by default is the current week,
-     // and remove sets that display of the remove button 
+    // state keys: myMeals are the user selected meals from the meals route, display to src are 
+    // used to render Recipe modal, week by default is the current week,
+    // and remove sets that display of the remove button 
     const [myMeals, setMyMeals] = useState('')
     const [src, setSrc] = useState('')
     const [ week, setWeek] = useState(getWeek(new Date()))
@@ -44,8 +45,9 @@ function Menu (props) {
         getWeek(new Date())===1&&week===52&&setRemove(false)
     }, [week])
 
-    // onClick handler to make a DELETE request with the id of the selected meal, then on successful response, makes a GET
-    // request to render the new meals and update the grocery items to have the removed ingredients removed from the list 
+    // onClick handler to make a DELETE request with the id of the selected meal, then on successful response, 
+    // makes a GET request to render the new meals and update the grocery items to have the removed 
+    // ingredients removed from the list 
     const handleRemove = (id) => {
         axios.delete(`${SERV_URL}/meals/${id}`)
         .then(()=>{
@@ -104,19 +106,34 @@ function Menu (props) {
                     <img className="menu__arrow" onClick={handleNext} src={rightArrow} alt="right arrow"/>
                 </div>
             </section>
-            {/* List of meals generated for each week by mapping an array of the days of the week then mapping the meals that match the day */}
+            {/* List of meals generated for each week by mapping an array of the days of the week then 
+            mapping the meals that match the day */}
             <ul className="menu__list">
     {myMeals&&daysOfTheWeek.map((day, i) => {
             return <Fragment key={i}>
                     <h3 className="menu__date">{day}</h3>
                 {myMeals&&myMeals.map(meal => meal.date===day&&meal.week===week&&
                     <li key={meal.id} className="card">
-                        <img className="card__image" onClick={()=>showIframe(meal.url)} src={meal.image} alt={`${meal.name}`}/>
+                        <img 
+                            className="card__image" 
+                            onClick={()=>showIframe(meal.url)} 
+                            src={meal.image} 
+                            alt={`${meal.name}`}
+                        />
                         <span className="card__name" onClick={()=>showIframe(meal.url)}>
                             {meal.name}
                         </span>
-                        <img className="card__arrow" onClick={()=>showIframe(meal.url)} src={longRightArrow} alt="right arrow"/>
-                        <span className="card__remove" style={{ display: remove ? "flex" : "none" }} onClick={()=>handleRemove(meal.id)}>
+                        <img 
+                            className="card__arrow" 
+                            onClick={()=>showIframe(meal.url)} 
+                            src={longRightArrow} 
+                            alt="right arrow"
+                        />
+                        <span 
+                            className="card__remove" 
+                            style={{ display: remove ? "flex" : "none" }} 
+                            onClick={()=>handleRemove(meal.id)}
+                        >
                             <img className="card__remove-icon" src={removeIcon} alt="plus sign"/>
                         </span>
                     </li>
