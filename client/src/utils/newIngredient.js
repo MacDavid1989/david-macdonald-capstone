@@ -14,7 +14,7 @@ export function newIngredient(ingredient, week, id) {
         category: ingredient.foodCategory,
         image: ingredient.image,
         isCompleted: false
-    }
+    };
 
-    return newIngredientObject
-}
+    return newIngredientObject;
+};

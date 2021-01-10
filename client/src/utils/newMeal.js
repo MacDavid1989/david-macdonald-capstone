@@ -9,7 +9,7 @@ export function newMeal(meal, ingredients, week, id, date) {
         image: meal.image,
         url: meal.url,
         ingredients: ingredients
-    }
+    };
 
-    return newMealObject
-}
+    return newMealObject;
+};

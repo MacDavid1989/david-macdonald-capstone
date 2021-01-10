@@ -5,7 +5,7 @@ export function newUserItem(e, week) {
         weight: parseInt(e.target.itemWeight.value),
         week: week,
         isCompleted: false 
-    }
+    };
 
-    return newUserItemObject
-}
+    return newUserItemObject;
+};
