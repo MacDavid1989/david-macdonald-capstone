@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 // imported functions
@@ -55,8 +55,6 @@ function Browse (props) {
     useEffect(()=>{
         // if there is no data in session storage then the getAPIMeals function will be called to fetch random meals
         getAPIMeals();
-
-        console.log('2')
 
         // sets session storage when a search value is entered into the field and the page will be unmounted
         return ()=> {
@@ -126,7 +124,7 @@ function Browse (props) {
         axios.post(`${SERV_URL}/meals`, getMeal(meal, ingredients, week, id, date))
         .then(()=>{
             axios.post(`${SERV_URL}/groceries`, { plan: true })
-            .then(console.log)
+            .then()
             .catch(console.error)
         })
         .catch(console.error)

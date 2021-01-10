@@ -10,17 +10,21 @@ function ToastModal (props) {
     // state of display for the modal
     const [display, setDisplay] = useState(false)
 
+    const { toast, resetToast} = props;
+
     useEffect(()=>{
         // when the sate is updated after mount sets the display to true to keep modal rendered
-        display===false&&props.toast&&
+        !display&&toast&&
         setDisplay(true)
 
         // after 5 seconds, the toast modal will no longer be displayed and the resetToast function will be called
-        setTimeout(()=>{
+        const toastMessage = setTimeout(()=>{
+            resetToast();
             setDisplay(false); 
-            props.resetToast()
         }, 5000)
-    }, [display, props]) 
+
+        return () => clearTimeout(toastMessage);
+    }, [display, toast, resetToast]) 
 
     return (
         <div className="toast" style={{ display: display ? "flex" : "none" }}>
