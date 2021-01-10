@@ -4,35 +4,35 @@ import { v4 as uuidv4 } from 'uuid';
 // imported functions
 import { mealType as randomMealType } from '../../utils/randomMealType';
 import { randomLetter as randomQuery } from '../../utils/randomLetter';
-import { newIngredient as getIngredient } from '../../utils/newIngredient'
-import { newMeal as getMeal } from '../../utils/newMeal'
+import { newIngredient as getIngredient } from '../../utils/newIngredient';
+import { newMeal as getMeal } from '../../utils/newMeal';
 // imported components
-import RecipeModal from '../../components/RecipeModal'
-import AddToModal from '../../components/AddToModal'
+import RecipeModal from '../../components/RecipeModal';
+import AddToModal from '../../components/AddToModal';
 // imported icons
-import plus from '../../assets/icons/plus-green.svg'
-import leftArrow from '../../assets/icons/long-arrow-left.svg'
-import rightArrow from '../../assets/icons/long-arrow-right.svg'
+import plus from '../../assets/icons/plus-green.svg';
+import leftArrow from '../../assets/icons/long-arrow-left.svg';
+import rightArrow from '../../assets/icons/long-arrow-right.svg';
 // styling
 import '../../scss/Browse.scss';
 
 const SERV_URL = process.env.REACT_APP_LOCAL_HOST || 'http://localhost:5000';
 
 // Browse Recipes component
-function Browse (props) {
+function Browse () {
     // state keys: query to page are search related, display is for the Recipe Modal state, previous is for rendering the back arrow,
     // src to selectedMealId is data to be passed as props to the Recipe Modal.
-    const [query, setQuery] = useState(sessionStorage.getItem('query') || '')
-    const [mealType, setMealType] = useState(sessionStorage.getItem('mealType') || '')
-    const [meals, setMeals] = useState('')
-    const [from, setFrom] = useState(parseInt(sessionStorage.getItem('from')) || 0)
-    const [to, setTo] = useState(parseInt(sessionStorage.getItem('to')) || 24)
-    const [page, setPage] = useState(parseInt(sessionStorage.getItem('page')) || 1)
-    const [display, setDisplay] = useState(false)
-    const [previous, setPrevious] = useState(false)
-    const [src, setSrc] = useState('')
-    const [selectedMeal, setSelectedMeal] = useState('')
-    const [selectedMealId, setSelectedMealId] = useState('')
+    const [query, setQuery] = useState(sessionStorage.getItem('query') || '');
+    const [mealType, setMealType] = useState(sessionStorage.getItem('mealType') || '');
+    const [meals, setMeals] = useState('');
+    const [from, setFrom] = useState(parseInt(sessionStorage.getItem('from')) || 0);
+    const [to, setTo] = useState(parseInt(sessionStorage.getItem('to')) || 24);
+    const [page, setPage] = useState(parseInt(sessionStorage.getItem('page')) || 1);
+    const [display, setDisplay] = useState(false);
+    const [previous, setPrevious] = useState(false);
+    const [src, setSrc] = useState('');
+    const [selectedMeal, setSelectedMeal] = useState('');
+    const [selectedMealId, setSelectedMealId] = useState('');
 
     // makes a GET request to the API in order to fetch meals
     const getAPIMeals = () => {
@@ -49,8 +49,8 @@ function Browse (props) {
         QUERY&&MEAL&&!meals&&
         axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
         .then(response => setMeals(response.data.hits.map(meal => meal.recipe)))
-        .catch(console.error)
-    }
+        .catch(console.error);
+    };
 
     useEffect(()=>{
         // if there is no data in session storage then the getAPIMeals function will be called to fetch random meals
@@ -63,8 +63,8 @@ function Browse (props) {
             sessionStorage.setItem('from', from);
             sessionStorage.setItem('to', to);
             sessionStorage.setItem('page', page);
-        }
-    })
+        };
+    });
 
     // onChange handler for the search input 
     const changeSearchIngredient = (e) => {
@@ -74,8 +74,8 @@ function Browse (props) {
         setPage(1);
         setPrevious(false);
         setQuery(e.target.value.toLowerCase());
-        getAPIMeals()   
-    }
+        getAPIMeals();
+    };
 
     // onChange handler for the select input
     const changeMealType = (e) => {
@@ -86,7 +86,7 @@ function Browse (props) {
         setPrevious(false);
         setMealType(e.target.value);
         getAPIMeals();
-    }
+    };
 
     // onClick handler for the next page arrow
     const handleNext = () => {
@@ -96,11 +96,11 @@ function Browse (props) {
         setPage(page + 1);
         setPrevious(true);
         getAPIMeals();
-    }
+    };
 
     // onClick handler for the previous page arrow; does nothing when on page 1 
     const handlePrevious = () => {
-        (from - 24)===0&&setPrevious(false)
+        (from - 24)===0&&setPrevious(false);
         
         if(from!==0){
             setMeals('');
@@ -108,8 +108,8 @@ function Browse (props) {
             setTo(to - 24);
             setPage(page - 1);
             getAPIMeals();
-        }
-    }
+        };
+    };
 
     // onClick handler for adding a meal to the server, calls getIngredients to create an ingredients object
     // with a new unique id, week value, and mealId. Only if an ingredients object is created will the POST
@@ -117,43 +117,43 @@ function Browse (props) {
     // a POST request is then made to the groceries route to add the ingredients to the list 
     const handleAdd = (meal, id, date, week) => {
         const ingredients = meal.ingredients.map(ingredient => {
-            return  getIngredient(ingredient,week,id)
-        })
+            return  getIngredient(ingredient,week,id);
+        });
         
         ingredients&&
         axios.post(`${SERV_URL}/meals`, getMeal(meal, ingredients, week, id, date))
         .then(()=>{
             axios.post(`${SERV_URL}/groceries`, { plan: true })
             .then()
-            .catch(console.error)
+            .catch(console.error);
         })
-        .catch(console.error)
-    }
+        .catch(console.error);
+    };
 
     // onClick handler to render Recipe Modal by changing the src state value with the url of the recipe
     const showIframe = (src) => {
-        setSrc(src)
-    }
+        setSrc(src);
+    };
 
     // onCLick handler resets the src value upon closing the modal so as to remain undisplayed
     const resetSrc = () => {
-        setSrc('')
-    }
+        setSrc('');
+    };
 
     // onClick handler passes the meal and id to the AddTo modal and sets display so as to change the display condition
     // from none to flex
     const showAddTo = (meal, id) => {
         setDisplay(true);
         setSelectedMeal(meal);
-        setSelectedMealId(id)
-    }
+        setSelectedMealId(id);
+    };
     
     // onCLick handler resets the values needed to render and display the AddTo modal
     const resetDisplay = () => {
         setDisplay(false);
         setSelectedMeal('');
-        setSelectedMealId('')
-    }
+        setSelectedMealId('');
+    };
     
     // Browse recipes component
     return (
@@ -246,6 +246,6 @@ function Browse (props) {
             </div>
         </>
     );
-}
+};
 
 export default Browse;
