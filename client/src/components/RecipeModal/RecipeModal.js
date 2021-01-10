@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import close from '../../assets/icons/long-arrow-left.svg'
 import '../../scss/RecipeModal.scss';
 

@@ -47,7 +47,7 @@ function AddToModal (props) {
         // if the next week is the new year then add the ability to go back to a previous week
         getWeek(new Date())===52&&week===1&&setPrevious(true)
 
-    }, [week, display, props.display, props.meal, props.id])
+    }, [week, display, props])
 
     // onClick handler for the previous week arrow which decrements by 1 or sets it to 52
     // if its the previous year 
