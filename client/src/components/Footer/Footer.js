@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import logo from '../../assets/icons/grubbery-white.svg'
+import { Link } from 'react-router-dom';
+// imported icons
+import logo from '../../assets/icons/grubbery-white.svg';
+// styling
 import '../../scss/Footer.scss';
 
 function Footer() {
@@ -28,7 +30,6 @@ function Footer() {
             </footer>
         </>
     );
-}
-
+};
 
 export default Footer;

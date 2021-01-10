@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom'
-import logo from '../../assets/icons/grubbery.svg'
+import { NavLink } from 'react-router-dom';
+// imported icons
+import logo from '../../assets/icons/grubbery.svg';
+// styling
 import '../../scss/Nav.scss';
 
 function Nav() {
 
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
 
     return (
         <>
             <nav className="nav">
                 <div className="nav__container">
-                    <NavLink className={open ? "nav__logo-alt" : "nav__logo"} to="/" onClick={() => open&&setOpen(!open)}>
+                    <NavLink 
+                        className={open ? "nav__logo-alt" : "nav__logo"} 
+                        to="/" 
+                        onClick={() => open&&setOpen(!open)}
+                    >
                         <img src={logo} alt="grubbery logo"/>
                     </NavLink>
                     <div className={open ? "nav__burger-alt" : "nav__burger"} onClick={() => setOpen(!open)}>
@@ -34,6 +40,6 @@ function Nav() {
             </nav>
         </>
     );
-}
+};
 
 export default Nav;

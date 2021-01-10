@@ -1,4 +1,5 @@
 import React from 'react';
+// styling
 import '../../scss/Spacer.scss';
 
 function Spacer() {
@@ -9,6 +10,6 @@ function Spacer() {
             </div>
         </>
     );
-}
+};
 
 export default Spacer;

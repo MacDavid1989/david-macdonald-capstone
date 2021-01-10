@@ -1,41 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getWeek } from 'date-fns';
-import check from '../../assets/icons/check-green.svg'
+// imported icons
+import check from '../../assets/icons/check-green.svg';
+// styling
 import '../../scss/ToastModal.scss';
 
 // Toast modal component
-class ToastModal extends Component {
+function ToastModal ({ day, week, toast, resetToast }) {
     // state of display for the modal
-    state = {
-        display: false
-    }
+    const [display, setDisplay] = useState(false);
 
-    componentDidUpdate(_prevP, prevS) {
-        // when the sate is updated after mount sets the display to true to keep modal rendered and passes props value to state values
-        (prevS.display === false) && this.props.toast &&
-        this.setState({
-            display: true,
-        });
+    useEffect(()=>{
+        // when the sate is updated after mount sets the display to true to keep modal rendered
+        !display&&toast&&setDisplay(true);
 
-        // Timeout used to delay hiding the modal
-        prevS.display===true&&this.state.display===true&&
-        setTimeout(()=>{this.setState({
-            display: false,
-        }); this.props.resetToast()}, 5000)
-    }
+        // after 5 seconds, the toast modal will no longer be displayed and the resetToast function will be called
+        const toastMessage = setTimeout(()=>{
+            resetToast();
+            setDisplay(false); 
+        }, 5000);
 
-    render() {
-        return (
-            <div className="toast" style={{ display: this.state.display ? "flex" : "none" }}>
-                <span className="toast__select">
-                    <img className="toast__select-icon" src={check} alt=""/>
-                </span>
-                <h1 className="toast__title">
-                    {`Successfully added to ${this.props.day} for ${this.props.week===getWeek(new Date())?'the Current Week': 'Week '+this.props.week}`}
-                </h1>
-            </div>
-        );
-    }
-}
+        return () => clearTimeout(toastMessage);
+    }, [display, toast, resetToast]) 
+
+    return (
+        <div className="toast" style={{ display: display ? "flex" : "none" }}>
+            <span className="toast__select">
+                <img className="toast__select-icon" src={check} alt=""/>
+            </span>
+            <h1 className="toast__title">
+                {`Successfully added to ${day} for ${week===getWeek(new Date())?'the Current Week': 'Week ' + week}`}
+            </h1>
+        </div>
+    );
+};
 
 export default ToastModal;
