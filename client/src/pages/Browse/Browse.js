@@ -55,16 +55,32 @@ function Browse (props) {
     useEffect(()=>{
         if(sessionStorage.getItem('query')&&sessionStorage.getItem('mealType')){
             setQuery(sessionStorage.getItem('query'));
-            setMealType(sessionStorage.getItem('mealType'));
+            setPage(parseInt(sessionStorage.getItem('page')));
             setFrom(parseInt(sessionStorage.getItem('from')));
             setTo(parseInt(sessionStorage.getItem('to')));
-            setPage(parseInt(sessionStorage.getItem('page')));
-            getAPIMeals()
-        } else {
-        // if there is no data in session storage then the getAPIMeals function will be called to fetch random meals
-            getAPIMeals()
-        }  
+            setMealType(sessionStorage.getItem('mealType'));
+        }
 
+        console.log('1')
+    }, [])
+
+    useEffect(()=>{
+        // if there is no data in session storage then the getAPIMeals function will be called to fetch random meals
+        getAPIMeals();
+
+        console.log('2')
+        // sets session storage when a search value is entered into the field and the page will be unmounted
+        return ()=> {
+            sessionStorage.setItem('query', query);
+            sessionStorage.setItem('mealType', mealType);
+            sessionStorage.setItem('from', from);
+            sessionStorage.setItem('to', to);
+            sessionStorage.setItem('page', page);
+            console.log('3')
+        }
+    })
+
+    useEffect(()=>{
         // checks if the page transitioned from the second group of meals to the first and hides the previous button
         from!==0&&
         setPrevious(true)
@@ -73,17 +89,8 @@ function Browse (props) {
         from===0&&
         setPrevious(false)
 
-        // sets session storage when a search value is entered into the field and the page will be unmounted
-        return ()=> {
-            if(query){
-                sessionStorage.setItem('query', query);
-                sessionStorage.setItem('mealType', mealType);
-                sessionStorage.setItem('from', from);
-                sessionStorage.setItem('to', to);
-                sessionStorage.setItem('page', page);
-            }
-        }
-    }, [from, getAPIMeals, query, mealType, meals, to, page])
+        console.log('4')
+    }, [from])
 
     // onChange handler for the search input 
     const changeSearchIngredient = (e) => {
