@@ -10,6 +10,6 @@ function Spacer() {
             </div>
         </>
     );
-}
+};
 
 export default Spacer;
