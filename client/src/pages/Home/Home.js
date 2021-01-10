@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import arrow from '../../assets/icons/long-arrow-right-white.svg';
-// imported images
-import hero from '../../assets/images/hero.png'
-import browse from '../../assets/images/browse.png'
-import largePlan from '../../assets/images/largePlan.png'
-import plan from '../../assets/images/plan.png'
-import recipe from '../../assets/images/recipe.png'
-import shop from '../../assets/images/shop.png'
+// imported icons
+import hero from '../../assets/images/hero.png';
+import browse from '../../assets/images/browse.png';
+import largePlan from '../../assets/images/largePlan.png';
+import plan from '../../assets/images/plan.png';
+import recipe from '../../assets/images/recipe.png';
+import shop from '../../assets/images/shop.png';
 // styling
 import '../../scss/Home.scss';
 
 // Home page component
-function Home() {
+function Home () {
 
     return (
         <>
@@ -90,6 +90,6 @@ function Home() {
             </div>
         </>
     );  
-}
+};
 
 export default Home;
