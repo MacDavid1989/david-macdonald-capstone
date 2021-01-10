@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'
+// imported icons
 import logo from '../../assets/icons/grubbery.svg'
+// styling
 import '../../scss/Nav.scss';
 
 function Nav() {

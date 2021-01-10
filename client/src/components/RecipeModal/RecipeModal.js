@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+// imported icons
 import close from '../../assets/icons/long-arrow-left.svg'
+// styling
 import '../../scss/RecipeModal.scss';
 
 // Recipe modal component
@@ -13,7 +15,7 @@ function RecipeModal (props) {
     };
 
     useEffect(()=>{
-        // when the sate is updated after mount sets the display to true to keep modal rendered and passes props value to state values
+        // when the sate is updated after mount sets the display to true to keep modal rendered
         display===false&&props.src&&
         setDisplay(true)
     }, [display, props.src]) 
@@ -34,6 +36,5 @@ function RecipeModal (props) {
         </div>
     );
 }
-
 
 export default RecipeModal;
