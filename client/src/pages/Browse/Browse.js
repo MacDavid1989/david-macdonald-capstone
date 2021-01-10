@@ -160,9 +160,9 @@ function Browse (props) {
         <>
             <RecipeModal resetSrc={resetSrc} src={src}/>
             <AddToModal 
-                display={display} 
-                meal={selectedMeal}
-                id={selectedMealId}
+                displayAddTo={display} 
+                mealAddTo={selectedMeal}
+                idAddTo={selectedMealId}
                 addToDate={handleAdd} 
                 resetDisplay={resetDisplay}
             />
