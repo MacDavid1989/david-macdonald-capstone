@@ -22,12 +22,12 @@ const SERV_URL = process.env.REACT_APP_LOCAL_HOST || 'http://localhost:5000';
 function Browse (props) {
     // state keys: query to page are search related, display is for the Recipe Modal state, previous is for rendering the back arrow,
     // src to selectedMealId is data to be passed as props to the Recipe Modal.
-    const [query, setQuery] = useState('')
-    const [mealType, setMealType] = useState('')
+    const [query, setQuery] = useState(sessionStorage.getItem('query') || '')
+    const [mealType, setMealType] = useState(sessionStorage.getItem('mealType') || '')
     const [meals, setMeals] = useState('')
-    const [from, setFrom] = useState(0)
-    const [to, setTo] = useState(24)
-    const [page, setPage] = useState(1)
+    const [from, setFrom] = useState(parseInt(sessionStorage.getItem('from')) || 0)
+    const [to, setTo] = useState(parseInt(sessionStorage.getItem('to')) || 24)
+    const [page, setPage] = useState(parseInt(sessionStorage.getItem('page')) || 1)
     const [display, setDisplay] = useState(false)
     const [previous, setPrevious] = useState(false)
     const [src, setSrc] = useState('')
@@ -35,7 +35,7 @@ function Browse (props) {
     const [selectedMealId, setSelectedMealId] = useState('')
 
     // makes a GET request to the API in order to fetch meals
-    const getAPIMeals = useCallback(() => {
+    const getAPIMeals = () => {
         // variables obtained from the process.env object
         const API_URL = process.env.REACT_APP_API_URL;
         const API_ID = process.env.REACT_APP_API_ID;
@@ -50,25 +50,14 @@ function Browse (props) {
         axios.get(API_URL+QUERY+API_ID+API_KEY+MEAL)
         .then(response => setMeals(response.data.hits.map(meal => meal.recipe)))
         .catch(console.error)
-    }, [from, query, mealType, meals, to])
-
-    useEffect(()=>{
-        if(sessionStorage.getItem('query')&&sessionStorage.getItem('mealType')){
-            setQuery(sessionStorage.getItem('query'));
-            setPage(parseInt(sessionStorage.getItem('page')));
-            setFrom(parseInt(sessionStorage.getItem('from')));
-            setTo(parseInt(sessionStorage.getItem('to')));
-            setMealType(sessionStorage.getItem('mealType'));
-        }
-
-        console.log('1')
-    }, [])
+    }
 
     useEffect(()=>{
         // if there is no data in session storage then the getAPIMeals function will be called to fetch random meals
         getAPIMeals();
 
         console.log('2')
+
         // sets session storage when a search value is entered into the field and the page will be unmounted
         return ()=> {
             sessionStorage.setItem('query', query);
@@ -76,21 +65,8 @@ function Browse (props) {
             sessionStorage.setItem('from', from);
             sessionStorage.setItem('to', to);
             sessionStorage.setItem('page', page);
-            console.log('3')
         }
     })
-
-    useEffect(()=>{
-        // checks if the page transitioned from the second group of meals to the first and hides the previous button
-        from!==0&&
-        setPrevious(true)
-
-        // checks if the page transitioned from the first group of meals to the second and shows the previous button
-        from===0&&
-        setPrevious(false)
-
-        console.log('4')
-    }, [from])
 
     // onChange handler for the search input 
     const changeSearchIngredient = (e) => {
@@ -120,11 +96,14 @@ function Browse (props) {
         setFrom(from + 24);
         setTo(to + 24);
         setPage(page + 1);
+        setPrevious(true);
         getAPIMeals();
     }
 
     // onClick handler for the previous page arrow; does nothing when on page 1 
     const handlePrevious = () => {
+        (from - 24)===0&&setPrevious(false)
+        
         if(from!==0){
             setMeals('');
             setFrom(from - 24);
