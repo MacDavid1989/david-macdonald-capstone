@@ -23,7 +23,7 @@ function Browse () {
     // state keys: query to page are search related, display is for the Recipe Modal state, previous is for rendering the back arrow,
     // src to selectedMealId is data to be passed as props to the Recipe Modal.
     const [query, setQuery] = useState(sessionStorage.getItem('query') || '');
-    const [mealType, setMealType] = useState(sessionStorage.getItem('mealType') || '');
+    const [mealType, setMealType] = useState(sessionStorage.getItem('mealType') || randomMealType());
     const [meals, setMeals] = useState('');
     const [from, setFrom] = useState(parseInt(sessionStorage.getItem('from')) || 0);
     const [to, setTo] = useState(parseInt(sessionStorage.getItem('to')) || 24);
@@ -42,7 +42,7 @@ function Browse () {
         const API_KEY = process.env.REACT_APP_API_KEY;
 
         // values set based on state or a random value generate from functions to provide queries for the GET request
-        const MEAL = `&mealType=${mealType || randomMealType()}&from=${from}&to=${to}`;
+        const MEAL = `&mealType=${mealType}&from=${from}&to=${to}`;
         const QUERY = query || randomQuery();
 
         // conditional request that only occurs when the specified values have data
@@ -192,9 +192,6 @@ function Browse () {
                             value={mealType} 
                             onChange={changeMealType}
                         >
-                            <option className="search__form-option" value="">
-                                Select meal
-                            </option>
                             <option className="search__form-option" value="breakfast">
                                 Breakfast
                             </option>
