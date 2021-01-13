@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "David MacDonald",
@@ -19,6 +20,7 @@
     "knex": "^0.21.15",
     "lodash": "^4.17.20",
     "logger": "0.0.1",
+    "mocha": "^8.2.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.11",
     "mysql": "^2.18.1",
