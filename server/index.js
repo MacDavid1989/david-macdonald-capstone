@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
+// import database connection
+const dbConnection = require('./connections/database');
+// import routes
 const mealList = require('./routes/mealListRoute')
 const groceryList = require('./routes/groceryListRoute')
 
@@ -9,6 +11,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5000;
 
 // allow cross-origin resource sharing
+const cors = require('cors');
 app.use(cors())
 
 // request.body middleware
@@ -20,6 +23,11 @@ app.use('/meals', mealList);
 // route for grocery list
 app.use('/groceries', groceryList);
 
-app.listen(PORT, () => {
-    console.log(`Server listening on port: ${PORT}`);
+// initialize db connection and have server listen on successful connection
+dbConnection.initialize()
+.then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server listening on port: ${PORT}`);
+    })
 })
+.catch(error => console.log("Error on HTTP start.\nError code >" + error));

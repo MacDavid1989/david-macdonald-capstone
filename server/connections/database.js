@@ -11,9 +11,7 @@ const client = new MongoClient(url, {
 exports.initialize = () => {
     return new Promise((resolve, reject) => {
       client.connect((err) => {
-        if(err){
-            reject(err);
-        }
+        err&&reject(err);
         console.log("Connected to database!");
         db = client.db(dbName);
       });
