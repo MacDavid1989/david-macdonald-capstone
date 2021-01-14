@@ -1,18 +1,23 @@
 const mealModel= require('../model/mealListModel');
 
 getAllMeals = (_req, res) => {
-    // fetches and responds with the array of all meals
-    const meals = mealModel.getMeals()
-    
-    res.status(200).json(meals)
+    // calls getMeals which returns a promise and upon success sends the data object to the client
+    mealModel.getMeals()
+    .then((data) => {
+        res.status(200).json(data);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(404).send(err);
+    });
 }
 
 postMeal = (req, res) => {
-    // creates a new meal object and adds it to the server
+    // passes the newMeal object to the addNewMeal function
     const newMeal = req.body;
     mealModel.addNewMeal(newMeal)
 
-    // creates a new ingredient object and adds it to the server
+    // passes the newIngredients array to the addNewIngredients function
     const newIngredients = newMeal.ingredients;
     mealModel.addNewIngredients(newIngredients)
 
@@ -20,15 +25,16 @@ postMeal = (req, res) => {
 }
 
 deleteMeal = (req, res) => {
-    // fetches all ingredients, filters out the items matching the req.params.id, and writes the new array to the server
-    const ingredients = mealModel.getIngredients().filter(ingredient => ingredient.mealId!==req.params.id)
-    mealModel.writeIngredients(ingredients)
-
-    // fetches all meals, filters out the meal matching the req.params.id, and writes the new array to the server 
-    const meals = mealModel.getMeals().filter(meal => meal.id!==req.params.id)
-    mealModel.writeMeals(meals)
+    // passes the meal id to the respective functions which make delete requests to the db
+    const meal = req.params.id
+    mealModel.deleteMeals(meal)
+    mealModel.deleteIngredients(meal)
 
     return res.status(200).json({ success: true})
 }
 
-module.exports = { getAllMeals, postMeal, deleteMeal }
+module.exports = { 
+    getAllMeals, 
+    postMeal, 
+    deleteMeal 
+}
