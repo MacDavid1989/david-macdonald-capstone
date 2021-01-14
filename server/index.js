@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 // import database connection
 const dbConnection = require('./connections/database');
 // import routes
@@ -16,9 +15,7 @@ const cors = require('cors');
 app.use(cors())
 
 // request.body middleware
-app.use(express.json())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // route for user selected meals
 app.use('/meals', mealList);

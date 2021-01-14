@@ -49,12 +49,7 @@ function Menu () {
         axios.delete(`${SERV_URL}/meals/${id}`)
         .then(()=>{
             axios.get(`${SERV_URL}/meals`)
-            .then(res => {
-                setMyMeals(res.data);
-                axios.post(`${SERV_URL}/groceries`, { plan: true })
-                .then()
-                .catch();
-            })
+            .then(res => setMyMeals(res.data))
             .catch(console.error);
         })
         .catch(console.error);
