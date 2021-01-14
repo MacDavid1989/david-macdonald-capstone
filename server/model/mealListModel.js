@@ -4,7 +4,15 @@ const ingredientsFile = './data/ingredients.json';
 
 // fetches the meals data
 getMeals = () => {
-    return JSON.parse(fs.readFileSync(mealsFile));
+    return new Promise((resolve, reject) => {
+        const collection = db.collection("meals");
+        collection.find({}).toArray((err, data) => {
+          if(err){
+            reject(err);
+          }
+          resolve(data);
+        });
+      });
 }
 
 // fetches the recipe items data

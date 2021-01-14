@@ -2,9 +2,14 @@ const mealModel= require('../model/mealListModel');
 
 getAllMeals = (_req, res) => {
     // fetches and responds with the array of all meals
-    const meals = mealModel.getMeals()
-    
-    res.status(200).json(meals)
+    mealModel.getMeals()
+    .then((data) => {
+        res.status(200).json(data);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(404).send(err);
+    });
 }
 
 postMeal = (req, res) => {
