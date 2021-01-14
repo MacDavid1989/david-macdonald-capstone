@@ -78,8 +78,8 @@ function Grocery () {
 
     //onClick handler that updates the isCompleted value of the item based on id and 
     // makes a new GET request at a successful response
-    const crossOffItem = (id) => {
-        axios.put(`${SERV_URL}/groceries/${id}`)
+    const crossOffItem = (id, category) => {
+        axios.put(`${SERV_URL}/groceries/${id}`, {category})
         .then(() => getGroceries())
         .catch();
     };
@@ -141,7 +141,7 @@ function Grocery () {
                 <ul className="grocery__list">
                 {groceries&&groceries.map(grocery => grocery.category==="user item"&&grocery.week===week&&
                     <li key={grocery.id} className="item" style={{ display: "flex"}}>
-                        <span onClick={()=>crossOffItem(grocery.id)} 
+                        <span onClick={()=>crossOffItem(grocery.id, grocery.category)} 
                             className={grocery.isCompleted?"item__select-check":"item__select"}
                         >
                             <img className="item__select-icon" src={grocery.isCompleted?check:undefined} alt=""/>

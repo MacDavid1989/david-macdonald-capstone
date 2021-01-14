@@ -124,11 +124,7 @@ function Browse () {
         
         ingredients&&
         axios.post(`${SERV_URL}/meals`, getMeal(meal, ingredients, week, id, date))
-        .then(()=>{
-            axios.post(`${SERV_URL}/groceries`, { plan: true })
-            .then()
-            .catch(console.error);
-        })
+        .then()
         .catch(console.error);
     };
 
