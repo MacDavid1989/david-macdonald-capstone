@@ -1,72 +1,37 @@
 const groceryModel = require('../model/groceryListModel');
 
 getAllGroceries = (req, res) => {
-    // fetches all recipe ingredients
-    const ingredients = groceryModel.getIngredients()
-    
-    // filters the items that match the req.params.id and passes them through the sort function
-    const groceryRecipe = groceryModel.groceryList(ingredients.filter(items => items.week === parseInt(req.params.id)))
-    
-    // fetches all user ingredients
-    const userItems = groceryModel.getUserItems()
-
-    // filters the items that match the req.params.id and passes them through the sort function
-    const groceryUser = groceryModel.groceryList(userItems.filter(items => items.week === parseInt(req.params.id)))
-
-    // responds with the spread values of the two sorted arrays above
-    res.status(200).json([...groceryRecipe, ...groceryUser])
+    // fetches all recipe ingredients and the on success fetches user items. Once successful returns the spread obects
+    // in an array within a json object
+    groceryModel.getIngredients()
+    .then(data=>{
+        const groceryRecipe = groceryModel.groceryList(data.filter(items => items.week === parseInt(req.params.id)))
+        groceryModel.getUserItems()
+        .then(data=>{
+            const groceryUser = groceryModel.groceryList(data.filter(items => items.week === parseInt(req.params.id)))
+            res.status(200).json([...groceryRecipe, ...groceryUser])
+        })
+    })
 }
 
 updateIsCompleted = (req, res) => {
-    // fetches all grocery items, user items, and recipe ingredients
-    const groceries = groceryModel.getGroceries();
-    const userItems = groceryModel.getUserItems();
-    const recipeItems = groceryModel.getIngredients();
-
-    // updates isCompleted value of item matching req.params.id
-    const groceriesUpdate = groceryModel.setIsCompleted(groceries, req.params.id);
-    const userItemsUpdate = groceryModel.setIsCompleted(userItems, req.params.id);
-    const recipeItemsUpdate = groceryModel.setIsCompleted(recipeItems, req.params.id);
-
-    // overwrites data files with the update values
-    groceryModel.writeGroceries(groceriesUpdate)
-    groceryModel.writeUserItems(userItemsUpdate)
-    groceryModel.writeIngredients(recipeItemsUpdate)
-
-    return res.status(204).json({ success: true})
+    // passes the item id and category if resent to the setIsCompleted function which returns a promise.
+    // when successful a response will be sent
+    groceryModel.setIsCompleted(req.params.id, req.body.category)
+    .then(data => res.status(204).json(data))
 }
 
 addGroceryItem = (req, res) => {
-    // checks if the incoming request is from the meal plan page
-    if(req.body.plan){
-        // spreads fetched data for user items and recipe ingredients containing the ingredients from the 
-        // newly selected meal into a single array and overwrites the data file
-        const groceries = [...groceryModel.getUserItems(), ...groceryModel.getIngredients()]
-        groceryModel.writeGroceries(groceries)
-        
-        return res.status(201).json({ success: true})
-    } else {
-        // passes req.body into the function to generate and write a new item object to the data file
-        const newGroceryItem = groceryModel.addNewUserItem(req.body)
-        
-        // spreads the fetched user item and recipe ingredients data into an array and overwrites the data file
-        const groceries = [...groceryModel.getUserItems(), ...groceryModel.getIngredients()]
-        groceryModel.writeGroceries(groceries)
-        
-        return res.status(201).json(newGroceryItem)
-    }
+    // passes req.body into the function to generate a new item object for the db
+    groceryModel.addNewUserItem(req.body)
+    .then(data => res.status(201).json(data))
 }
 
 deleteGroceryItem = (req, res) => {
-    // fetches user items and writes a filtered array without the items matching req.params.id to the data file
-    const userItems = groceryModel.getUserItems()
-    groceryModel.writeUserItems(userItems.filter(item=>item.id!==req.params.id))
-    
-    // fetches grocery items and writes a filtered array without the items matching req.params.id to the data file
-    const groceries = groceryModel.getGroceries()
-    groceryModel.writeGroceries(groceries.filter(item=>item.id!==req.params.id))
-
-    res.status(200).json({ success: true})
+    // passes the item id to the deleteItem function which returns a promise that once successful leads to a response
+    const item = req.params.id
+    groceryModel.deleteItem(item)
+    .then(data => res.status(200).json(data))
 }
 
 module.exports = {

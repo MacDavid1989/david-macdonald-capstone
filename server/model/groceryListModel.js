@@ -1,8 +1,4 @@
-const fs = require('fs');
 const { v4: uuidv4 } = require("uuid");
-const ingredientsFile = './data/ingredients.json';
-const groceriesFile = './data/groceries.json';
-const userItemsFile = './data/userItems.json';
 
 // creates a grocery list from the items array passed as an argument
 groceryList = (ingredients) => {
@@ -87,37 +83,33 @@ sortByCategory = (item) => {
     return item
 }
 
-// fetches the recipe items data
+// fetches the recipe ingredients data
 getIngredients = () => {
-    return JSON.parse(fs.readFileSync(ingredientsFile))
-}
-
-// fetches the grocery items data
-getGroceries = () => {
-    return JSON.parse(fs.readFileSync(groceriesFile))
+    return new Promise((resolve, reject) => {
+        const collection = db.collection("ingredients");
+        collection.find({}).toArray((err, data) => {
+          if(err){
+            reject(err);
+          }
+          resolve(data);
+        });
+    });
 }
 
 // fetches the user items data
 getUserItems = () => {
-    return JSON.parse(fs.readFileSync(userItemsFile))
+    return new Promise((resolve, reject) => {
+        const collection = db.collection("userItems");
+        collection.find({}).toArray((err, data) => {
+          if(err){
+            reject(err);
+          }
+          resolve(data);
+        });
+    });
 }
 
-// writes the recipe ingredients data file
-writeIngredients = (ingredients) => {
-    fs.writeFileSync(ingredientsFile, JSON.stringify([...ingredients]), err=>console.log(err))
-}
-
-// writes the grocery items data file
-writeGroceries = (groceries) => {
-    fs.writeFileSync(groceriesFile, JSON.stringify([...groceries]), err=>console.log(err))
-}
-
-// writes the user items data file
-writeUserItems = (userItems) => {
-    fs.writeFileSync(userItemsFile, JSON.stringify([...userItems]), err=>console.log(err))
-}
-
-// adds the user entered item to the data file
+// adds the user entered item to the db
 addNewUserItem = (newUserItem) => {
     // creates new user item object and provides a unique id
     const item = {
@@ -129,38 +121,58 @@ addNewUserItem = (newUserItem) => {
         isCompleted: newUserItem.isCompleted
     }
 
-    // fetches all user items and adds the new item object to the array then overwrites the data file
-    const userItems = getUserItems()
-    userItems.unshift(item)
-    writeUserItems(userItems)
-
-    return item
+    return new Promise((resolve, reject) => {
+        const collection = db.collection("userItems");
+        collection.insertOne(item, (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            console.log("New User Item Added!")
+            resolve(item);
+        });
+    });
 }
 
-// finds the clicked item id matching the item passed as an argument and sets its isCompleted value
-// then returns the updated array of items
-setIsCompleted = (itemArray, id) => {
-    itemArray.forEach(item => {
-        if(item.id===id){
-            if(item.isCompleted===false){
-                return item.isCompleted = true;
-            } else {
-                return item.isCompleted = false;
-            }
-        }
-    })
+// if the category is present, will return a promise from the userItems collection where it will
+// find the item matching the id and on success update the isCompleted value. if no category present
+// the same action will take place in the ingredients collection
+setIsCompleted = (id, category) => {
+    if(category){
+        return new Promise(function (resolve, reject) {
+            const collection = db.collection('userItems');
+            collection.findOne({id: id}).then(item => {
+                collection.updateOne({ id: id }, {$set: {isCompleted: !item.isCompleted}});
+            });
+            console.log('Updated item')
+            resolve("Updated item");
+        });
+    } else{
+        return new Promise(function (resolve, reject) {
+            const collection = db.collection('ingredients');
+            collection.findOne({id: id}).then(item => {
+                collection.updateOne({ id: id }, {$set: {isCompleted: !item.isCompleted}});
+            });
+            console.log('Updated item')
+            resolve("Updated item");
+        });
+    }
+}
 
-    return itemArray;
+// removes a user item matching the id provided
+deleteItem = (item) => {
+    return new Promise(function (resolve, reject) {
+        const collection = db.collection('userItems');
+        collection.deleteOne({ id: item });
+        console.log('deleted item')
+        resolve("Deleted item");
+    });
 }
 
 module.exports = {
     groceryList,
     getIngredients,
-    getGroceries,
     getUserItems,
-    writeIngredients,
-    writeGroceries,
-    writeUserItems,
     addNewUserItem,
-    setIsCompleted
+    setIsCompleted,
+    deleteItem
 }

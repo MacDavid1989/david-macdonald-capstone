@@ -66,16 +66,3 @@ module.exports = {
     addNewMeal, 
     addNewIngredients 
 }
-
-// // fetches the recipe items data
-// getIngredients = () => {
-//     return new Promise((resolve, reject) => {
-//         const collection = db.collection("ingredients");
-//         collection.find({}).toArray((err, data) => {
-//           if(err){
-//             reject(err);
-//           }
-//           resolve(data);
-//         });
-//       });
-// }
