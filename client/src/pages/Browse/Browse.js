@@ -42,7 +42,7 @@ function Browse () {
         const API_KEY = process.env.REACT_APP_API_KEY;
 
         // values set based on state or a random value generate from functions to provide queries for the GET request
-        const MEAL = `&mealType=${mealType}&from=${from}&to=${to}`;
+        const MEAL = /*`&mealType=${mealType}*/`&from=${from}&to=${to}`;
         const QUERY = query || randomQuery();
 
         // conditional request that only occurs when the specified values have data
