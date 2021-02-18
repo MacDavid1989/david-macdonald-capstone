@@ -57,15 +57,15 @@ function Browse () {
         getAPIMeals();
 
         // sets session storage when a search value is entered into the field
-        return ()=> {
-            if(query&&mealType){
-                sessionStorage.setItem('query', query);
-                sessionStorage.setItem('mealType', mealType);
-                sessionStorage.setItem('from', from);
-                sessionStorage.setItem('to', to);
-                sessionStorage.setItem('page', page);
-            };
-        };
+        // return ()=> {
+        //     if(query&&mealType){
+        //         sessionStorage.setItem('query', query);
+        //         sessionStorage.setItem('mealType', mealType);
+        //         sessionStorage.setItem('from', from);
+        //         sessionStorage.setItem('to', to);
+        //         sessionStorage.setItem('page', page);
+        //     };
+        // };
     });
 
     // onChange handler for the search input 
