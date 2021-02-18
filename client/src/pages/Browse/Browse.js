@@ -26,7 +26,7 @@ function Browse () {
     const [mealType, setMealType] = useState(sessionStorage.getItem('mealType') || randomMealType());
     const [meals, setMeals] = useState('');
     const [from, setFrom] = useState(parseInt(sessionStorage.getItem('from')) || 0);
-    const [to, setTo] = useState(parseInt(sessionStorage.getItem('to')) || 24);
+    const [to, setTo] = useState(parseInt(sessionStorage.getItem('to')) || 10);
     const [page, setPage] = useState(parseInt(sessionStorage.getItem('page')) || 1);
     const [display, setDisplay] = useState(false);
     const [previous, setPrevious] = useState(false);
@@ -72,7 +72,7 @@ function Browse () {
     const changeSearchIngredient = (e) => {
         setMeals('');
         setFrom(0);
-        setTo(24);
+        setTo(10);
         setPage(1);
         setPrevious(false);
         setQuery(e.target.value.toLowerCase());
@@ -83,7 +83,7 @@ function Browse () {
     const changeMealType = (e) => {
         setMeals('');
         setFrom(0);
-        setTo(24);
+        setTo(10);
         setPage(1);
         setPrevious(false);
         setMealType(e.target.value);
@@ -93,8 +93,8 @@ function Browse () {
     // onClick handler for the next page arrow
     const handleNext = () => {
         setMeals('');
-        setFrom(from + 24);
-        setTo(to + 24);
+        setFrom(from + 10);
+        setTo(to + 10);
         setPage(page + 1);
         setPrevious(true);
         getAPIMeals();
@@ -102,12 +102,12 @@ function Browse () {
 
     // onClick handler for the previous page arrow; does nothing when on page 1 
     const handlePrevious = () => {
-        (from - 24)===0&&setPrevious(false);
+        (from - 10)===0&&setPrevious(false);
         
         if(from!==0){
             setMeals('');
-            setFrom(from - 24);
-            setTo(to - 24);
+            setFrom(from - 10);
+            setTo(to - 10);
             setPage(page - 1);
             getAPIMeals();
         };
