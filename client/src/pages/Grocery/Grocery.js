@@ -183,7 +183,7 @@ function Grocery() {
                           : "none",
                       }}
                     >
-                      {`${grocery.food.toLowerCase()}`}
+                      {`${grocery.food?.toLowerCase()}`}
                     </span>
                     <span
                       className={remove ? "item__weight--alt" : "item__weight"}
